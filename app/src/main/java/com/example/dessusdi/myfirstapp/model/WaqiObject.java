@@ -62,7 +62,7 @@ public class WaqiObject {
         String minTemp = "0";
         if (this.globalObject != null) {
             if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
-                minTemp = String.format("Min : %d", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(0));
+                minTemp = String.format("Min : %d°C", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(0));
             }
         }
         return minTemp;
@@ -72,7 +72,7 @@ public class WaqiObject {
         String maxTemp = "0";
         if (this.globalObject != null) {
             if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
-                maxTemp = String.format("Max : %d", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(1));
+                maxTemp = String.format("Max : %d°C", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(1));
             }
         }
         return maxTemp;
