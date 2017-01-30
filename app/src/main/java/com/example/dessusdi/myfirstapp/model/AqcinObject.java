@@ -3,19 +3,38 @@ package com.example.dessusdi.myfirstapp.model;
 import android.app.Activity;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
+import java.util.ArrayList;
+
 /**
  * Created by dessusdi on 30/01/2017.
  */
 public class AqcinObject {
 
-    private AqcinRequestService async;
-    private String jsonStr;
+    String p;
+    ArrayList<Integer> v;
+    String i;
 
-    public AqcinObject(Activity context) {
-        this.async = new AqcinRequestService(context);
+    public String getP() {
+        return p;
     }
 
-    public void getData() {
-        this.async.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json");
+    public void setP(String p) {
+        this.p = p;
+    }
+
+    public ArrayList<Integer> getV() {
+        return v;
+    }
+
+    public void setV(ArrayList<Integer> v) {
+        this.v = v;
+    }
+
+    public String getI() {
+        return i;
+    }
+
+    public void setI(String i) {
+        this.i = i;
     }
 }
