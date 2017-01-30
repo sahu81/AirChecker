@@ -2,7 +2,6 @@ package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;

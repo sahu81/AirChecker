@@ -17,7 +17,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder{
     public AqcinCellView(View itemView) {
         super(itemView);
 
-        textViewView = (TextView) itemView.findViewById(R.id.city_name);
+        textViewView = (TextView) itemView.findViewById(R.id.city_nameTextView);
     }
 
     public void bind(WaqiObject myObject){
