@@ -1,6 +1,7 @@
 package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.Activity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -24,7 +25,7 @@ public class AqcinRequestService {
         mApplicationContext = context;
     }
 
-    public void sendRequestWithUrl(String url) {
+    public void sendRequestWithUrl(String url, final VolleyCallback callback) {
         final TextView mTextView = (TextView) this.mApplicationContext.findViewById(R.id.textViewAPI);
 
         // Instantiate the RequestQueue.
@@ -35,10 +36,9 @@ public class AqcinRequestService {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         Gson gson = new Gson();
                         GlobalObject global = gson.fromJson(response, GlobalObject.class);
-                        mTextView.setText(global.getRxs().getObs().get(0).getMsg().getCity().getName());
+                        callback.onSuccess(global);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -50,5 +50,9 @@ public class AqcinRequestService {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+    }
+
+    public interface VolleyCallback{
+        void onSuccess(GlobalObject globalObject);
     }
 }

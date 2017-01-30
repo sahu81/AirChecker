@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.R;
-import com.example.dessusdi.myfirstapp.model.IaqiObject;
+import com.example.dessusdi.myfirstapp.model.WaqiObject;
 
 /**
  * Created by dessusdi on 30/01/2017.
@@ -20,7 +20,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder{
         textViewView = (TextView) itemView.findViewById(R.id.city_name);
     }
 
-    public void bind(IaqiObject myObject){
+    public void bind(WaqiObject myObject){
         textViewView.setText("TEST");
     }
 

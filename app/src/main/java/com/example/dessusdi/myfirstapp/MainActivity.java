@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.dessusdi.myfirstapp.model.IaqiObject;
+import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
-    private List<IaqiObject> cities = new ArrayList<>();
+    private List<WaqiObject> cities = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +26,12 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         AqcinRequestService async = new AqcinRequestService(MainActivity.this);
-        async.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json");
+        //async.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json");
 
-        cities.add(new IaqiObject());
-        cities.add(new IaqiObject());
-        cities.add(new IaqiObject());
-        cities.add(new IaqiObject());
+        WaqiObject grenoble = new WaqiObject(async);
+        grenoble.fetchData();
+
+        cities.add(grenoble);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
