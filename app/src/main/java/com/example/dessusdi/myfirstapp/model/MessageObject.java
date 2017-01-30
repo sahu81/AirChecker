@@ -8,8 +8,17 @@ import java.util.ArrayList;
 public class MessageObject {
     private long timestamp;
     private CityObject city;
+    private ForecastObject forecast;
     private ArrayList<IaqiObject> iaqi;
     private int aqi;
+
+    public ForecastObject getForecast() {
+        return forecast;
+    }
+
+    public void setForecast(ForecastObject forecast) {
+        this.forecast = forecast;
+    }
 
     public int getAqi() {
         return aqi;

@@ -32,6 +32,8 @@ public class AqcinCellView extends RecyclerView.ViewHolder{
         city_nameTextView.setText(myObject.getName());
         air_qualityTextView.setText(myObject.getAirQuality());
         gpsTextView.setText(myObject.getGPSCoordinate());
+        minTextView.setText(myObject.getMinTemp());
+        maxTextView.setText(myObject.getMaxTemp());
     }
 
 }
