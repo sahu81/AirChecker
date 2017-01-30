@@ -28,14 +28,9 @@ public class WaqiObject {
             public void onSuccess(GlobalObject global) {
                 globalObject = global;
                 adpaterList.notifyDataSetChanged();
-                //mTextView.setText(global.getRxs().getObs().get(0).getMsg().getCity().getName());
             }
         });
         // TODO: Completion block and assign to globalobject
-    }
-
-    public interface DataRetrievedCallback{
-        void onSuccess();
     }
 
     public String getName() {
