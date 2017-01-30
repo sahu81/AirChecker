@@ -1,20 +1,31 @@
 package com.example.dessusdi.myfirstapp;
 
-import android.nfc.Tag;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.dessusdi.myfirstapp.model.AqcinObject;
+import com.example.dessusdi.myfirstapp.tools.AqcinAsyncTask;
+
 
 public class MainActivity extends ActionBarActivity {
+
+    public String test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.i(null, "View loaded");
+
+
+        AqcinObject objectAqcin = new AqcinObject(MainActivity.this);
+        objectAqcin.getData();
+
+
+
+        //TextView contentText = (TextView) findViewById(R.id.textViewAPI);
+        //contentText.setText(async.getJSONStr());
     }
 
     @Override
