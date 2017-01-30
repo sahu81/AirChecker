@@ -1,5 +1,7 @@
 package com.example.dessusdi.myfirstapp.model;
 
+import android.util.Log;
+
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
@@ -54,6 +56,26 @@ public class WaqiObject {
             airQuality = String.format("%.6f - %.6f", this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(0), this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(1));
         }
         return airQuality;
+    }
+
+    public String getMinTemp() {
+        String minTemp = "0";
+        if (this.globalObject != null) {
+            if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
+                minTemp = String.format("Min : %d", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(0));
+            }
+        }
+        return minTemp;
+    }
+
+    public String getMaxTemp() {
+        String maxTemp = "0";
+        if (this.globalObject != null) {
+            if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
+                maxTemp = String.format("Max : %d", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(1));
+            }
+        }
+        return maxTemp;
     }
 
     public String getId() {
