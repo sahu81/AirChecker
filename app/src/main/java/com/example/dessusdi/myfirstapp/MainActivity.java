@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.dessusdi.myfirstapp.model.IaqiObject;
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
@@ -19,23 +18,28 @@ public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
     private List<WaqiObject> cities = new ArrayList<>();
+    private AqcinListAdapter adpater = new AqcinListAdapter(cities);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         AqcinRequestService async = new AqcinRequestService(MainActivity.this);
-        //async.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json");
 
-        WaqiObject grenoble = new WaqiObject(async);
+        WaqiObject grenoble = new WaqiObject(async, adpater);
         grenoble.fetchData();
 
         cities.add(grenoble);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+
+        this.refreshRecyclerList();
+    }
+
+    public void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new AqcinListAdapter(cities));
+        recyclerView.setAdapter(this.adpater);
     }
 
     @Override

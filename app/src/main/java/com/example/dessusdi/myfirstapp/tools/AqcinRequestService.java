@@ -1,7 +1,7 @@
 package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.Activity;
-import android.util.Log;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -27,6 +27,7 @@ public class AqcinRequestService {
 
     public void sendRequestWithUrl(String url, final VolleyCallback callback) {
         final TextView mTextView = (TextView) this.mApplicationContext.findViewById(R.id.textViewAPI);
+        final RecyclerView mRecyclerView = (RecyclerView) this.mApplicationContext.findViewById(R.id.recyclerView);
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);

@@ -21,7 +21,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder{
     }
 
     public void bind(WaqiObject myObject){
-        textViewView.setText("TEST");
+        textViewView.setText(myObject.getName());
     }
 
 }
