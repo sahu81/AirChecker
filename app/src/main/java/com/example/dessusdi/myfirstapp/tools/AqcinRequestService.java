@@ -11,6 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dessusdi.myfirstapp.R;
+import com.example.dessusdi.myfirstapp.model.GlobalObject;
+import com.google.gson.Gson;
 
 /**
  * Created by dessusdi on 30/01/2017.
@@ -34,8 +36,10 @@ public class AqcinRequestService {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        mTextView.setText("Response is: "+ response.substring(0,500));
+
+                        Gson gson = new Gson();
+                        GlobalObject global = gson.fromJson(response, GlobalObject.class);
+                        mTextView.setText(global.getRxs().getObs().get(0).getMsg().getCity().getName());
                     }
                 }, new Response.ErrorListener() {
             @Override

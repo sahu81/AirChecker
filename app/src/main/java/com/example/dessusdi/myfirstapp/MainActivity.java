@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.dessusdi.myfirstapp.model.AqcinObject;
-import com.example.dessusdi.myfirstapp.tools.AqcinAsyncTask;
+import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,14 +18,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        AqcinObject objectAqcin = new AqcinObject(MainActivity.this);
-        objectAqcin.getData();
-
-
-
-        //TextView contentText = (TextView) findViewById(R.id.textViewAPI);
-        //contentText.setText(async.getJSONStr());
+        AqcinRequestService async = new AqcinRequestService(MainActivity.this);
+        async.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json");
     }
 
     @Override
