@@ -26,7 +26,6 @@ public class AqcinRequestService {
     }
 
     public void sendRequestWithUrl(String url, final VolleyCallback callback) {
-        final TextView mTextView = (TextView) this.mApplicationContext.findViewById(R.id.textViewAPI);
         final RecyclerView mRecyclerView = (RecyclerView) this.mApplicationContext.findViewById(R.id.recyclerView);
 
         // Instantiate the RequestQueue.
@@ -45,7 +44,6 @@ public class AqcinRequestService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error);
-                mTextView.setText("That didn't work!");
             }
         });
 

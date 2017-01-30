@@ -27,12 +27,17 @@ public class MainActivity extends ActionBarActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         AqcinRequestService async = new AqcinRequestService(MainActivity.this);
+        WaqiObject grenoble     = new WaqiObject("https://api.waqi.info/api/feed/@3067/obs.en.json", async, adpater);
+        WaqiObject grenoble2    = new WaqiObject("https://api.waqi.info/api/feed/@3069/obs.en.json", async, adpater);
+        WaqiObject smh          = new WaqiObject("https://api.waqi.info/api/feed/@3071/obs.en.json", async, adpater);
 
-        WaqiObject grenoble = new WaqiObject(async, adpater);
         grenoble.fetchData();
+        grenoble2.fetchData();
+        smh.fetchData();
 
         cities.add(grenoble);
-
+        cities.add(grenoble2);
+        cities.add(smh);
 
         this.refreshRecyclerList();
     }

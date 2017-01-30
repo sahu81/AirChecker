@@ -1,13 +1,9 @@
 package com.example.dessusdi.myfirstapp.model;
 
-import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-
-import com.example.dessusdi.myfirstapp.MainActivity;
-import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+
+import java.net.URL;
 
 /**
  * Created by dessusdi on 30/01/2017.
@@ -17,14 +13,16 @@ public class WaqiObject {
     private AqcinRequestService waqiService;
     private GlobalObject globalObject;
     private AqcinListAdapter adpaterList;
+    private String url = "";
 
-    public WaqiObject(AqcinRequestService waqiService, AqcinListAdapter adpater) {
+    public WaqiObject(String url, AqcinRequestService waqiService, AqcinListAdapter adpater) {
+        this.url = url;
         this.waqiService = waqiService;
         this.adpaterList = adpater;
     }
 
     public void fetchData() {
-        this.waqiService.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json",
+        this.waqiService.sendRequestWithUrl(this.url,
         new AqcinRequestService.VolleyCallback() {
             @Override
             public void onSuccess(GlobalObject global) {
