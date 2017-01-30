@@ -48,6 +48,14 @@ public class WaqiObject {
         return String.valueOf(airQuality);
     }
 
+    public String getGPSCoordinate() {
+        String airQuality = "(not found)";
+        if (this.globalObject != null) {
+            airQuality = this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(0) + " - " + this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(1);
+        }
+        return airQuality;
+    }
+
     public String getId() {
         return this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getId();
     }

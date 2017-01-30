@@ -18,6 +18,7 @@
         <TextView
             android:id="@+id/air_qualityTextView"
             android:layout_width="60dp"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:gravity="center_vertical|center_horizontal"
@@ -30,6 +31,7 @@
         <TextView
             android:id="@+id/city_nameTextView"
             android:layout_width="250dp"
+            android:maxLines="1"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
             tools:text="Unknow"
@@ -48,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Min : "
+            android:maxLines="1"
             android:layout_below="@+id/air_qualityTextView"
             android:layout_toEndOf="@+id/air_qualityTextView" />
 
@@ -55,6 +58,7 @@
             android:id="@+id/maxTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="Max : "
             android:layout_marginEnd="64dp"
             android:layout_alignTop="@+id/minTextView"
@@ -64,6 +68,7 @@
             android:id="@+id/gpsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="GPS : "
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/air_qualityTextView" />

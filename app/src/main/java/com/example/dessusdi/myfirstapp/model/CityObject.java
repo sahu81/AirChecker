@@ -1,5 +1,7 @@
 package com.example.dessusdi.myfirstapp.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by dessusdi on 30/01/2017.
  */
@@ -9,6 +11,15 @@ public class CityObject {
     private String url;
     private int idx;
     private String id;
+    private ArrayList<Double> geo;
+
+    public ArrayList<Double> getGeo() {
+        return geo;
+    }
+
+    public void setGeo(ArrayList<Double> geo) {
+        this.geo = geo;
+    }
 
     public String getName() {
         return name;

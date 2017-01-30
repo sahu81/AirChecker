@@ -31,6 +31,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder{
     public void bind(WaqiObject myObject){
         city_nameTextView.setText(myObject.getName());
         air_qualityTextView.setText(myObject.getAirQuality());
+        gpsTextView.setText(myObject.getGPSCoordinate());
     }
 
 }
