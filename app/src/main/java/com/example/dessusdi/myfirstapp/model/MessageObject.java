@@ -9,6 +9,15 @@ public class MessageObject {
     private long timestamp;
     private CityObject city;
     private ArrayList<IaqiObject> iaqi;
+    private int aqi;
+
+    public int getAqi() {
+        return aqi;
+    }
+
+    public void setAqi(int aqi) {
+        this.aqi = aqi;
+    }
 
     public long getTimestamp() {
         return timestamp;

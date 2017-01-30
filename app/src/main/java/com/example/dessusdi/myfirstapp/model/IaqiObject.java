@@ -1,8 +1,5 @@
 package com.example.dessusdi.myfirstapp.model;
 
-import android.app.Activity;
-import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-
 import java.util.ArrayList;
 
 /**

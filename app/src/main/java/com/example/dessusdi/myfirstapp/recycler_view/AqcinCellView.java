@@ -12,16 +12,26 @@ import com.example.dessusdi.myfirstapp.model.WaqiObject;
  */
 public class AqcinCellView extends RecyclerView.ViewHolder{
 
-    private TextView textViewView;
+    private TextView city_nameTextView;
+    private TextView air_qualityTextView;
+    private TextView gpsTextView;
+    private TextView minTextView;
+    private TextView maxTextView;
 
     public AqcinCellView(View itemView) {
         super(itemView);
 
-        textViewView = (TextView) itemView.findViewById(R.id.city_nameTextView);
+        air_qualityTextView = (TextView) itemView.findViewById(R.id.air_qualityTextView);
+        city_nameTextView = (TextView) itemView.findViewById(R.id.city_nameTextView);
+        gpsTextView = (TextView) itemView.findViewById(R.id.gpsTextView);
+        minTextView = (TextView) itemView.findViewById(R.id.minTextView);
+        maxTextView = (TextView) itemView.findViewById(R.id.maxTextView);
     }
 
     public void bind(WaqiObject myObject){
-        textViewView.setText(myObject.getName());
+        city_nameTextView.setText(myObject.getName());
+        air_qualityTextView.setText(myObject.getAirQuality());
+        gpsTextView.setText(myObject.getGPSCoordinate());
     }
 
 }

@@ -17,21 +17,27 @@
 
         <TextView
             android:id="@+id/air_qualityTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
+            android:maxLines="1"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical|center_horizontal"
             android:text="117"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="15dp" />
 
         <TextView
             android:id="@+id/city_nameTextView"
             android:layout_width="250dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="false"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
             tools:text="Unknow"
-            android:gravity="center_vertical|center_horizontal"
+            android:gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:textColor="#333"
             android:textSize="15sp"
@@ -46,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Min : "
-            android:layout_marginStart="27dp"
+            android:maxLines="1"
             android:layout_below="@+id/air_qualityTextView"
             android:layout_toEndOf="@+id/air_qualityTextView" />
 
@@ -54,6 +60,7 @@
             android:id="@+id/maxTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="Max : "
             android:layout_marginEnd="64dp"
             android:layout_alignTop="@+id/minTextView"
@@ -63,9 +70,12 @@
             android:id="@+id/gpsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="false"
             android:text="GPS : "
             android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/minTextView" />
+            android:layout_toEndOf="@+id/air_qualityTextView" />
 
 
     </RelativeLayout>
