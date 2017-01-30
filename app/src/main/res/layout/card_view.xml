@@ -10,21 +10,64 @@
     app:cardCornerRadius="2dp"
     app:cardElevation="2dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/city_name"
-            android:layout_width="match_parent"
+            android:id="@+id/air_qualityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="117"
+            android:textSize="40dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/city_nameTextView"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
-            android:padding="20dp"
             tools:text="Unknow"
+            android:gravity="center_vertical|center_horizontal"
             android:fontFamily="sans-serif"
             android:textColor="#333"
-            android:textSize="18sp" />
-    </LinearLayout>
+            android:textSize="15sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/air_qualityTextView"
+            android:layout_above="@+id/gpsTextView"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/minTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min : "
+            android:layout_marginStart="27dp"
+            android:layout_below="@+id/air_qualityTextView"
+            android:layout_toEndOf="@+id/air_qualityTextView" />
+
+        <TextView
+            android:id="@+id/maxTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max : "
+            android:layout_marginEnd="64dp"
+            android:layout_alignTop="@+id/minTextView"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/gpsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GPS : "
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/minTextView" />
+
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

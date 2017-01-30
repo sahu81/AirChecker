@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.dessusdi.myfirstapp.model.IaqiObject;
+import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
@@ -17,24 +17,34 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
-    private List<IaqiObject> cities = new ArrayList<>();
+    private List<WaqiObject> cities = new ArrayList<>();
+    private AqcinListAdapter adpater = new AqcinListAdapter(cities);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         AqcinRequestService async = new AqcinRequestService(MainActivity.this);
-        async.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json");
+        WaqiObject grenoble     = new WaqiObject("https://api.waqi.info/api/feed/@3067/obs.en.json", async, adpater);
+        WaqiObject grenoble2    = new WaqiObject("https://api.waqi.info/api/feed/@3069/obs.en.json", async, adpater);
+        WaqiObject smh          = new WaqiObject("https://api.waqi.info/api/feed/@3071/obs.en.json", async, adpater);
 
-        cities.add(new IaqiObject());
-        cities.add(new IaqiObject());
-        cities.add(new IaqiObject());
-        cities.add(new IaqiObject());
+        grenoble.fetchData();
+        grenoble2.fetchData();
+        smh.fetchData();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        cities.add(grenoble);
+        cities.add(grenoble2);
+        cities.add(smh);
+
+        this.refreshRecyclerList();
+    }
+
+    public void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new AqcinListAdapter(cities));
+        recyclerView.setAdapter(this.adpater);
     }
 
     @Override

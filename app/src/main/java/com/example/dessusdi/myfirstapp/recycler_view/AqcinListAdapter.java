@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.model.IaqiObject;
+import com.example.dessusdi.myfirstapp.model.WaqiObject;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ import java.util.List;
  */
 public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
-    List<IaqiObject> list;
+    List<WaqiObject> list;
 
-    public AqcinListAdapter(List<IaqiObject> list) {
+    public AqcinListAdapter(List<WaqiObject> list) {
         this.list = list;
     }
 
@@ -29,7 +30,7 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
     @Override
     public void onBindViewHolder(AqcinCellView aqcinCellView, int index) {
-        IaqiObject myObject = list.get(index);
+        WaqiObject myObject = list.get(index);
         aqcinCellView.bind(myObject);
     }
 
