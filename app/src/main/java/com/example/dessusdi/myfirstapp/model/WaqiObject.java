@@ -30,7 +30,6 @@ public class WaqiObject {
                 adpaterList.notifyDataSetChanged();
             }
         });
-        // TODO: Completion block and assign to globalobject
     }
 
     public String getName() {
@@ -39,6 +38,14 @@ public class WaqiObject {
             name = this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getName();
         }
         return name;
+    }
+
+    public String getAirQuality() {
+        int airQuality = 0;
+        if (this.globalObject != null) {
+            airQuality = this.globalObject.getRxs().getObs().get(0).getMsg().getAqi();
+        }
+        return String.valueOf(airQuality);
     }
 
     public String getId() {
