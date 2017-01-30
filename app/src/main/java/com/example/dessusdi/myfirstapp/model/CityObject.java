@@ -5,10 +5,10 @@ package com.example.dessusdi.myfirstapp.model;
  */
 public class CityObject {
 
-    String name;
-    String url;
-    int idx;
-    String id;
+    private String name;
+    private String url;
+    private int idx;
+    private String id;
 
     public String getName() {
         return name;

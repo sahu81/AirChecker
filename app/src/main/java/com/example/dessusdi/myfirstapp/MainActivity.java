@@ -2,16 +2,21 @@ package com.example.dessusdi.myfirstapp;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.dessusdi.myfirstapp.model.AqcinObject;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
-    public String test;
+    private RecyclerView recyclerView;
+    private List<AqcinObject> cities = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +25,15 @@ public class MainActivity extends ActionBarActivity {
 
         AqcinRequestService async = new AqcinRequestService(MainActivity.this);
         async.sendRequestWithUrl("https://api.waqi.info/api/feed/@3069/obs.en.json");
+
+        cities.add(new AqcinObject());
+        cities.add(new AqcinObject());
+        cities.add(new AqcinObject());
+        cities.add(new AqcinObject());
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new AqcinListAdapter(cities));
     }
 
     @Override
