@@ -32,6 +32,8 @@
             android:id="@+id/city_nameTextView"
             android:layout_width="250dp"
             android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="false"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
             tools:text="Unknow"
@@ -69,6 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="false"
             android:text="GPS : "
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/air_qualityTextView" />

@@ -11,13 +11,13 @@ public class CityObject {
     private String url;
     private int idx;
     private String id;
-    private ArrayList<Double> geo;
+    private ArrayList<Float> geo;
 
-    public ArrayList<Double> getGeo() {
+    public ArrayList<Float> getGeo() {
         return geo;
     }
 
-    public void setGeo(ArrayList<Double> geo) {
+    public void setGeo(ArrayList<Float> geo) {
         this.geo = geo;
     }
 

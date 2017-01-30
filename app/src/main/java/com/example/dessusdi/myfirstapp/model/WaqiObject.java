@@ -51,7 +51,7 @@ public class WaqiObject {
     public String getGPSCoordinate() {
         String airQuality = "(not found)";
         if (this.globalObject != null) {
-            airQuality = this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(0) + " - " + this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(1);
+            airQuality = String.format("%.6f - %.6f", this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(0), this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(1));
         }
         return airQuality;
     }
