@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Created by dessusdi on 30/01/2017.
  */
 public class MessageObject {
-    long timestamp;
-    CityObject city;
-    ArrayList<AqcinObject> iaqi;
+    private long timestamp;
+    private CityObject city;
+    private ArrayList<AqcinObject> iaqi;
 
     public long getTimestamp() {
         return timestamp;

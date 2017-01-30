@@ -10,9 +10,9 @@ import java.util.ArrayList;
  */
 public class AqcinObject {
 
-    String p;
-    ArrayList<Integer> v;
-    String i;
+    private String p;
+    private ArrayList<Integer> v;
+    private String i;
 
     public String getP() {
         return p;

@@ -1,7 +1,6 @@
 package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.Activity;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.android.volley.Request;

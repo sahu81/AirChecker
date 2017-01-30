@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by dessusdi on 30/01/2017.
  */
 public class RxsObject {
-    ArrayList<Data> obs;
+    private ArrayList<Data> obs;
 
     public ArrayList<Data> getObs() {
         return obs;
