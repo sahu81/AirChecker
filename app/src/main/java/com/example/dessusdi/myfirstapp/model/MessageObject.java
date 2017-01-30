@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class MessageObject {
     private long timestamp;
     private CityObject city;
-    private ArrayList<AqcinObject> iaqi;
+    private ArrayList<IaqiObject> iaqi;
 
     public long getTimestamp() {
         return timestamp;
@@ -26,11 +26,11 @@ public class MessageObject {
         this.city = city;
     }
 
-    public ArrayList<AqcinObject> getIaqi() {
+    public ArrayList<IaqiObject> getIaqi() {
         return iaqi;
     }
 
-    public void setIaqi(ArrayList<AqcinObject> iaqi) {
+    public void setIaqi(ArrayList<IaqiObject> iaqi) {
         this.iaqi = iaqi;
     }
 }

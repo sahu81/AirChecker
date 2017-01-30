@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by dessusdi on 30/01/2017.
  */
-public class AqcinObject {
+public class IaqiObject {
 
     private String p;
     private ArrayList<Integer> v;
