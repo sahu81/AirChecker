@@ -51,14 +51,14 @@ public class WaqiObject {
         return String.valueOf(airQuality);
     }
 
-    public int getColorId() {
+    public String getColorCode() {
         int airQuality = Integer.parseInt(this.getAirQuality());
-        int color = R.color.red;
+        String color = "#e74c3c";
 
         if(airQuality < 40)
-            color = R.color.green;
+            color = "#1abc9c";
         else if(airQuality >= 40 && airQuality < 90)
-            color = R.color.orange;
+            color = "#f39c12";
 
         return color;
     }

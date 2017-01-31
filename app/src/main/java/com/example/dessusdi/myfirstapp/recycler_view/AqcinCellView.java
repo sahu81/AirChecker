@@ -1,5 +1,6 @@
 package com.example.dessusdi.myfirstapp.recycler_view;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder{
         gpsTextView.setText(myObject.getGPSCoordinate());
         minTextView.setText(myObject.getMinTemp());
         maxTextView.setText(myObject.getMaxTemp());
-        air_qualityTextView.setBackgroundColor(myObject.getColorId());
+        air_qualityTextView.setBackgroundColor(Color.parseColor(myObject.getColorCode()));
     }
 
 }
