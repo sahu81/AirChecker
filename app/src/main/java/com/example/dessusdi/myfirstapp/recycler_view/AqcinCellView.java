@@ -34,6 +34,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder{
         gpsTextView.setText(myObject.getGPSCoordinate());
         minTextView.setText(myObject.getMinTemp());
         maxTextView.setText(myObject.getMaxTemp());
+        air_qualityTextView.setBackgroundColor(myObject.getColorId());
     }
 
 }

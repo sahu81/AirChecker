@@ -2,6 +2,7 @@ package com.example.dessusdi.myfirstapp.model;
 
 import android.util.Log;
 
+import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
@@ -48,6 +49,18 @@ public class WaqiObject {
             airQuality = this.globalObject.getRxs().getObs().get(0).getMsg().getAqi();
         }
         return String.valueOf(airQuality);
+    }
+
+    public int getColorId() {
+        int airQuality = Integer.parseInt(this.getAirQuality());
+        int color = R.color.red;
+
+        if(airQuality < 40)
+            color = R.color.green;
+        else if(airQuality >= 40 && airQuality < 90)
+            color = R.color.orange;
+
+        return color;
     }
 
     public String getGPSCoordinate() {
