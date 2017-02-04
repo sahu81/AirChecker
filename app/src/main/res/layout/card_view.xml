@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="126dp"
         android:orientation="vertical">
 
         <TextView
@@ -31,6 +31,37 @@
             android:layout_marginTop="40dp" />
 
         <TextView
+            android:id="@+id/gpsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:text="GPS : "
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/air_qualityTextView" />
+
+        <TextView
+            android:id="@+id/maxTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:text="Max : "
+            android:layout_marginEnd="63dp"
+            android:layout_alignBottom="@+id/air_qualityTextView"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/minTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min : "
+            android:maxLines="1"
+            android:layout_marginRight="126dp"
+            android:layout_alignBottom="@+id/air_qualityTextView"
+            android:layout_toEndOf="@+id/air_qualityTextView" />
+
+        <TextView
             android:id="@+id/city_nameTextView"
             android:layout_width="250dp"
             android:maxLines="1"
@@ -43,40 +74,8 @@
             android:fontFamily="sans-serif"
             android:textColor="#333"
             android:textSize="15sp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/air_qualityTextView"
-            android:layout_above="@+id/gpsTextView"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/minTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Min : "
-            android:maxLines="1"
-            android:layout_below="@+id/air_qualityTextView"
-            android:layout_toEndOf="@+id/air_qualityTextView" />
-
-        <TextView
-            android:id="@+id/maxTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="Max : "
-            android:layout_marginEnd="64dp"
-            android:layout_alignTop="@+id/minTextView"
-            android:layout_alignParentEnd="true" />
-
-        <TextView
-            android:id="@+id/gpsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:text="GPS : "
-            android:layout_centerVertical="true"
+            android:textStyle="bold"
+            android:layout_alignTop="@+id/air_qualityTextView"
             android:layout_toEndOf="@+id/air_qualityTextView" />
 
 
