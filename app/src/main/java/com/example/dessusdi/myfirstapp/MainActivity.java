@@ -18,7 +18,7 @@ public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
     private List<WaqiObject> cities = new ArrayList<>();
-    private AqcinListAdapter adpater = new AqcinListAdapter(cities);
+    private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,9 @@ public class MainActivity extends ActionBarActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         AqcinRequestService async = new AqcinRequestService(MainActivity.this);
-        WaqiObject grenoble     = new WaqiObject("https://api.waqi.info/api/feed/@3067/obs.en.json", async, adpater);
-        WaqiObject grenoble2    = new WaqiObject("https://api.waqi.info/api/feed/@3069/obs.en.json", async, adpater);
-        WaqiObject smh          = new WaqiObject("https://api.waqi.info/api/feed/@3071/obs.en.json", async, adpater);
+        WaqiObject grenoble     = new WaqiObject("https://api.waqi.info/api/feed/@3067/obs.en.json", async, adapter);
+        WaqiObject grenoble2    = new WaqiObject("https://api.waqi.info/api/feed/@3069/obs.en.json", async, adapter);
+        WaqiObject smh          = new WaqiObject("https://api.waqi.info/api/feed/@3071/obs.en.json", async, adapter);
 
         grenoble.fetchData();
         grenoble2.fetchData();
@@ -44,7 +44,7 @@ public class MainActivity extends ActionBarActivity {
 
     public void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(this.adpater);
+        recyclerView.setAdapter(this.adapter);
     }
 
     @Override
