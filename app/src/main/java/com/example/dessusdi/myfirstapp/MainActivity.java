@@ -21,7 +21,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
-    private String[] citiesIds = new String[] {"@3067", "@3069", "@3071"};
+    private List<String> citiesIds;
     private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
@@ -34,10 +34,11 @@ public class MainActivity extends ActionBarActivity {
         AqcinDatabaseService dbService  = new AqcinDatabaseService(getContext());
         AqcinRequestService async       = new AqcinRequestService(getContext());
 
+        citiesIds = dbService.fetchSavedCities();
+
         for (String id : citiesIds) {
             WaqiObject cityObject = new WaqiObject(id, async, adapter);
             cityObject.fetchData();
-            //dbService.addCity(id);
             cities.add(cityObject);
         }
 
