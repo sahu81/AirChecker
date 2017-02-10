@@ -23,6 +23,5 @@ public final class Constants {
         private Database() {}
     }
 
-
     private Constants() {}
 }
