@@ -58,7 +58,12 @@ public class AqcinDatabaseService {
 
     public List fetchSavedCities() {
         Log.d("DATABASE", "Fetching cities from db...");
+
+        return WaqiObject.listAll(WaqiObject.class);
+
+        /* BEFORE ADDING ORM
         db = mDbHelper.getReadableDatabase();
+
 
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
@@ -90,6 +95,7 @@ public class AqcinDatabaseService {
         cursor.close();
         this.close();
         return itemIds;
+        */
     }
 
     public void close() {

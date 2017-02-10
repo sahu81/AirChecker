@@ -3,21 +3,35 @@ package com.example.dessusdi.myfirstapp.model;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 import com.example.dessusdi.myfirstapp.tools.Constants;
+import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 /**
  * Created by dessusdi on 30/01/2017.
  * DESSUS Dimitri
  */
-public class WaqiObject {
+public class WaqiObject extends SugarRecord {
+    @Ignore
     private AqcinRequestService waqiService;
+
+    @Ignore
     private GlobalObject globalObject;
+
+    @Ignore
     private AqcinListAdapter adpaterList;
+
+    @Ignore
     private String url = "";
+
+    String identifier;
+
+    public WaqiObject() { }
 
     public WaqiObject(String cityID, AqcinRequestService waqiService, AqcinListAdapter adpater) {
         this.url = Constants.Url.BASE_URL.replace("%%CITY_ID%%", cityID);
-        this.waqiService = waqiService;
-        this.adpaterList = adpater;
+        this.waqiService    = waqiService;
+        this.adpaterList    = adpater;
+        this.identifier     = cityID;
     }
 
     public void fetchData() {
@@ -29,6 +43,18 @@ public class WaqiObject {
                 adpaterList.notifyDataSetChanged();
             }
         });
+    }
+
+    public void setRequestService(AqcinRequestService waqiService) {
+        this.waqiService = waqiService;
+    }
+
+    public void setGlobalObject(GlobalObject globalObject) {
+        this.globalObject = globalObject;
+    }
+
+    public void setAqcinListAdapter(AqcinListAdapter adpaterList) {
+        this.adpaterList = adpaterList;
     }
 
     public String getName() {
@@ -87,7 +113,7 @@ public class WaqiObject {
         return maxTemp;
     }
 
-    public String getId() {
-        return this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getId();
+    public String getIdentifier() {
+        return this.identifier;
     }
 }

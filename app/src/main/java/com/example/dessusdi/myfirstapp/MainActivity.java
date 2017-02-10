@@ -26,7 +26,6 @@ public class MainActivity extends ActionBarActivity {
     private RecyclerView recyclerView;
     private AqcinDatabaseService dbService = new AqcinDatabaseService(getContext());
     private AqcinRequestService async = new AqcinRequestService(getContext());
-    private List<String> citiesIds;
     private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
@@ -44,8 +43,6 @@ public class MainActivity extends ActionBarActivity {
 
         this.reloadCitiesFromDB();
 
-
-
         /*
         dbService.removeCity("@3067");
         */
@@ -55,14 +52,16 @@ public class MainActivity extends ActionBarActivity {
 
     private void reloadCitiesFromDB() {
         // Load cities from db
-        this.citiesIds = dbService.fetchSavedCities();
-        this.cities.clear();
-        for (String id : citiesIds) {
-            WaqiObject cityObject = new WaqiObject(id, async, adapter);
+        //this.citiesIds = dbService.fetchSavedCities();
+        this.cities = dbService.fetchSavedCities();
+
+        for (WaqiObject cityObject : this.cities) {
+            Log.d("DATABASE", cityObject.getIdentifier());
+            cityObject.setAqcinListAdapter(adapter);
+            cityObject.setRequestService(async);
             cityObject.fetchData();
-            cities.add(cityObject);
         }
-        Log.d("DATABASE", dbService.fetchSavedCities().toString());
+        //Log.d("DATABASE", dbService.fetchSavedCities().toString());
     }
 
     public void refreshRecyclerList() {
@@ -108,7 +107,9 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String identifier = input.getText().toString();
-                dbService.addCity(identifier);
+                WaqiObject cityObject = new WaqiObject(identifier, async, adapter);
+                cityObject.save();
+                cityObject.fetchData();
                 reloadCitiesFromDB();
             }
         });
