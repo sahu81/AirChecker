@@ -1,13 +1,17 @@
 package com.example.dessusdi.myfirstapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
@@ -21,6 +25,8 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
+    private AqcinDatabaseService dbService = new AqcinDatabaseService(getContext());
+    private AqcinRequestService async = new AqcinRequestService(getContext());
     private List<String> citiesIds;
     private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
@@ -29,10 +35,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
-        AqcinDatabaseService dbService  = new AqcinDatabaseService(getContext());
-        AqcinRequestService async       = new AqcinRequestService(getContext());
+        this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         /*
         dbService.addCity("@3071");
@@ -40,22 +43,27 @@ public class MainActivity extends ActionBarActivity {
         dbService.addCity("@3067");
         */
 
-        // Load cities from db
-        this.citiesIds = dbService.fetchSavedCities();
+        this.reloadCitiesFromDB();
 
-        for (String id : citiesIds) {
-            WaqiObject cityObject = new WaqiObject(id, async, adapter);
-            cityObject.fetchData();
-            cities.add(cityObject);
-        }
+
 
         /*
         dbService.removeCity("@3067");
         */
 
-        Log.d("DATABASE", dbService.fetchSavedCities().toString());
-
         this.refreshRecyclerList();
+    }
+
+    private void reloadCitiesFromDB() {
+        // Load cities from db
+        this.citiesIds = dbService.fetchSavedCities();
+        this.cities.clear();
+        for (String id : citiesIds) {
+            WaqiObject cityObject = new WaqiObject(id, async, adapter);
+            cityObject.fetchData();
+            cities.add(cityObject);
+        }
+        Log.d("DATABASE", dbService.fetchSavedCities().toString());
     }
 
     public void refreshRecyclerList() {
@@ -79,10 +87,40 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
+            this.presentSearchDialog();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void presentSearchDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Title");
+
+        // Set up the input
+        final EditText input = new EditText(this);
+        // Specify the type of input expected
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String identifier = input.getText().toString();
+                dbService.addCity(identifier);
+                reloadCitiesFromDB();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
     }
 
     public Context getContext() {
