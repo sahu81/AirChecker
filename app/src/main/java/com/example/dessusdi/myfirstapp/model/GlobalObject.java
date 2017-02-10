@@ -2,6 +2,7 @@ package com.example.dessusdi.myfirstapp.model;
 
 /**
  * Created by dessusdi on 30/01/2017.
+ * DESSUS Dimitri
  */
 public class GlobalObject {
     private String dt;

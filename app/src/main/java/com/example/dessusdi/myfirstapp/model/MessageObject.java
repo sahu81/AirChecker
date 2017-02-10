@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by dessusdi on 30/01/2017.
+ * DESSUS Dimitri
  */
 public class MessageObject {
     private long timestamp;

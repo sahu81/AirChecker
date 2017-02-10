@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 
 /**
  * Created by dessusdi on 30/01/2017.
+ * DESSUS Dimitri
  */
 public class AqcinRequestService {
 
@@ -26,8 +27,6 @@ public class AqcinRequestService {
     }
 
     public void sendRequestWithUrl(String url, final VolleyCallback callback) {
-        final RecyclerView mRecyclerView = (RecyclerView) this.mApplicationContext.findViewById(R.id.recyclerView);
-
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
 

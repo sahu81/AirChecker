@@ -6,13 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dessusdi.myfirstapp.R;
-import com.example.dessusdi.myfirstapp.model.IaqiObject;
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 
 import java.util.List;
 
 /**
  * Created by dessusdi on 30/01/2017.
+ * DESSUS Dimitri
  */
 public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
