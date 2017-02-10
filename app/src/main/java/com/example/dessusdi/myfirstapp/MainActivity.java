@@ -2,20 +2,12 @@ package com.example.dessusdi.myfirstapp;
 
 import android.app.AlertDialog;
 import android.content.Context;
-<<<<<<< HEAD
-import android.graphics.Canvas;
-=======
 import android.content.DialogInterface;
->>>>>>> 883e96abb9183e4e8f3797429ef7fb7d21416755
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-<<<<<<< HEAD
-import android.support.v7.widget.helper.ItemTouchHelper;
-=======
 import android.text.InputType;
->>>>>>> 883e96abb9183e4e8f3797429ef7fb7d21416755
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +15,6 @@ import android.widget.EditText;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
-import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseHelper;
 import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseService;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
