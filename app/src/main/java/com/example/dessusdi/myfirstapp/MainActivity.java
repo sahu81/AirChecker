@@ -1,14 +1,18 @@
 package com.example.dessusdi.myfirstapp;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
+import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseHelper;
+import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseService;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
 import java.util.ArrayList;
@@ -17,7 +21,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
-    private String[] citiesIds = new String[] {"@3067", "@3069", "@3071"};
+    private List<String> citiesIds;
     private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
@@ -27,13 +31,29 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        AqcinRequestService async = new AqcinRequestService(MainActivity.this);
+        AqcinDatabaseService dbService  = new AqcinDatabaseService(getContext());
+        AqcinRequestService async       = new AqcinRequestService(getContext());
+
+        /*
+        dbService.addCity("@3071");
+        dbService.addCity("@3069");
+        dbService.addCity("@3067");
+        */
+
+        // Load cities from db
+        this.citiesIds = dbService.fetchSavedCities();
 
         for (String id : citiesIds) {
             WaqiObject cityObject = new WaqiObject(id, async, adapter);
             cityObject.fetchData();
             cities.add(cityObject);
         }
+
+        /*
+        dbService.removeCity("@3067");
+        */
+
+        Log.d("DATABASE", dbService.fetchSavedCities().toString());
 
         this.refreshRecyclerList();
     }
@@ -58,10 +78,14 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Context getContext() {
+        return MainActivity.this;
     }
 }

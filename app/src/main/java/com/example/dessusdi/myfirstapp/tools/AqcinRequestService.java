@@ -1,7 +1,7 @@
 package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.Activity;
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -9,8 +9,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.dessusdi.myfirstapp.MainActivity;
-import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.model.GlobalObject;
 import com.google.gson.Gson;
 
@@ -22,8 +20,8 @@ public class AqcinRequestService {
 
     private Activity mApplicationContext;
 
-    public AqcinRequestService(MainActivity context) {
-        mApplicationContext = context;
+    public AqcinRequestService(Context context) {
+        mApplicationContext = (Activity)context;
     }
 
     public void sendRequestWithUrl(String url, final VolleyCallback callback) {
