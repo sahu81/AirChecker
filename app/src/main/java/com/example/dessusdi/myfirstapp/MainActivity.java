@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -15,7 +16,6 @@ import android.widget.EditText;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
-import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseService;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
 import java.util.ArrayList;
@@ -24,10 +24,8 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
-    private AqcinDatabaseService dbService = new AqcinDatabaseService(getContext());
     private AqcinRequestService async = new AqcinRequestService(getContext());
-    private List<String> citiesIds;
-    private List<WaqiObject> cities = new ArrayList<>();
+    private List<WaqiObject> cities = new ArrayList<WaqiObject>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
     @Override
@@ -36,33 +34,62 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        /*
-        dbService.addCity("@3071");
-        dbService.addCity("@3069");
-        dbService.addCity("@3067");
-        */
-
+        this.setupRecyclerView();
         this.reloadCitiesFromDB();
-
-
-
-        /*
-        dbService.removeCity("@3067");
-        */
-
         this.refreshRecyclerList();
+    }
+
+    private void setupRecyclerView() {
+        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+                final int position = viewHolder.getAdapterPosition();
+
+                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Are you sure to delete?");
+
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            adapter.notifyItemRemoved(position);
+                            cities.get(position).delete();
+                            cities.remove(position);
+                            return;
+                        }
+                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Replace cell at same position
+                            adapter.notifyItemRemoved(position + 1);
+                            adapter.notifyItemRangeChanged(position, adapter.getItemCount());
+                            return;
+                        }
+                    }).show();
+                }
+            }
+        };
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recylcerview
     }
 
     private void reloadCitiesFromDB() {
         // Load cities from db
-        this.citiesIds = dbService.fetchSavedCities();
-        this.cities.clear();
-        for (String id : citiesIds) {
-            WaqiObject cityObject = new WaqiObject(id, async, adapter);
+
+        this.cities.addAll(WaqiObject.listAll(WaqiObject.class));
+
+        for (WaqiObject cityObject : this.cities) {
+            Log.d("DATABASE", "ID --> " + cityObject.getIdentifier());
+            Log.d("DATABASE", "Name --> " + cityObject.getName());
+            cityObject.setAqcinListAdapter(this.adapter);
+            cityObject.setRequestService(this.async);
             cityObject.fetchData();
-            cities.add(cityObject);
         }
-        Log.d("DATABASE", dbService.fetchSavedCities().toString());
     }
 
     public void refreshRecyclerList() {
@@ -95,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void presentSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Title");
+        builder.setTitle("Add new city");
 
         // Set up the input
         final EditText input = new EditText(this);
@@ -108,8 +135,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String identifier = input.getText().toString();
-                dbService.addCity(identifier);
-                reloadCitiesFromDB();
+                WaqiObject cityObject = new WaqiObject(identifier, async, adapter);
+                cityObject.save();
+                cityObject.fetchData();
+                cities.add(cityObject);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

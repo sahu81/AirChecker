@@ -1,5 +1,7 @@
 package com.example.dessusdi.myfirstapp.model;
 
+import com.orm.SugarRecord;
+
 /**
  * Created by dessusdi on 30/01/2017.
  * DESSUS Dimitri

@@ -1,14 +1,13 @@
-package com.example.dessusdi.myfirstapp.tools;
+package com.example.dessusdi.myfirstapp.ManualSQLiteClasses;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
+import com.example.dessusdi.myfirstapp.tools.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,21 +17,26 @@ import java.util.List;
 public class AqcinDatabaseService {
 
     private AqcinDatabaseHelper mDbHelper;
+    private SQLiteDatabase db;
 
     public AqcinDatabaseService(Context context) {
         this.mDbHelper = new AqcinDatabaseHelper(context);
     }
 
+    public void open() {
+        mDbHelper.getWritableDatabase();
+    }
+
     public long addCity(String identifier) {
         Log.d("DATABASE", "Adding city to db...");
         // Gets the data repository in write mode
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
+        this.open();
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
         Log.d("DATABASE", identifier);
         values.put(Constants.Database.COLUMN_CITY_ID, identifier);
 
+        this.close();
         // Insert the new row, returning the primary key value of the new row
         return db.insert(Constants.Database.TABLE_NAME, null, values);
     }
@@ -41,19 +45,24 @@ public class AqcinDatabaseService {
         Log.d("DATABASE", "Removing city from db...");
 
         // Gets the data repository in write mode
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        this.open();
         // Define 'where' part of query.
         String selection = Constants.Database.COLUMN_CITY_ID + " LIKE ?";
         // Specify arguments in placeholder order.
         String[] selectionArgs = { identifier };
         // Issue SQL statement.
         db.delete(Constants.Database.TABLE_NAME, selection, selectionArgs);
-
+        this.close();
     }
 
     public List fetchSavedCities() {
         Log.d("DATABASE", "Fetching cities from db...");
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        return WaqiObject.listAll(WaqiObject.class);
+
+        /* BEFORE ADDING ORM
+        db = mDbHelper.getReadableDatabase();
+
 
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
@@ -83,7 +92,12 @@ public class AqcinDatabaseService {
             itemIds.add(cityId);
         }
         cursor.close();
-
+        this.close();
         return itemIds;
+        */
+    }
+
+    public void close() {
+        this.mDbHelper.close();
     }
 }

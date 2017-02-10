@@ -13,6 +13,7 @@ public final class Constants {
         private Url() {}
     }
 
+    // This part was used for manual persistance SQLite (now remplaced by Sugar ORM)
     public static class Database implements BaseColumns {
 
         public static final int DATABASE_VERSION    = 1;
