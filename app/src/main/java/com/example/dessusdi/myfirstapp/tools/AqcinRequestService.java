@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.model.GlobalObject;
 import com.google.gson.Gson;
@@ -20,7 +21,7 @@ public class AqcinRequestService {
 
     private Activity mApplicationContext;
 
-    public AqcinRequestService(Activity context) {
+    public AqcinRequestService(MainActivity context) {
         mApplicationContext = context;
     }
 

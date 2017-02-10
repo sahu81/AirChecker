@@ -17,8 +17,9 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
+    private String[] citiesIds = new String[] {"@3067", "@3069", "@3071"};
     private List<WaqiObject> cities = new ArrayList<>();
-    private AqcinListAdapter adpater = new AqcinListAdapter(cities);
+    private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,24 +28,19 @@ public class MainActivity extends ActionBarActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         AqcinRequestService async = new AqcinRequestService(MainActivity.this);
-        WaqiObject grenoble     = new WaqiObject("https://api.waqi.info/api/feed/@3067/obs.en.json", async, adpater);
-        WaqiObject grenoble2    = new WaqiObject("https://api.waqi.info/api/feed/@3069/obs.en.json", async, adpater);
-        WaqiObject smh          = new WaqiObject("https://api.waqi.info/api/feed/@3071/obs.en.json", async, adpater);
 
-        grenoble.fetchData();
-        grenoble2.fetchData();
-        smh.fetchData();
-
-        cities.add(grenoble);
-        cities.add(grenoble2);
-        cities.add(smh);
+        for (String id : citiesIds) {
+            WaqiObject cityObject = new WaqiObject(id, async, adapter);
+            cityObject.fetchData();
+            cities.add(cityObject);
+        }
 
         this.refreshRecyclerList();
     }
 
     public void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(this.adpater);
+        recyclerView.setAdapter(this.adapter);
     }
 
     @Override
