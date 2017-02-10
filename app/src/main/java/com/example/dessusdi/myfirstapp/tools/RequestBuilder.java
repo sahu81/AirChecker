@@ -5,8 +5,8 @@ package com.example.dessusdi.myfirstapp.tools;
  * DESSUS Dimitri
  */
 public abstract class RequestBuilder {
-    public static String buildAirQualityURL(String identifier) {
-        return Constants.Url.AIR_QUALITY_BASE_URL.replace("%%CITY_ID%%", identifier.replaceAll("\\s+",""));
+    public static String buildAirQualityURL(int identifier) {
+        return Constants.Url.AIR_QUALITY_BASE_URL.replace("%%CITY_ID%%", "@" + identifier);
     }
 
     public static String buildCityIdURL(String search) {

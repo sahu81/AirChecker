@@ -49,7 +49,7 @@ public class AqcinRequestService {
         queue.add(stringRequest);
     }
 
-    public void fetchAirQuality(String identifier, final GlobalObjectCallback callback) {
+    public void fetchAirQuality(int identifier, final GlobalObjectCallback callback) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
 

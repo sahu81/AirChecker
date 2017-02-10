@@ -152,11 +152,6 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String inputText = input.getText().toString();
-                /*WaqiObject cityObject = new WaqiObject(inputText, async, adapter);
-                cityObject.save();
-                cityObject.fetchData();
-                cities.add(cityObject);
-                checkIfRecyclerEmpty();*/
 
                 async.fetchCityID(inputText,
                         new AqcinRequestService.SearchQueryCallback() {
@@ -208,12 +203,17 @@ public class MainActivity extends ActionBarActivity {
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Log.d("DATA", "UID --->" + locationArray.get(radioIndex).getUid() + "  " + locationArray.get(radioIndex).getStation().getName());
+                WaqiObject cityObject = new WaqiObject(locationArray.get(radioIndex).getUid(), async, adapter);
+                cityObject.save();
+                cityObject.fetchData();
+                cities.add(cityObject);
+                checkIfRecyclerEmpty();
             }
         });
 
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
+                dialog.cancel();
             }
         });
 

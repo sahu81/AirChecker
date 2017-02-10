@@ -25,13 +25,13 @@ public class WaqiObject extends SugarRecord {
     @Ignore
     private String url = "";
 
-    String identifier = "";
+    int identifier = 0;
 
     public WaqiObject() {
         super();
     }
 
-    public WaqiObject(String cityID, AqcinRequestService waqiService, AqcinListAdapter adpater) {
+    public WaqiObject(int cityID, AqcinRequestService waqiService, AqcinListAdapter adpater) {
         this.url            = RequestBuilder.buildAirQualityURL(cityID);
         this.waqiService    = waqiService;
         this.adpaterList    = adpater;
@@ -118,7 +118,7 @@ public class WaqiObject extends SugarRecord {
         return maxTemp;
     }
 
-    public String getIdentifier() {
+    public int getIdentifier() {
         return this.identifier;
     }
 }
