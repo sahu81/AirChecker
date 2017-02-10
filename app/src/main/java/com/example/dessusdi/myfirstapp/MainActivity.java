@@ -12,9 +12,14 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.dessusdi.myfirstapp.model.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
+import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
@@ -24,15 +29,18 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
+    private TextView emptyRecyclerTextView;
     private AqcinRequestService async = new AqcinRequestService(getContext());
-    private List<WaqiObject> cities = new ArrayList<WaqiObject>();
+    private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
+    private int radioIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        this.emptyRecyclerTextView = (TextView) findViewById(R.id.emptyRecycler);
 
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
@@ -57,17 +65,19 @@ public class MainActivity extends ActionBarActivity {
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            // Remove cell at specific position
                             adapter.notifyItemRemoved(position);
                             cities.get(position).delete();
                             cities.remove(position);
+                            checkIfRecyclerEmpty();
                             return;
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Replace cell at same position
-                            adapter.notifyItemRemoved(position + 1);
                             adapter.notifyItemRangeChanged(position, adapter.getItemCount());
+                            checkIfRecyclerEmpty();
                             return;
                         }
                     }).show();
@@ -75,7 +85,15 @@ public class MainActivity extends ActionBarActivity {
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recylcerview
+        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recyclerview
+    }
+
+    private void checkIfRecyclerEmpty() {
+        if (this.cities.size() > 0) {
+            emptyRecyclerTextView.setVisibility(View.INVISIBLE);
+        } else {
+            emptyRecyclerTextView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void reloadCitiesFromDB() {
@@ -84,12 +102,12 @@ public class MainActivity extends ActionBarActivity {
         this.cities.addAll(WaqiObject.listAll(WaqiObject.class));
 
         for (WaqiObject cityObject : this.cities) {
-            Log.d("DATABASE", "ID --> " + cityObject.getIdentifier());
-            Log.d("DATABASE", "Name --> " + cityObject.getName());
             cityObject.setAqcinListAdapter(this.adapter);
             cityObject.setRequestService(this.async);
             cityObject.fetchData();
         }
+
+        this.checkIfRecyclerEmpty();
     }
 
     public void refreshRecyclerList() {
@@ -106,9 +124,7 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
@@ -134,11 +150,18 @@ public class MainActivity extends ActionBarActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String identifier = input.getText().toString();
-                WaqiObject cityObject = new WaqiObject(identifier, async, adapter);
-                cityObject.save();
-                cityObject.fetchData();
-                cities.add(cityObject);
+                String inputText = input.getText().toString();
+
+                async.fetchCityID(inputText,
+                        new AqcinRequestService.SearchQueryCallback() {
+                            @Override
+                            public void onSuccess(SearchGlobalObject searchGlobalObject) {
+                                if(searchGlobalObject.getData().size() > 0)
+                                    presentRadioList(searchGlobalObject.getData());
+                                //TODO: Show alert message if not found
+                            }
+                        });
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -149,6 +172,49 @@ public class MainActivity extends ActionBarActivity {
         });
 
         builder.show();
+    }
+
+    private void presentRadioList(final ArrayList<SearchLocationObject> locationArray) {
+
+        List<String> citiesName = new ArrayList<String>();
+        for (SearchLocationObject location : locationArray) {
+            citiesName.add(location.getStation().getName());
+        }
+
+        if(citiesName.size() <= 0)
+            return;
+
+        final String[] items = new String[ citiesName.size() ];
+        citiesName.toArray( items );
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);//ERROR ShowDialog cannot be resolved to a type
+        builder.setTitle("Choose a location");
+        AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        radioIndex = item;
+                    }
+                });
+
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Log.d("DATA", "UID --->" + locationArray.get(radioIndex).getUid() + "  " + locationArray.get(radioIndex).getStation().getName());
+                WaqiObject cityObject = new WaqiObject(locationArray.get(radioIndex).getUid(), async, adapter);
+                cityObject.save();
+                cityObject.fetchData();
+                cities.add(cityObject);
+                checkIfRecyclerEmpty();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public Context getContext() {

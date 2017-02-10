@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.R;
-import com.example.dessusdi.myfirstapp.model.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 
 /**
  * Created by dessusdi on 30/01/2017.

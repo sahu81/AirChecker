@@ -1,13 +1,12 @@
 package com.example.dessusdi.myfirstapp.recycler_view;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dessusdi.myfirstapp.R;
-import com.example.dessusdi.myfirstapp.model.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 
 import java.util.List;
 
