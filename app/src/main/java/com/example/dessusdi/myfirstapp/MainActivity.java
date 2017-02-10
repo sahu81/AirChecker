@@ -15,7 +15,6 @@ import android.widget.EditText;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
-import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseHelper;
 import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseService;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
