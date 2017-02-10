@@ -76,7 +76,6 @@ public class MainActivity extends ActionBarActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Replace cell at same position
-                            adapter.notifyItemRemoved(position + 1);
                             adapter.notifyItemRangeChanged(position, adapter.getItemCount());
                             checkIfRecyclerEmpty();
                             return;
