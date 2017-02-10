@@ -1,12 +1,8 @@
 package com.example.dessusdi.myfirstapp.model;
 
-import android.util.Log;
-
-import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-
-import java.net.URL;
+import com.example.dessusdi.myfirstapp.tools.Constants;
 
 /**
  * Created by dessusdi on 30/01/2017.
@@ -18,8 +14,8 @@ public class WaqiObject {
     private AqcinListAdapter adpaterList;
     private String url = "";
 
-    public WaqiObject(String url, AqcinRequestService waqiService, AqcinListAdapter adpater) {
-        this.url = url;
+    public WaqiObject(String cityID, AqcinRequestService waqiService, AqcinListAdapter adpater) {
+        this.url = Constants.Url.BASE_URL.replace("%%CITY_ID%%", cityID);
         this.waqiService = waqiService;
         this.adpaterList = adpater;
     }
