@@ -157,10 +157,9 @@ public class MainActivity extends ActionBarActivity {
                         new AqcinRequestService.SearchQueryCallback() {
                             @Override
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
-                                Log.d("DATABASE", "Search query completed !");
-                                Log.d("DATA", "ID ---> " + searchGlobalObject.getData().get(0).getUid());
-
-                                presentRadioList(searchGlobalObject.getData());
+                                if(searchGlobalObject.getData().size() > 0)
+                                    presentRadioList(searchGlobalObject.getData());
+                                //TODO: Show alert message if not found
                             }
                         });
 
@@ -195,8 +194,6 @@ public class MainActivity extends ActionBarActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         radioIndex = item;
-                        Toast.makeText(getApplicationContext(), items[item],
-                                Toast.LENGTH_SHORT).show();
                     }
                 });
 
