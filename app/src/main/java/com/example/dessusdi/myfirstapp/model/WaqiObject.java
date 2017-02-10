@@ -40,7 +40,7 @@ public class WaqiObject extends SugarRecord {
         this.identifier     = cityID;
     }
 
-    public void fetchData(final List<WaqiObject> array) {
+    public void fetchData() {
         this.url = this.getUrl(this.identifier);
         this.waqiService.sendRequestWithUrl(this.url,
         new AqcinRequestService.VolleyCallback() {
@@ -54,7 +54,7 @@ public class WaqiObject extends SugarRecord {
     }
 
     public String getUrl(String identifier) {
-        return Constants.Url.BASE_URL.replace("%%CITY_ID%%", identifier);
+        return Constants.Url.BASE_URL.replace("%%CITY_ID%%", identifier.replaceAll("\\s+",""));
     }
 
     public void setRequestService(AqcinRequestService waqiService) {
