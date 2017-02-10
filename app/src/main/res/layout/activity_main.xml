@@ -11,4 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+    <TextView android:id="@+id/emptyRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/emptyRecycler"
+        android:gravity="center"
+        />
+
 </RelativeLayout>

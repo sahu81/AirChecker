@@ -9,10 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
@@ -24,6 +25,7 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
+    private TextView emptyRecyclerTextView;
     private AqcinRequestService async = new AqcinRequestService(getContext());
     private List<WaqiObject> cities = new ArrayList<WaqiObject>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
@@ -33,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        this.emptyRecyclerTextView = (TextView) findViewById(R.id.emptyRecycler);
 
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
@@ -57,9 +60,11 @@ public class MainActivity extends ActionBarActivity {
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            // Remove cell at specific position
                             adapter.notifyItemRemoved(position);
                             cities.get(position).delete();
                             cities.remove(position);
+                            checkIfRecyclerEmpty();
                             return;
                         }
                     }).setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -68,6 +73,7 @@ public class MainActivity extends ActionBarActivity {
                             // Replace cell at same position
                             adapter.notifyItemRemoved(position + 1);
                             adapter.notifyItemRangeChanged(position, adapter.getItemCount());
+                            checkIfRecyclerEmpty();
                             return;
                         }
                     }).show();
@@ -76,6 +82,14 @@ public class MainActivity extends ActionBarActivity {
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recylcerview
+    }
+
+    private void checkIfRecyclerEmpty() {
+        if (this.cities.size() > 0) {
+            emptyRecyclerTextView.setVisibility(View.INVISIBLE);
+        } else {
+            emptyRecyclerTextView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void reloadCitiesFromDB() {
@@ -88,6 +102,8 @@ public class MainActivity extends ActionBarActivity {
             cityObject.setRequestService(this.async);
             cityObject.fetchData();
         }
+
+        this.checkIfRecyclerEmpty();
     }
 
     public void refreshRecyclerList() {
@@ -135,6 +151,7 @@ public class MainActivity extends ActionBarActivity {
                 cityObject.save();
                 cityObject.fetchData();
                 cities.add(cityObject);
+                checkIfRecyclerEmpty();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
