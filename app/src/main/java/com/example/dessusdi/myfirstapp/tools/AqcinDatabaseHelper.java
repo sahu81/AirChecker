@@ -13,7 +13,7 @@ public class AqcinDatabaseHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + Constants.Database.TABLE_NAME + " (" +
                     Constants.Database._ID + " INTEGER PRIMARY KEY," +
-                    Constants.Database.COLUMN_CITY_ID + " TEXT";
+                    Constants.Database.COLUMN_CITY_ID + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + Constants.Database.TABLE_NAME;

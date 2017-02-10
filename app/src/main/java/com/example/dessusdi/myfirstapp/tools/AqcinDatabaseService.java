@@ -37,8 +37,18 @@ public class AqcinDatabaseService {
         return db.insert(Constants.Database.TABLE_NAME, null, values);
     }
 
-    public void removeCity(WaqiObject waqiObj) {
+    public void removeCity(String identifier) {
         Log.d("DATABASE", "Removing city from db...");
+
+        // Gets the data repository in write mode
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        // Define 'where' part of query.
+        String selection = Constants.Database.COLUMN_CITY_ID + " LIKE ?";
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = { identifier };
+        // Issue SQL statement.
+        db.delete(Constants.Database.TABLE_NAME, selection, selectionArgs);
+
     }
 
     public List fetchSavedCities() {

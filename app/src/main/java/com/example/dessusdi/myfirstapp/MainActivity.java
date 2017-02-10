@@ -34,13 +34,24 @@ public class MainActivity extends ActionBarActivity {
         AqcinDatabaseService dbService  = new AqcinDatabaseService(getContext());
         AqcinRequestService async       = new AqcinRequestService(getContext());
 
-        citiesIds = dbService.fetchSavedCities();
+        /*
+        dbService.addCity("@3071");
+        dbService.addCity("@3069");
+        dbService.addCity("@3067");
+        */
+
+        // Load cities from db
+        this.citiesIds = dbService.fetchSavedCities();
 
         for (String id : citiesIds) {
             WaqiObject cityObject = new WaqiObject(id, async, adapter);
             cityObject.fetchData();
             cities.add(cityObject);
         }
+
+        /*
+        dbService.removeCity("@3067");
+        */
 
         Log.d("DATABASE", dbService.fetchSavedCities().toString());
 
