@@ -2,7 +2,6 @@ package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,12 +9,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.dessusdi.myfirstapp.models.GlobalObject;
+import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by dessusdi on 30/01/2017.
@@ -40,9 +36,7 @@ public class AqcinRequestService {
                     public void onResponse(String response) {
                         Gson gson = new Gson();
                         SearchGlobalObject globalSearchObject = gson.fromJson(response, SearchGlobalObject.class);
-                        Log.d("DATA", "ID ---> " + globalSearchObject.getData().get(0).getUid());
-                        
-                        callback.onSuccess();
+                        callback.onSuccess(globalSearchObject);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -84,6 +78,6 @@ public class AqcinRequestService {
     }
 
     public interface SearchQueryCallback {
-        void onSuccess();
+        void onSuccess(SearchGlobalObject globalSearchObject);
     }
 }

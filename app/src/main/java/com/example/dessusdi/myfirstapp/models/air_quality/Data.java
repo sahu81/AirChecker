@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp.models;
+package com.example.dessusdi.myfirstapp.models.air_quality;
 
 /**
  * Created by dessusdi on 30/01/2017.

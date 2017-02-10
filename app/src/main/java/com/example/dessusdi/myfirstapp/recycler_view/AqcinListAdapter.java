@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dessusdi.myfirstapp.R;
-import com.example.dessusdi.myfirstapp.models.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 
 import java.util.List;
 

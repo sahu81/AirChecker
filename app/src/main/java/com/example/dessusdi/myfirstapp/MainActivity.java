@@ -15,8 +15,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.dessusdi.myfirstapp.models.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
+import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
@@ -30,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
     private AqcinRequestService async = new AqcinRequestService(getContext());
     private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
+    private int radioIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,8 +161,11 @@ public class MainActivity extends ActionBarActivity {
                 async.fetchCityID(inputText,
                         new AqcinRequestService.SearchQueryCallback() {
                             @Override
-                            public void onSuccess() {
+                            public void onSuccess(SearchGlobalObject searchGlobalObject) {
                                 Log.d("DATABASE", "Search query completed !");
+                                Log.d("DATA", "ID ---> " + searchGlobalObject.getData().get(0).getUid());
+
+                                presentRadioList(searchGlobalObject.getData());
                             }
                         });
 
@@ -172,6 +179,46 @@ public class MainActivity extends ActionBarActivity {
         });
 
         builder.show();
+    }
+
+    private void presentRadioList(final ArrayList<SearchLocationObject> locationArray) {
+
+        List<String> citiesName = new ArrayList<String>();
+        for (SearchLocationObject location : locationArray) {
+            citiesName.add(location.getStation().getName());
+        }
+
+        if(citiesName.size() <= 0)
+            return;
+
+        final String[] items = new String[ citiesName.size() ];
+        citiesName.toArray( items );
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);//ERROR ShowDialog cannot be resolved to a type
+        builder.setTitle("Choose a location");
+        AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) {
+                        radioIndex = item;
+                        Toast.makeText(getApplicationContext(), items[item],
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Log.d("DATA", "UID --->" + locationArray.get(radioIndex).getUid() + "  " + locationArray.get(radioIndex).getStation().getName());
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public Context getContext() {

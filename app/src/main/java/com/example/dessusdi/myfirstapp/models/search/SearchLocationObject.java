@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class SearchLocationObject {
     private int uid;
-    private SearchLocationObject station;
+    private SearchStationObject station;
 
     public int getUid() {
         return uid;
@@ -18,11 +18,11 @@ public class SearchLocationObject {
         this.uid = uid;
     }
 
-    public SearchLocationObject getStation() {
+    public SearchStationObject getStation() {
         return station;
     }
 
-    public void setStation(SearchLocationObject station) {
+    public void setStation(SearchStationObject station) {
         this.station = station;
     }
 }

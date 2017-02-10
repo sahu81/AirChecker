@@ -1,7 +1,5 @@
 package com.example.dessusdi.myfirstapp.models.search;
 
-import com.example.dessusdi.myfirstapp.models.Data;
-
 import java.util.ArrayList;
 
 /**
