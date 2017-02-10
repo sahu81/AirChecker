@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp.model;
+package com.example.dessusdi.myfirstapp.models;
 
 import java.util.ArrayList;
 

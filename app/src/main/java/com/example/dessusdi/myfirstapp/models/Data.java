@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp.model;
+package com.example.dessusdi.myfirstapp.models;
 
 /**
  * Created by dessusdi on 30/01/2017.

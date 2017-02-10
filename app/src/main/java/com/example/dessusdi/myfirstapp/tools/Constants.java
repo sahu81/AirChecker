@@ -8,7 +8,9 @@ import android.provider.BaseColumns;
  */
 public final class Constants {
     public final class Url {
-        public static final String BASE_URL = "https://api.waqi.info/api/feed/%%CITY_ID%%/obs.en.json";
+        public static final String TOKEN    = "c71fbbfd99ef2c934f9d7d737be9e1e70ff03a9c";
+        public static final String CITY_SEARCH_BASE_URL = "http://api.waqi.info/search/?token=%%TOKEN%%&keyword=";
+        public static final String AIR_QUALITY_BASE_URL = "https://api.waqi.info/api/feed/%%CITY_ID%%/obs.en.json";
 
         private Url() {}
     }

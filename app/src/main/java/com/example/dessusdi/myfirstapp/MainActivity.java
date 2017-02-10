@@ -9,13 +9,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.dessusdi.myfirstapp.model.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
@@ -27,7 +28,7 @@ public class MainActivity extends ActionBarActivity {
     private RecyclerView recyclerView;
     private TextView emptyRecyclerTextView;
     private AqcinRequestService async = new AqcinRequestService(getContext());
-    private List<WaqiObject> cities = new ArrayList<WaqiObject>();
+    private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
     @Override
@@ -81,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recylcerview
+        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recyclerview
     }
 
     private void checkIfRecyclerEmpty() {
@@ -146,12 +147,21 @@ public class MainActivity extends ActionBarActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String identifier = input.getText().toString();
-                WaqiObject cityObject = new WaqiObject(identifier, async, adapter);
+                String inputText = input.getText().toString();
+                /*WaqiObject cityObject = new WaqiObject(inputText, async, adapter);
                 cityObject.save();
                 cityObject.fetchData();
                 cities.add(cityObject);
-                checkIfRecyclerEmpty();
+                checkIfRecyclerEmpty();*/
+
+                async.fetchCityID(inputText,
+                        new AqcinRequestService.SearchQueryCallback() {
+                            @Override
+                            public void onSuccess() {
+                                Log.d("DATABASE", "Search query completed !");
+                            }
+                        });
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
