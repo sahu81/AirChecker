@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
     private RecyclerView recyclerView;
     private AqcinDatabaseService dbService = new AqcinDatabaseService(getContext());
     private AqcinRequestService async = new AqcinRequestService(getContext());
-    private List<WaqiObject> cities = new ArrayList<>();
+    private List<WaqiObject> cities = new ArrayList<WaqiObject>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);
 
     @Override
@@ -35,33 +35,25 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        /*
-        dbService.addCity("@3071");
-        dbService.addCity("@3069");
-        dbService.addCity("@3067");
-        */
-
         this.reloadCitiesFromDB();
-
-        /*
-        dbService.removeCity("@3067");
-        */
-
         this.refreshRecyclerList();
     }
 
     private void reloadCitiesFromDB() {
         // Load cities from db
         //this.citiesIds = dbService.fetchSavedCities();
-        this.cities = dbService.fetchSavedCities();
+
+        this.cities.addAll(dbService.fetchSavedCities());
+
+        Log.d("DATABASE", cities.toString());
 
         for (WaqiObject cityObject : this.cities) {
-            Log.d("DATABASE", cityObject.getIdentifier());
-            cityObject.setAqcinListAdapter(adapter);
-            cityObject.setRequestService(async);
-            cityObject.fetchData();
+            Log.d("DATABASE", "ID --> " + cityObject.getIdentifier());
+            Log.d("DATABASE", "Name --> " + cityObject.getName());
+            cityObject.setAqcinListAdapter(this.adapter);
+            cityObject.setRequestService(this.async);
+            cityObject.fetchData(this.cities);
         }
-        //Log.d("DATABASE", dbService.fetchSavedCities().toString());
     }
 
     public void refreshRecyclerList() {
@@ -109,8 +101,8 @@ public class MainActivity extends ActionBarActivity {
                 String identifier = input.getText().toString();
                 WaqiObject cityObject = new WaqiObject(identifier, async, adapter);
                 cityObject.save();
-                cityObject.fetchData();
-                reloadCitiesFromDB();
+                cityObject.fetchData(cities);
+                cities.add(cityObject);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

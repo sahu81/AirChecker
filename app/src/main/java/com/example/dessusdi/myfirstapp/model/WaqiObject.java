@@ -1,10 +1,14 @@
 package com.example.dessusdi.myfirstapp.model;
 
+import android.util.Log;
+
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 import com.example.dessusdi.myfirstapp.tools.Constants;
 import com.orm.SugarRecord;
 import com.orm.dsl.Ignore;
+
+import java.util.List;
 
 /**
  * Created by dessusdi on 30/01/2017.
@@ -23,26 +27,34 @@ public class WaqiObject extends SugarRecord {
     @Ignore
     private String url = "";
 
-    String identifier;
+    String identifier = "";
 
-    public WaqiObject() { }
+    public WaqiObject() {
+        super();
+    }
 
     public WaqiObject(String cityID, AqcinRequestService waqiService, AqcinListAdapter adpater) {
-        this.url = Constants.Url.BASE_URL.replace("%%CITY_ID%%", cityID);
+        this.url            = this.getUrl(cityID);
         this.waqiService    = waqiService;
         this.adpaterList    = adpater;
         this.identifier     = cityID;
     }
 
-    public void fetchData() {
+    public void fetchData(final List<WaqiObject> array) {
+        this.url = this.getUrl(this.identifier);
         this.waqiService.sendRequestWithUrl(this.url,
         new AqcinRequestService.VolleyCallback() {
             @Override
             public void onSuccess(GlobalObject global) {
-                globalObject = global;
+                setGlobalObject(global);
                 adpaterList.notifyDataSetChanged();
+                Log.d("DATABASE", "Data fetched !");
             }
         });
+    }
+
+    public String getUrl(String identifier) {
+        return Constants.Url.BASE_URL.replace("%%CITY_ID%%", identifier);
     }
 
     public void setRequestService(AqcinRequestService waqiService) {
