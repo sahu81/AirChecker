@@ -79,6 +79,17 @@
             android:layout_toEndOf="@+id/air_qualityTextView"
             android:text="@string/cell_city_name" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButton"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/share"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/city_nameTextView" />
+
 
     </RelativeLayout>
 
