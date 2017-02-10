@@ -95,7 +95,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void presentSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Title");
+        builder.setTitle("Add new city");
 
         // Set up the input
         final EditText input = new EditText(this);
