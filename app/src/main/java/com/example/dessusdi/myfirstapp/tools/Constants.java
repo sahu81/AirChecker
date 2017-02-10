@@ -1,5 +1,7 @@
 package com.example.dessusdi.myfirstapp.tools;
 
+import android.provider.BaseColumns;
+
 /**
  * Created by dessusdi on 10/02/2017.
  * DESSUS Dimitri
@@ -10,6 +12,17 @@ public final class Constants {
 
         private Url() {}
     }
+
+    public static class Database implements BaseColumns {
+
+        public static final int DATABASE_VERSION    = 1;
+        public static final String DATABASE_NAME    = "waqi.db";
+        public static final String TABLE_NAME       = "AIR_QUALITY";
+        public static final String COLUMN_CITY_ID   = "identifier";
+
+        private Database() {}
+    }
+
 
     private Constants() {}
 }

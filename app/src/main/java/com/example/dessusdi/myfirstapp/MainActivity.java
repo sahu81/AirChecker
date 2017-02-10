@@ -1,14 +1,18 @@
 package com.example.dessusdi.myfirstapp;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
+import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseHelper;
+import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseService;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
 import java.util.ArrayList;
@@ -27,13 +31,17 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        AqcinRequestService async = new AqcinRequestService(MainActivity.this);
+        AqcinDatabaseService dbService  = new AqcinDatabaseService(getContext());
+        AqcinRequestService async       = new AqcinRequestService(getContext());
 
         for (String id : citiesIds) {
             WaqiObject cityObject = new WaqiObject(id, async, adapter);
             cityObject.fetchData();
+            //dbService.addCity(id);
             cities.add(cityObject);
         }
+
+        Log.d("DATABASE", dbService.fetchSavedCities().toString());
 
         this.refreshRecyclerList();
     }
@@ -63,5 +71,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public Context getContext() {
+        return MainActivity.this;
     }
 }
