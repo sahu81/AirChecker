@@ -1,8 +1,10 @@
-package com.example.dessusdi.myfirstapp.tools;
+package com.example.dessusdi.myfirstapp.ManualSQLiteClasses;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.dessusdi.myfirstapp.tools.Constants;
 
 /**
  * Created by dessusdi on 10/02/2017.

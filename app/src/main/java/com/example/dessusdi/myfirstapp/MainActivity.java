@@ -16,7 +16,6 @@ import android.widget.EditText;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
-import com.example.dessusdi.myfirstapp.tools.AqcinDatabaseService;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
-    private AqcinDatabaseService dbService = new AqcinDatabaseService(getContext());
     private AqcinRequestService async = new AqcinRequestService(getContext());
     private List<WaqiObject> cities = new ArrayList<WaqiObject>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities);

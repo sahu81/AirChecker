@@ -1,14 +1,13 @@
-package com.example.dessusdi.myfirstapp.tools;
+package com.example.dessusdi.myfirstapp.ManualSQLiteClasses;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.model.WaqiObject;
+import com.example.dessusdi.myfirstapp.tools.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
