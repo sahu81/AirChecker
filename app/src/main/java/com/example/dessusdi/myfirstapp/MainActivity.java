@@ -1,10 +1,12 @@
 package com.example.dessusdi.myfirstapp;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
