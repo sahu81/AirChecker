@@ -18,4 +18,5 @@
     <string name="add_action">Add</string>
     <string name="cancel_action">Cancel</string>
     <string name="choose_location">Choose a location</string>
+    <string name="city_not_found">City not found, please check again and try again.</string>
 </resources>

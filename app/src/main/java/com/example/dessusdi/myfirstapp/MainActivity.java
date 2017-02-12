@@ -25,6 +25,8 @@ import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
@@ -157,7 +159,8 @@ public class MainActivity extends ActionBarActivity {
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
                                 if(searchGlobalObject.getData().size() > 0)
                                     presentRadioList(searchGlobalObject.getData());
-                                //TODO: Show alert message if not found
+                                else
+                                    presentCityNotFoundDialog();
                             }
                         });
 
@@ -171,6 +174,23 @@ public class MainActivity extends ActionBarActivity {
         });
 
         builder.show();
+    }
+
+    private void presentCityNotFoundDialog() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+        builder1.setMessage(R.string.city_not_found);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                R.string.validate_action,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertCityNotFound = builder1.create();
+        alertCityNotFound.show();
     }
 
     private void presentRadioList(final ArrayList<SearchLocationObject> locationArray) {
