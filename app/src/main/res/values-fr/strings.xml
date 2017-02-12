@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_search">Recherche</string>
+    <string name="menu_search">Recherche</string>
+    <string name="menu_settings">Réglages</string>
     <string name="add_action">Ajouter</string>
     <string name="add_city">Ajouter nouvelle ville</string>
     <string name="cancel_action">Annuler</string>

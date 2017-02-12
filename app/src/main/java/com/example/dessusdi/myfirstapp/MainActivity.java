@@ -129,9 +129,11 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (id == R.id.menu_search) {
             this.presentSearchDialog();
             return true;
+        } else if (id == R.id.menu_settings) {
+
         }
 
         return super.onOptionsItemSelected(item);
