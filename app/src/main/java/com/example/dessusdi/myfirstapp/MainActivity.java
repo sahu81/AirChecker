@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView emptyRecyclerTextView;
     private AqcinRequestService async = new AqcinRequestService(getContext());
     private List<WaqiObject> cities = new ArrayList<>();
-    private AqcinListAdapter adapter = new AqcinListAdapter(cities);
+    private AqcinListAdapter adapter = new AqcinListAdapter(cities, getContext());
     private int radioIndex;
 
     @Override

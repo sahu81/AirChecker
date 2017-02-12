@@ -70,16 +70,16 @@ public class WaqiObject extends SugarRecord {
         return name;
     }
 
-    public String getAirQuality() {
+    public int getAirQuality() {
         int airQuality = 0;
         if (this.globalObject != null) {
             airQuality = this.globalObject.getRxs().getObs().get(0).getMsg().getAqi();
         }
-        return String.valueOf(airQuality);
+        return airQuality;
     }
 
     public String getColorCode() {
-        int airQuality = Integer.parseInt(this.getAirQuality());
+        int airQuality = this.getAirQuality();
         String color = "#e74c3c";
 
         if(airQuality < 40)
