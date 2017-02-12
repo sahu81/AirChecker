@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">MyFirstAndroidApp</string>
+    <string name="app_name" translatable="false">AirChecker</string>
 
     <string name="hello_world">Hello Android !</string>
     <string name="action_search">Search</string>
