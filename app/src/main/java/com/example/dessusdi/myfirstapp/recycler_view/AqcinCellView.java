@@ -27,6 +27,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
     private TextView minTextView;
     private TextView maxTextView;
     private ImageButton shareImageButton;
+    private ImageButton refreshImageButton;
 
     public AqcinCellView(View itemView) {
         super(itemView);
@@ -37,7 +38,9 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
         minTextView = (TextView) itemView.findViewById(R.id.minTextView);
         maxTextView = (TextView) itemView.findViewById(R.id.maxTextView);
         shareImageButton = (ImageButton) itemView.findViewById(R.id.shareButton);
+        refreshImageButton = (ImageButton) itemView.findViewById(R.id.refreshButton);
         shareImageButton.setOnClickListener(this);
+        refreshImageButton.setOnClickListener(this);
     }
 
     @Override
@@ -56,7 +59,8 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
             emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
             this.context.startActivity(Intent.createChooser(emailIntent, "Email:"));
-        }
+        } else if (v == this.refreshImageButton)
+            this.waqi.fetchData();
     }
 
     public void setWaqiObject(WaqiObject myObject){
