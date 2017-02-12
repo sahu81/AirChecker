@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_search">Recherche</string>
+    <string name="add_action">Ajouter</string>
+    <string name="add_city">Ajouter nouvelle ville</string>
+    <string name="cancel_action">Annuler</string>
+    <string name="cell_city_location">GPS : (inconnu)</string>
+    <string name="cell_city_maxTemp">Max : 0 °C</string>
+    <string name="cell_city_minTemp">Min : 0 °C</string>
+    <string name="cell_city_name">Inconnue</string>
+    <string name="choose_location">Choisissez une ville</string>
+    <string name="delete_confirmation">Etes-vous sûr de supprimer ?</string>
+    <string name="emptyRecycler">Aucune ville ajoutée !</string>
+    <string name="hello_world">Bonjour Android !</string>
+    <string name="no">Non</string>
+    <string name="share_air_quality_mail_subject">Resultat qualité de l\'air</string>
+    <string name="validate_action">OK</string>
+    <string name="yes">Oui</string>
+    <string name="share_air_quality_mail_body">Bonjour,\nVoici le resultat de la qualité de l\'air à \'%1$s\' : %2$d\n\nRécupéré par %3$s</string>
+</resources>
