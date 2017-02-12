@@ -3,9 +3,9 @@ package com.example.dessusdi.myfirstapp.recycler_view;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -28,19 +28,25 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
     private TextView maxTextView;
     private ImageButton shareImageButton;
     private ImageButton refreshImageButton;
+    private ImageButton bellImageButton;
 
     public AqcinCellView(View itemView) {
         super(itemView);
 
-        air_qualityTextView = (TextView) itemView.findViewById(R.id.air_qualityTextView);
-        city_nameTextView = (TextView) itemView.findViewById(R.id.city_nameTextView);
-        gpsTextView = (TextView) itemView.findViewById(R.id.gpsTextView);
-        minTextView = (TextView) itemView.findViewById(R.id.minTextView);
-        maxTextView = (TextView) itemView.findViewById(R.id.maxTextView);
-        shareImageButton = (ImageButton) itemView.findViewById(R.id.shareButton);
-        refreshImageButton = (ImageButton) itemView.findViewById(R.id.refreshButton);
+        // Assigning layout elements
+        air_qualityTextView     = (TextView) itemView.findViewById(R.id.air_qualityTextView);
+        city_nameTextView       = (TextView) itemView.findViewById(R.id.city_nameTextView);
+        gpsTextView             = (TextView) itemView.findViewById(R.id.gpsTextView);
+        minTextView             = (TextView) itemView.findViewById(R.id.minTextView);
+        maxTextView             = (TextView) itemView.findViewById(R.id.maxTextView);
+        shareImageButton        = (ImageButton) itemView.findViewById(R.id.shareButton);
+        refreshImageButton      = (ImageButton) itemView.findViewById(R.id.refreshButton);
+        bellImageButton         = (ImageButton) itemView.findViewById(R.id.soundButton);
+
+        // Setting listener on buttons
         shareImageButton.setOnClickListener(this);
         refreshImageButton.setOnClickListener(this);
+        bellImageButton.setOnClickListener(this);
     }
 
     @Override
@@ -53,14 +59,19 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
                     this.waqi.getAirQuality(),
                     this.context.getResources().getString(R.string.app_name));
 
-
             Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
             emailIntent.setType("message/rfc822");
             emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, subject);
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
             this.context.startActivity(Intent.createChooser(emailIntent, "Email:"));
-        } else if (v == this.refreshImageButton)
+        } else if (v == this.refreshImageButton) {
             this.waqi.fetchData();
+        } else {
+            // Play a sound according to the air quality level
+            MediaPlayer mPlayer = MediaPlayer.create(context, this.waqi.getSoundResId());
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mPlayer.start();
+        }
     }
 
     public void setWaqiObject(WaqiObject myObject){
