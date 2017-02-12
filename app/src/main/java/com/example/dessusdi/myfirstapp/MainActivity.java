@@ -59,9 +59,9 @@ public class MainActivity extends ActionBarActivity {
 
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setMessage("Are you sure to delete?");
+                    builder.setMessage(R.string.delete_confirmation);
 
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Remove cell at specific position
@@ -71,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
                             checkIfRecyclerEmpty();
                             return;
                         }
-                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Replace cell at same position
@@ -137,7 +137,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void presentSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add new city");
+        builder.setTitle(R.string.add_city);
 
         // Set up the input
         final EditText input = new EditText(this);
@@ -146,7 +146,7 @@ public class MainActivity extends ActionBarActivity {
         builder.setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.validate_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String inputText = input.getText().toString();
@@ -163,7 +163,7 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -187,7 +187,7 @@ public class MainActivity extends ActionBarActivity {
         citiesName.toArray( items );
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);//ERROR ShowDialog cannot be resolved to a type
-        builder.setTitle("Choose a location");
+        builder.setTitle(R.string.choose_location);
         AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -195,9 +195,8 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
 
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.add_action, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Log.d("DATA", "UID --->" + locationArray.get(radioIndex).getUid() + "  " + locationArray.get(radioIndex).getStation().getName());
                 WaqiObject cityObject = new WaqiObject(locationArray.get(radioIndex).getUid(), async, adapter);
                 cityObject.save();
                 cityObject.fetchData();
@@ -206,7 +205,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel_action, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }

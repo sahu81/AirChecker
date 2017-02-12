@@ -10,4 +10,12 @@
     <string name="emptyRecycler">No city added !</string>
     <string name="share_air_quality_mail_subject">Result of air quality</string>
     <string name="share_air_quality_mail_body">Hello,\nHere is the result of the air quality at \'%1$s\' : %2$d\n\nFetched by %3$s</string>
+    <string name="delete_confirmation">Are you sure to delete ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="add_city">Add new city</string>
+    <string name="validate_action">OK</string>
+    <string name="add_action">Add</string>
+    <string name="cancel_action">Cancel</string>
+    <string name="choose_location">Choose a location</string>
 </resources>
