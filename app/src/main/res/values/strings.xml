@@ -34,4 +34,6 @@
     <string name="language_french">French</string>
     <string name="language_french_alias" translatable="false">fr_FR</string>
     <string name="pref_cat_customize_summary">Edit global app interface</string>
+    <string name="service_killed">Service destroyed</string>
+    <string name="service_checking">Checking air quality...</string>
 </resources>

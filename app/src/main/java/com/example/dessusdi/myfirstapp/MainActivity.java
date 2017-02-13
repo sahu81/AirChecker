@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -23,6 +24,7 @@ import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
 
 import java.util.ArrayList;
@@ -62,6 +64,11 @@ public class MainActivity extends ActionBarActivity {
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
         this.refreshRecyclerList();
+        this.setupBackgroundService();
+    }
+
+    private void setupBackgroundService() {
+        startService(new Intent(this, BackgroundRefresher.class));
     }
 
     private void setupRecyclerView() {

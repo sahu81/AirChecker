@@ -27,4 +27,6 @@
     <string name="language_english">Anglais</string>
     <string name="language_french">Français</string>
     <string name="pref_cat_customize_summary">Modifiez l\'interface de l\'application</string>
+    <string name="service_killed">Service arrêté</string>
+    <string name="service_checking">Récupération qualité de l\'air...</string>
 </resources>
