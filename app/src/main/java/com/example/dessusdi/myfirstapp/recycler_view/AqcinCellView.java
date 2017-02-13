@@ -65,6 +65,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
             emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, body);
             this.context.startActivity(Intent.createChooser(emailIntent, "Email:"));
         } else if (v == this.refreshImageButton) {
+            this.waqi.setGlobalObject(null);
             this.waqi.fetchData();
         } else {
             // Play a sound according to the air quality level

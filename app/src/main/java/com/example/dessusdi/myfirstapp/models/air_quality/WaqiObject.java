@@ -45,7 +45,6 @@ public class WaqiObject extends SugarRecord {
             @Override
             public void onSuccess(GlobalObject global) {
                 setGlobalObject(global);
-                adpaterList.notifyDataSetChanged();
                 Log.d("DATABASE", "Data fetched !");
             }
         });
@@ -57,6 +56,7 @@ public class WaqiObject extends SugarRecord {
 
     public void setGlobalObject(GlobalObject globalObject) {
         this.globalObject = globalObject;
+        adpaterList.notifyDataSetChanged();
     }
 
     public void setAqcinListAdapter(AqcinListAdapter adpaterList) {
@@ -105,7 +105,7 @@ public class WaqiObject extends SugarRecord {
     }
 
     public String getGPSCoordinate() {
-        String airQuality = "(not found)";
+        String airQuality = "";
         if (this.globalObject != null) {
             airQuality = String.format("GPS : %.6f - %.6f", this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(0), this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(1));
         }
@@ -113,7 +113,7 @@ public class WaqiObject extends SugarRecord {
     }
 
     public String getMinTemp() {
-        String minTemp = "0";
+        String minTemp = "";
         if (this.globalObject != null) {
             if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
                 minTemp = String.format("Min : %d°C", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(0));
@@ -123,7 +123,7 @@ public class WaqiObject extends SugarRecord {
     }
 
     public String getMaxTemp() {
-        String maxTemp = "0";
+        String maxTemp = "";
         if (this.globalObject != null) {
             if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
                 maxTemp = String.format("Max : %d°C", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(1));
