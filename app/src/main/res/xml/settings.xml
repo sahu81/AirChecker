@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/pref_cat_customize">
-        <ListPreference
-            android:key="language_preference"
-            android:title="@string/change_language_title"
-            android:icon="@drawable/pref_language"
-            android:summary="@string/language_english"
-            android:entries="@array/languages"
-            android:entryValues="@array/language-values"
-            android:defaultValue="@string/language_english_alias"/>
+<preference-headers xmlns:android="http://schemas.android.com/apk/res/android" >
 
-        <ListPreference
-            android:key="theme_preference"
-            android:title="@string/change_theme_title"
-            android:icon="@drawable/pref_theme"
-            android:summary="@string/theme_darken"
-            android:entries="@array/themes"
-            android:entryValues="@array/themes-values"
-            android:defaultValue="@string/theme_darken_alias" />
+    <header
+        android:title="@string/pref_cat_customize"
+        android:fragment="com.example.dessusdi.myfirstapp.SettingsActivity$CustomizationFragment"
+        android:icon="@drawable/pref_cat_customize"
+        android:summary="@string/pref_cat_customize_summary" />
 
-    </PreferenceCategory>
-</PreferenceScreen>
+</preference-headers>
