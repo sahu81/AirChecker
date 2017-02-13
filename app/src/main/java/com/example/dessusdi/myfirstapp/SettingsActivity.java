@@ -52,10 +52,7 @@ public class SettingsActivity extends PreferenceActivity {
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
-            Log.d("DATA", preference.toString());
-
             if(preference == this.languagePreference) {
-                Locale current = getResources().getConfiguration().locale;
                 Locale locale = new Locale(newValue.toString());
                 Locale.setDefault(locale);
                 Configuration config = new Configuration();
@@ -69,7 +66,6 @@ public class SettingsActivity extends PreferenceActivity {
             } else {
                 return false;
             }
-
         }
     }
 
