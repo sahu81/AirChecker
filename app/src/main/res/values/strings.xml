@@ -24,9 +24,13 @@
     <string name="change_theme_title">Change theme</string>
     <string name="pref_cat_customize">Customization</string>
 
-    <string name="theme_default">Default theme (darken)</string>
+    <string name="theme_darken">Darken theme</string>
+    <string name="theme_darken_alias" translatable="false">theme_darken</string>
     <string name="theme_light">Light theme</string>
+    <string name="theme_light_alias" translatable="false">theme_light</string>
 
     <string name="language_english">English</string>
+    <string name="language_english_alias" translatable="false">en-US</string>
     <string name="language_french">French</string>
+    <string name="language_french_alias" translatable="false">fr-FR</string>
 </resources>

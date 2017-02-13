@@ -22,7 +22,7 @@
     <string name="change_language_title">Changer la langue</string>
     <string name="change_theme_title">Changer le theme</string>
     <string name="pref_cat_customize">Personnalisation</string>
-    <string name="theme_default">Theme par défaut (sombre)</string>
+    <string name="theme_darken">Theme par défaut (sombre)</string>
     <string name="theme_light">Theme lumineux</string>
     <string name="language_english">Anglais</string>
     <string name="language_french">Français</string>
