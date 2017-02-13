@@ -1,6 +1,7 @@
 package com.example.dessusdi.myfirstapp;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
