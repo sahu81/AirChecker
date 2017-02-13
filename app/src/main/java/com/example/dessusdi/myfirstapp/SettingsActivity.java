@@ -1,17 +1,14 @@
 package com.example.dessusdi.myfirstapp;
 
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.example.dessusdi.myfirstapp.tools.Constants;
+import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
 
 import java.util.Locale;
 
@@ -35,6 +32,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     public static class GlobalFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
+        private LanguageUpdater langUpdater;
         private ListPreference languagePreference;
         private ListPreference themePreferences;
 
@@ -48,12 +46,11 @@ public class SettingsActivity extends PreferenceActivity {
             // Adding listeners to ListPreference
             this.languagePreference  = (ListPreference)findPreference("language_preference");
             this.themePreferences    = (ListPreference)findPreference("theme_preference");
+            this.langUpdater         = new LanguageUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
 
             // Loading from shared prefs current locale
-            SharedPreferences settingsPrefs = this.getPreferenceManager().getSharedPreferences();
-            String language = settingsPrefs.getString("language_preference", getResources().getString(R.string.language_english));
-            this.languagePreference.setSummary(language);
-            
+            this.languagePreference.setSummary(this.langUpdater.getSavedLocale());
+
             // Setting up listeners on ListPreference
             languagePreference.setOnPreferenceChangeListener(this);
             themePreferences.setOnPreferenceChangeListener(this);
@@ -62,12 +59,7 @@ public class SettingsActivity extends PreferenceActivity {
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             if(preference == this.languagePreference) {
-                Locale locale = new Locale(newValue.toString());
-                Locale.setDefault(locale);
-                Configuration config = new Configuration();
-                config.locale = locale;
-                getActivity().getResources().updateConfiguration(config, null);
-                getActivity().recreate();
+                this.langUpdater.buildLanguageConfiguration(newValue.toString(), true);
                 return true;
             } else if(preference == this.themePreferences) {
                 //TODO: Change programmatically theme
