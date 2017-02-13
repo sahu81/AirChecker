@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class MainActivity extends ActionBarActivity {
 
+    private SwipeRefreshLayout swipeRefresh;
     private RecyclerView recyclerView;
     private TextView emptyRecyclerTextView;
     private AqcinRequestService async = new AqcinRequestService(getContext());
@@ -48,9 +50,17 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         this.recyclerView           = (RecyclerView) findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) findViewById(R.id.emptyRecycler);
+        this.swipeRefresh           = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
 
         this.langUpdater = new LanguageUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
         this.langUpdater.loadSavedLanguage();
+
+        this.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                reloadCitiesFromDB();
+            }
+        });
 
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
@@ -108,7 +118,8 @@ public class MainActivity extends ActionBarActivity {
 
     private void reloadCitiesFromDB() {
         // Load cities from db
-
+        this.cities.clear();
+        this.adapter.notifyDataSetChanged();
         this.cities.addAll(WaqiObject.listAll(WaqiObject.class));
 
         for (WaqiObject cityObject : this.cities) {
@@ -118,6 +129,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         this.checkIfRecyclerEmpty();
+        this.swipeRefresh.setRefreshing(false);
     }
 
     public void refreshRecyclerList() {
