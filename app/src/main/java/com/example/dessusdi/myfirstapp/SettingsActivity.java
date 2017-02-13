@@ -1,12 +1,14 @@
 package com.example.dessusdi.myfirstapp;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.tools.Constants;
@@ -46,6 +48,13 @@ public class SettingsActivity extends PreferenceActivity {
             // Adding listeners to ListPreference
             this.languagePreference  = (ListPreference)findPreference("language_preference");
             this.themePreferences    = (ListPreference)findPreference("theme_preference");
+
+            // Loading from shared prefs current locale
+            SharedPreferences settingsPrefs = this.getPreferenceManager().getSharedPreferences();
+            String language = settingsPrefs.getString("language_preference", getResources().getString(R.string.language_english));
+            this.languagePreference.setSummary(language);
+            
+            // Setting up listeners on ListPreference
             languagePreference.setOnPreferenceChangeListener(this);
             themePreferences.setOnPreferenceChangeListener(this);
         }
