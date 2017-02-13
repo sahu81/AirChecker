@@ -3,6 +3,9 @@ package com.example.dessusdi.myfirstapp;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -133,10 +136,15 @@ public class MainActivity extends ActionBarActivity {
             this.presentSearchDialog();
             return true;
         } else if (id == R.id.menu_settings) {
-
+            this.showUserSettings();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showUserSettings() {
+        Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+        MainActivity.this.startActivity(settingsIntent);
     }
 
     private void presentSearchDialog() {
