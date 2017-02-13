@@ -5,6 +5,7 @@
         android:title="@string/pref_cat_customize"
         android:fragment="com.example.dessusdi.myfirstapp.SettingsActivity$CustomizationFragment"
         android:icon="@drawable/pref_cat_customize"
-        android:summary="@string/pref_cat_customize_summary" />
+        android:summary="@string/pref_cat_customize_summary">
+    </header>
 
 </preference-headers>
