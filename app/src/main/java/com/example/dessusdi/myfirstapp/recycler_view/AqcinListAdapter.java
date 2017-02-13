@@ -1,5 +1,6 @@
 package com.example.dessusdi.myfirstapp.recycler_view;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,26 +18,29 @@ import java.util.List;
 public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
     List<WaqiObject> list;
+    Context context;
 
-    public AqcinListAdapter(List<WaqiObject> list) {
+    public AqcinListAdapter(List<WaqiObject> list, Context context) {
         this.list = list;
+        this.context = context;
     }
 
     @Override
     public AqcinCellView onCreateViewHolder(ViewGroup viewGroup, int itemType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view, viewGroup, false);
-        return new AqcinCellView(view);
+        AqcinCellView aqcinView = new AqcinCellView(view);
+        aqcinView.setContext(this.context);
+        return aqcinView;
     }
 
     @Override
     public void onBindViewHolder(AqcinCellView aqcinCellView, int index) {
         WaqiObject myObject = list.get(index);
-        aqcinCellView.bind(myObject);
+        aqcinCellView.setWaqiObject(myObject);
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
-
 }

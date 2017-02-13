@@ -2,6 +2,7 @@ package com.example.dessusdi.myfirstapp.models.air_quality;
 
 import android.util.Log;
 
+import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
@@ -70,16 +71,16 @@ public class WaqiObject extends SugarRecord {
         return name;
     }
 
-    public String getAirQuality() {
+    public int getAirQuality() {
         int airQuality = 0;
         if (this.globalObject != null) {
             airQuality = this.globalObject.getRxs().getObs().get(0).getMsg().getAqi();
         }
-        return String.valueOf(airQuality);
+        return airQuality;
     }
 
     public String getColorCode() {
-        int airQuality = Integer.parseInt(this.getAirQuality());
+        int airQuality = this.getAirQuality();
         String color = "#e74c3c";
 
         if(airQuality < 40)
@@ -88,6 +89,19 @@ public class WaqiObject extends SugarRecord {
             color = "#f39c12";
 
         return color;
+    }
+
+    public int getSoundResId() {
+        int soundResID;
+        int airQuality = this.getAirQuality();
+        if(airQuality < 100)
+            soundResID = R.raw.no_alert;
+        else if (airQuality >= 100 && airQuality < 200)
+            soundResID = R.raw.alert_mid;
+        else
+            soundResID = R.raw.alert_max;
+
+        return soundResID;
     }
 
     public String getGPSCoordinate() {

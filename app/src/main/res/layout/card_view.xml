@@ -31,17 +31,6 @@
             android:layout_marginTop="40dp" />
 
         <TextView
-            android:id="@+id/gpsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:singleLine="false"
-            android:text="@string/cell_city_location"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/air_qualityTextView" />
-
-        <TextView
             android:id="@+id/maxTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,22 +52,60 @@
 
         <TextView
             android:id="@+id/city_nameTextView"
-            android:layout_width="250dp"
+            android:layout_width="230dp"
             android:maxLines="1"
             android:ellipsize="end"
             android:singleLine="false"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
-            tools:text="Unknow"
+            tools:text="@string/cell_city_name"
             android:gravity="center_vertical"
             android:fontFamily="sans-serif"
             android:textColor="#333"
             android:textSize="15sp"
             android:textStyle="bold"
             android:layout_alignTop="@+id/air_qualityTextView"
-            android:layout_toEndOf="@+id/air_qualityTextView"
-            android:text="@string/cell_city_name" />
+            android:text="@string/cell_city_name"
+            android:layout_alignStart="@+id/gpsTextView"
+            android:layout_toStartOf="@+id/shareButton" />
 
+        <TextView
+            android:id="@+id/gpsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="false"
+            android:text="@string/cell_city_location"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/minTextView" />
+
+        <ImageButton
+            android:id="@+id/shareButton"
+            android:scaleType="fitCenter"
+            android:src="@drawable/share"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_height="35dp"
+            android:layout_width="35dp" />
+
+        <ImageButton
+            android:id="@+id/refreshButton"
+            android:scaleType="fitCenter"
+            android:src="@drawable/refresh"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_below="@+id/shareButton"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:id="@+id/soundButton"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bell"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:layout_below="@+id/refreshButton"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 

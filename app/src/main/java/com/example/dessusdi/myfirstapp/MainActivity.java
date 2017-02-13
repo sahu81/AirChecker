@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
@@ -26,13 +25,15 @@ import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
 public class MainActivity extends ActionBarActivity {
 
     private RecyclerView recyclerView;
     private TextView emptyRecyclerTextView;
     private AqcinRequestService async = new AqcinRequestService(getContext());
     private List<WaqiObject> cities = new ArrayList<>();
-    private AqcinListAdapter adapter = new AqcinListAdapter(cities);
+    private AqcinListAdapter adapter = new AqcinListAdapter(cities, getContext());
     private int radioIndex;
 
     @Override
@@ -60,9 +61,9 @@ public class MainActivity extends ActionBarActivity {
 
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                    builder.setMessage("Are you sure to delete?");
+                    builder.setMessage(R.string.delete_confirmation);
 
-                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Remove cell at specific position
@@ -72,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
                             checkIfRecyclerEmpty();
                             return;
                         }
-                    }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             // Replace cell at same position
@@ -128,9 +129,11 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_search) {
+        if (id == R.id.menu_search) {
             this.presentSearchDialog();
             return true;
+        } else if (id == R.id.menu_settings) {
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -138,7 +141,7 @@ public class MainActivity extends ActionBarActivity {
 
     private void presentSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add new city");
+        builder.setTitle(R.string.add_city);
 
         // Set up the input
         final EditText input = new EditText(this);
@@ -147,7 +150,7 @@ public class MainActivity extends ActionBarActivity {
         builder.setView(input);
 
         // Set up the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.validate_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String inputText = input.getText().toString();
@@ -158,13 +161,14 @@ public class MainActivity extends ActionBarActivity {
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
                                 if(searchGlobalObject.getData().size() > 0)
                                     presentRadioList(searchGlobalObject.getData());
-                                //TODO: Show alert message if not found
+                                else
+                                    presentCityNotFoundDialog();
                             }
                         });
 
             }
         });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -172,6 +176,23 @@ public class MainActivity extends ActionBarActivity {
         });
 
         builder.show();
+    }
+
+    private void presentCityNotFoundDialog() {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+        builder1.setMessage(R.string.city_not_found);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                R.string.validate_action,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertCityNotFound = builder1.create();
+        alertCityNotFound.show();
     }
 
     private void presentRadioList(final ArrayList<SearchLocationObject> locationArray) {
@@ -188,7 +209,7 @@ public class MainActivity extends ActionBarActivity {
         citiesName.toArray( items );
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);//ERROR ShowDialog cannot be resolved to a type
-        builder.setTitle("Choose a location");
+        builder.setTitle(R.string.choose_location);
         AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
@@ -196,9 +217,8 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
 
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.add_action, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                Log.d("DATA", "UID --->" + locationArray.get(radioIndex).getUid() + "  " + locationArray.get(radioIndex).getStation().getName());
                 WaqiObject cityObject = new WaqiObject(locationArray.get(radioIndex).getUid(), async, adapter);
                 cityObject.save();
                 cityObject.fetchData();
@@ -207,7 +227,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.cancel_action, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
