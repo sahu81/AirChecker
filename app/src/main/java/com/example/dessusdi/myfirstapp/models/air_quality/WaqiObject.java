@@ -64,7 +64,7 @@ public class WaqiObject extends SugarRecord {
     }
 
     public String getName() {
-        String name = "Loading...";
+        String name = "";
         if (this.globalObject != null) {
             name = this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getName();
         }
@@ -105,7 +105,7 @@ public class WaqiObject extends SugarRecord {
     }
 
     public String getGPSCoordinate() {
-        String airQuality = "";
+        String airQuality = "Loading...";
         if (this.globalObject != null) {
             airQuality = String.format("GPS : %.6f - %.6f", this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(0), this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(1));
         }
