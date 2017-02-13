@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/pref_cat_customize">
+        <Preference
+            android:title="@string/change_language_title"
+            android:summary="@string/language_english"
+            android:key="pref_change_language"
+            android:icon="@drawable/pref_language"/>
+
+        <Preference
+            android:title="@string/change_theme_title"
+            android:summary="@string/theme_default"
+            android:key="pref_change_theme"
+            android:icon="@drawable/pref_theme"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

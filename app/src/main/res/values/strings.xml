@@ -20,4 +20,13 @@
     <string name="cancel_action">Cancel</string>
     <string name="choose_location">Choose a location</string>
     <string name="city_not_found">City not found, please check again and try again.</string>
+    <string name="change_language_title">Change language</string>
+    <string name="change_theme_title">Change theme</string>
+    <string name="pref_cat_customize">Customization</string>
+
+    <string name="theme_default">Default theme (darken)</string>
+    <string name="theme_light">Light theme</string>
+
+    <string name="language_english">English</string>
+    <string name="language_french">French</string>
 </resources>
