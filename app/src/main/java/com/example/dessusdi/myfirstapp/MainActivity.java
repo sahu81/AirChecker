@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
         this.themeUpdater = new ThemeUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
 
         // Changing theme at startup
-        setTheme(this.themeUpdater.loadSavedTheme());
+        this.themeUpdater.loadSavedTheme();
 
         setContentView(R.layout.activity_main);
         this.recyclerView           = (RecyclerView) findViewById(R.id.recyclerView);

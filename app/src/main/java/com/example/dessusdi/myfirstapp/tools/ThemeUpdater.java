@@ -25,7 +25,7 @@ public class ThemeUpdater {
         this.sharedPreferences = sharedPreferences;
     }
 
-    public int getTheme(String newTheme) {
+    public void setTheme(String newTheme) {
         int theme;
         switch (newTheme) {
             case "theme_sunset":
@@ -38,11 +38,11 @@ public class ThemeUpdater {
                 theme = R.style.AppTheme;
                 break;
         }
-        return theme;
+        this.context.setTheme(theme);
     }
 
-    public int loadSavedTheme() {
-        return this.getTheme(getSavedTheme());
+    public void loadSavedTheme() {
+        this.setTheme(getSavedTheme());
     }
 
     public String getSavedTheme() {

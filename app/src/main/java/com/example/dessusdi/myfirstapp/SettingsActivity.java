@@ -68,7 +68,8 @@ public class SettingsActivity extends PreferenceActivity {
                 this.langUpdater.buildLanguageConfiguration(newValue.toString(), true);
                 return true;
             } else if(preference == this.themePreferences) {
-                this.getActivity().setTheme(this.themeUpdater.getTheme(newValue.toString()));
+                this.themeUpdater.setTheme(newValue.toString());
+                this.themePreferences.setSummary(getResources().getString(getResources().getIdentifier(newValue.toString(), "string", getActivity().getPackageName())));
                 return true;
             } else {
                 return false;
