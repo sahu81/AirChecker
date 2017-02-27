@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -26,11 +25,10 @@ import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
+import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -41,11 +39,18 @@ public class MainActivity extends ActionBarActivity {
     private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities, getContext());
     private LanguageUpdater langUpdater;
+    private ThemeUpdater themeUpdater;
     private int radioIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.themeUpdater = new ThemeUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
+
+        // Changing theme at startup
+        setTheme(this.themeUpdater.loadSavedTheme());
+
         setContentView(R.layout.activity_main);
         this.recyclerView           = (RecyclerView) findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) findViewById(R.id.emptyRecycler);

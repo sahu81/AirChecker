@@ -36,4 +36,6 @@
     <string name="pref_cat_customize_summary">Edit global app interface</string>
     <string name="service_killed">Service destroyed</string>
     <string name="service_checking">Checking air quality...</string>
+    <string name="theme_sunset">Sunset theme</string>
+    <string name="theme_sunset_alias" translatable="false">theme_sunset</string>
 </resources>
