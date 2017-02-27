@@ -69,6 +69,7 @@ public class SettingsActivity extends PreferenceActivity {
                 return true;
             } else if(preference == this.themePreferences) {
                 this.themeUpdater.setTheme(newValue.toString());
+                this.themeUpdater.restartActivities();
                 this.themePreferences.setSummary(getResources().getString(getResources().getIdentifier(newValue.toString(), "string", getActivity().getPackageName())));
                 return true;
             } else {

@@ -2,10 +2,13 @@ package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
+import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 
 import java.util.Locale;
@@ -38,7 +41,16 @@ public class ThemeUpdater {
                 theme = R.style.AppTheme;
                 break;
         }
+
         this.context.setTheme(theme);
+    }
+
+    public void restartActivities() {
+        Activity activity = (Activity) context;
+        TaskStackBuilder.create(activity)
+                .addNextIntent(new Intent(activity, MainActivity.class))
+                .addNextIntent(activity.getIntent())
+                .startActivities();
     }
 
     public void loadSavedTheme() {
