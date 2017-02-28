@@ -56,7 +56,7 @@ public class ThemeUpdater {
         // Check if auto night theme is enabled
         if(this.sharedPreferences.getBoolean("theme_auto_preference", true)) {
             int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-            if(hour >= 18 && hour <= 6) {
+            if(hour >= 18 || (hour >= 0 && hour <= 6)) {
                 // Set night mode
                 this.context.setTheme(R.style.NightTheme);
                 return;
