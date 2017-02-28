@@ -4,14 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 
-import java.util.Locale;
+import java.util.Calendar;
 
 /**
  * Created by Dimitri on 27/02/2017.
@@ -54,6 +53,16 @@ public class ThemeUpdater {
     }
 
     public void loadSavedTheme() {
+        // Check if auto night theme is enabled
+        if(this.sharedPreferences.getBoolean("theme_auto_preference", true)) {
+            int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+            if(hour >= 18 && hour <= 6) {
+                // Set night mode
+                this.context.setTheme(R.style.NightTheme);
+                return;
+            }
+        }
+
         this.setTheme(getSavedTheme());
     }
 

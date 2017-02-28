@@ -18,5 +18,12 @@
             android:entries="@array/themes"
             android:entryValues="@array/themes_values"
             android:defaultValue="@string/theme_darken_alias" />
+
+        <SwitchPreference
+            android:key="theme_auto_preference"
+            android:title="@string/set_auto_night_theme"
+            android:icon="@drawable/auto_night"
+            android:switchTextOn="I"
+            android:switchTextOff="O"/>
     </PreferenceCategory>
 </PreferenceScreen>

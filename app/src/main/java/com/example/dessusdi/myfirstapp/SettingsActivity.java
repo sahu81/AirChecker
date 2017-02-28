@@ -7,6 +7,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
@@ -48,10 +49,10 @@ public class SettingsActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.settings_global);
 
             // Adding listeners to ListPreference
-            this.languagePreference  = (ListPreference)findPreference("language_preference");
-            this.themePreferences    = (ListPreference)findPreference("theme_preference");
-            this.langUpdater         = new LanguageUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
-            this.themeUpdater        = new ThemeUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
+            this.languagePreference     = (ListPreference)findPreference("language_preference");
+            this.themePreferences       = (ListPreference)findPreference("theme_preference");
+            this.langUpdater            = new LanguageUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
+            this.themeUpdater           = new ThemeUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
 
             // Loading from shared prefs current locale
             this.languagePreference.setSummary(this.langUpdater.getSavedLocale());

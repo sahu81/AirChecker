@@ -30,4 +30,5 @@
     <string name="service_killed">Service destroyed</string>
     <string name="service_checking">Checking air quality...</string>
     <string name="theme_sunset">Sunset theme</string>
+    <string name="set_auto_night_theme">Automatic night mode</string>
 </resources>

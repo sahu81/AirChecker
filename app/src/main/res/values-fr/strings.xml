@@ -30,4 +30,5 @@
     <string name="service_killed">Service arrêté</string>
     <string name="service_checking">Récupération qualité de l\'air...</string>
     <string name="theme_sunset">Theme rouge</string>
+    <string name="set_auto_night_theme">Theme nuit automatique</string>
 </resources>
