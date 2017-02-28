@@ -23,12 +23,12 @@ import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
+import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -39,11 +39,18 @@ public class MainActivity extends ActionBarActivity {
     private List<WaqiObject> cities = new ArrayList<>();
     private AqcinListAdapter adapter = new AqcinListAdapter(cities, getContext());
     private LanguageUpdater langUpdater;
+    private ThemeUpdater themeUpdater;
     private int radioIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.themeUpdater = new ThemeUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
+
+        // Changing theme at startup
+        this.themeUpdater.loadSavedTheme();
+
         setContentView(R.layout.activity_main);
         this.recyclerView           = (RecyclerView) findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) findViewById(R.id.emptyRecycler);
@@ -62,6 +69,11 @@ public class MainActivity extends ActionBarActivity {
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
         this.refreshRecyclerList();
+        this.setupBackgroundService();
+    }
+
+    private void setupBackgroundService() {
+        startService(new Intent(this, BackgroundRefresher.class));
     }
 
     private void setupRecyclerView() {

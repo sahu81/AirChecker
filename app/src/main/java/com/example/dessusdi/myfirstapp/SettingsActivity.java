@@ -1,15 +1,19 @@
 package com.example.dessusdi.myfirstapp;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
+import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
+import java.lang.reflect.Field;
 import java.util.Locale;
 
 /**
@@ -33,6 +37,7 @@ public class SettingsActivity extends PreferenceActivity {
     public static class GlobalFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
         private LanguageUpdater langUpdater;
+        private ThemeUpdater themeUpdater;
         private ListPreference languagePreference;
         private ListPreference themePreferences;
 
@@ -44,12 +49,14 @@ public class SettingsActivity extends PreferenceActivity {
             addPreferencesFromResource(R.xml.settings_global);
 
             // Adding listeners to ListPreference
-            this.languagePreference  = (ListPreference)findPreference("language_preference");
-            this.themePreferences    = (ListPreference)findPreference("theme_preference");
-            this.langUpdater         = new LanguageUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
+            this.languagePreference     = (ListPreference)findPreference("language_preference");
+            this.themePreferences       = (ListPreference)findPreference("theme_preference");
+            this.langUpdater            = new LanguageUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
+            this.themeUpdater           = new ThemeUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
 
             // Loading from shared prefs current locale
             this.languagePreference.setSummary(this.langUpdater.getSavedLocale());
+            this.themePreferences.setSummary(getResources().getString(getResources().getIdentifier(this.themeUpdater.getSavedTheme(), "string", getActivity().getPackageName())));
 
             // Setting up listeners on ListPreference
             languagePreference.setOnPreferenceChangeListener(this);
@@ -62,7 +69,9 @@ public class SettingsActivity extends PreferenceActivity {
                 this.langUpdater.buildLanguageConfiguration(newValue.toString(), true);
                 return true;
             } else if(preference == this.themePreferences) {
-                //TODO: Change programmatically theme
+                this.themeUpdater.setTheme(newValue.toString());
+                this.themeUpdater.restartActivities();
+                this.themePreferences.setSummary(getResources().getString(getResources().getIdentifier(newValue.toString(), "string", getActivity().getPackageName())));
                 return true;
             } else {
                 return false;
