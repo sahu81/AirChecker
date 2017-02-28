@@ -9,7 +9,11 @@
         <item name="colorPrimaryDark">@android:color/holo_blue_dark</item>
     </style>
 
-    <style name="NightTheme" parent="Theme.AppCompat.NoActionBar" />
+    <style name="NightTheme" parent="Theme.AppCompat.NoActionBar" >
+        <item name="android:colorForeground">@color/abc_secondary_text_material_light</item>
+        <item name="android:textColorSecondary">@color/secondary_text_material_dark</item>
+        <item name="android:textColorPrimaryInverse">@color/primary_text_material_light</item>
+    </style>
 
     <style name="SunsetTheme" parent="Theme.AppCompat.Light.NoActionBar" >
         <item name="colorPrimary">@android:color/holo_red_light</item>
