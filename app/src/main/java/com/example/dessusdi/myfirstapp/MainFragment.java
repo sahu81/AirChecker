@@ -1,22 +1,23 @@
 package com.example.dessusdi.myfirstapp;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,43 +26,49 @@ import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
 import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by Dimitri on 01/03/2017.
+ */
+
+public class MainFragment extends Fragment {
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView recyclerView;
     private TextView emptyRecyclerTextView;
-    private AqcinRequestService async = new AqcinRequestService(getContext());
+    private AqcinRequestService async = new AqcinRequestService(getActivity());
     private List<WaqiObject> cities = new ArrayList<>();
-    private AqcinListAdapter adapter = new AqcinListAdapter(cities, getContext());
+    private AqcinListAdapter adapter = new AqcinListAdapter(cities, getActivity());
     private LanguageUpdater langUpdater;
     private ThemeUpdater themeUpdater;
     private int radioIndex;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main,container,false);
+    }
 
-        /*
-        this.themeUpdater = new ThemeUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        //this.themeUpdater = new ThemeUpdater(getActivity(), PreferenceManager.getDefaultSharedPreferences(this));
 
         // Changing theme at startup
-        this.themeUpdater.loadSavedTheme();
+        //this.themeUpdater.loadSavedTheme();
 
-        setContentView(R.layout.activity_main);
-        this.recyclerView           = (RecyclerView) findViewById(R.id.recyclerView);
-        this.emptyRecyclerTextView  = (TextView) findViewById(R.id.emptyRecycler);
-        this.swipeRefresh           = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
+        this.recyclerView           = (RecyclerView) view.findViewById(R.id.recyclerView);
+        this.emptyRecyclerTextView  = (TextView) view.findViewById(R.id.emptyRecycler);
+        this.swipeRefresh           = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
-        this.langUpdater = new LanguageUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
-        this.langUpdater.loadSavedLanguage();
+        //this.langUpdater = new LanguageUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
+        //this.langUpdater.loadSavedLanguage();
 
         this.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -73,12 +80,7 @@ public class MainActivity extends AppCompatActivity {
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
         this.refreshRecyclerList();
-        this.setupBackgroundService();
-
-    }
-
-    private void setupBackgroundService() {
-        startService(new Intent(this, BackgroundRefresher.class));
+        //this.setupBackgroundService();
     }
 
     private void setupRecyclerView() {
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 final int position = viewHolder.getAdapterPosition();
 
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage(R.string.delete_confirmation);
 
                     builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
@@ -129,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
             emptyRecyclerTextView.setVisibility(View.VISIBLE);
         }
     }
-
     private void reloadCitiesFromDB() {
         // Load cities from db
         this.cities.clear();
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         for (WaqiObject cityObject : this.cities) {
             cityObject.setAqcinListAdapter(this.adapter);
             cityObject.setRequestService(this.async);
-            cityObject.fetchData();
+            //cityObject.fetchData();
         }
 
         this.checkIfRecyclerEmpty();
@@ -147,15 +148,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void refreshRecyclerList() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(this.adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     @Override
@@ -175,16 +169,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showUserSettings() {
-        Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
-        MainActivity.this.startActivity(settingsIntent);
+        Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
+        startActivity(settingsIntent);
     }
 
     private void presentSearchDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.add_city);
 
         // Set up the input
-        final EditText input = new EditText(this);
+        final EditText input = new EditText(getActivity());
         // Specify the type of input expected
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         builder.setView(input);
@@ -219,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void presentCityNotFoundDialog() {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
         builder1.setMessage(R.string.city_not_found);
         builder1.setCancelable(true);
 
@@ -248,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
         final String[] items = new String[ citiesName.size() ];
         citiesName.toArray( items );
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);//ERROR ShowDialog cannot be resolved to a type
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());//ERROR ShowDialog cannot be resolved to a type
         builder.setTitle(R.string.choose_location);
         AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
@@ -276,20 +270,4 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
-
-    public Context getContext() {
-        return MainActivity.this;
-    }
 }
-*/
-
-public class MainActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-
-}
-
