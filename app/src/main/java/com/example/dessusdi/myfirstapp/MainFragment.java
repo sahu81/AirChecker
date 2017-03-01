@@ -12,9 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,8 +42,6 @@ public class MainFragment extends Fragment {
     private AqcinRequestService async;
     private List<WaqiObject> cities;
     private AqcinListAdapter adapter;
-    private LanguageUpdater langUpdater;
-    private ThemeUpdater themeUpdater;
     private int radioIndex;
 
     @Nullable
@@ -58,11 +54,6 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        this.themeUpdater = new ThemeUpdater(getActivity(), PreferenceManager.getDefaultSharedPreferences(getActivity()));
-
-        // Changing theme at startup
-        this.themeUpdater.loadSavedTheme();
-
         this.recyclerView           = (RecyclerView) view.findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) view.findViewById(R.id.emptyRecycler);
         this.swipeRefresh           = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
@@ -70,9 +61,6 @@ public class MainFragment extends Fragment {
         this.async      = new AqcinRequestService(getActivity());
         this.cities     = ((MainActivity) getActivity()).getCities();
         this.adapter    = ((MainActivity) getActivity()).getAdapter();
-
-        this.langUpdater = new LanguageUpdater(getActivity(), PreferenceManager.getDefaultSharedPreferences(getActivity()));
-        this.langUpdater.loadSavedLanguage();
 
         this.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

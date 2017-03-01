@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Menu;
@@ -15,6 +16,8 @@ import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
+import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private AqcinRequestService async           = new AqcinRequestService(MainActivity.this);
     private List<WaqiObject> cities             = new ArrayList<>();
     private AqcinListAdapter adapter            = new AqcinListAdapter(cities, MainActivity.this);
+    private LanguageUpdater langUpdater;
+    private ThemeUpdater themeUpdater;
     private int radioIndex;
 
     public List<WaqiObject> getCities() {
@@ -38,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.themeUpdater = new ThemeUpdater(this, PreferenceManager.getDefaultSharedPreferences(this));
+        this.themeUpdater.loadSavedTheme();
+
+        this.langUpdater = new LanguageUpdater(this, PreferenceManager.getDefaultSharedPreferences(this));
+        this.langUpdater.loadSavedLanguage();
     }
 
     @Override
