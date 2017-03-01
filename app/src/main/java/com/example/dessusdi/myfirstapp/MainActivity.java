@@ -77,11 +77,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showUserSettings() {
-        SettingsFragment newFragment = new SettingsFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, newFragment, TAG_FRAGMENT);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        if (getFragmentManager().getBackStackEntryCount() <= 0) {
+            SettingsFragment newFragment = new SettingsFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_container, newFragment, TAG_FRAGMENT);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 
     @Override
