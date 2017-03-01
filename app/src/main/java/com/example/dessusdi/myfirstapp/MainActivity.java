@@ -1,33 +1,20 @@
 package com.example.dessusdi.myfirstapp;
 
 import android.app.AlertDialog;
-import android.content.Context;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
-import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
-import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -285,25 +272,17 @@ public class MainActivity extends AppCompatActivity {
 
 public class MainActivity extends AppCompatActivity {
 
-    private AqcinRequestService async   = new AqcinRequestService(MainActivity.this);
-    private List<WaqiObject> cities     = new ArrayList<>();
-    private AqcinListAdapter adapter    = new AqcinListAdapter(cities, MainActivity.this);
+    private final static String TAG_FRAGMENT    = "FRAG_SETTINGS";
+    private AqcinRequestService async           = new AqcinRequestService(MainActivity.this);
+    private List<WaqiObject> cities             = new ArrayList<>();
+    private AqcinListAdapter adapter            = new AqcinListAdapter(cities, MainActivity.this);
     private int radioIndex;
 
     public List<WaqiObject> getCities() {
         return cities;
     }
-
-    public void setCities(List<WaqiObject> cities) {
-        this.cities = cities;
-    }
-
     public AqcinListAdapter getAdapter() {
         return adapter;
-    }
-
-    public void setAdapter(AqcinListAdapter adapter) {
-        this.adapter = adapter;
     }
 
     @Override
@@ -336,8 +315,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showUserSettings() {
-        Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
-        MainActivity.this.startActivity(settingsIntent);
+        SettingsFragment newFragment = new SettingsFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_container, newFragment, TAG_FRAGMENT);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     private void presentSearchDialog() {
