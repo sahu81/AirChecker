@@ -58,10 +58,10 @@ public class MainFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //this.themeUpdater = new ThemeUpdater(getActivity(), PreferenceManager.getDefaultSharedPreferences(this));
+        this.themeUpdater = new ThemeUpdater(getActivity(), PreferenceManager.getDefaultSharedPreferences(getActivity()));
 
         // Changing theme at startup
-        //this.themeUpdater.loadSavedTheme();
+        this.themeUpdater.loadSavedTheme();
 
         this.recyclerView           = (RecyclerView) view.findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) view.findViewById(R.id.emptyRecycler);
@@ -71,8 +71,8 @@ public class MainFragment extends Fragment {
         this.cities     = new ArrayList<>();
         this.adapter    = new AqcinListAdapter(cities, getActivity());
 
-        //this.langUpdater = new LanguageUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
-        //this.langUpdater.loadSavedLanguage();
+        this.langUpdater = new LanguageUpdater(getActivity(), PreferenceManager.getDefaultSharedPreferences(getActivity()));
+        this.langUpdater.loadSavedLanguage();
 
         this.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
