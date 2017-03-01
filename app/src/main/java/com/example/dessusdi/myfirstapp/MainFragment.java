@@ -68,8 +68,8 @@ public class MainFragment extends Fragment {
         this.swipeRefresh           = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
         this.async      = new AqcinRequestService(getActivity());
-        this.cities     = new ArrayList<>();
-        this.adapter    = new AqcinListAdapter(cities, getActivity());
+        this.cities     = ((MainActivity) getActivity()).getCities();
+        this.adapter    = ((MainActivity) getActivity()).getAdapter();
 
         this.langUpdater = new LanguageUpdater(getActivity(), PreferenceManager.getDefaultSharedPreferences(getActivity()));
         this.langUpdater.loadSavedLanguage();

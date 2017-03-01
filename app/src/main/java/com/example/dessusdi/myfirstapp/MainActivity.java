@@ -285,8 +285,26 @@ public class MainActivity extends AppCompatActivity {
 
 public class MainActivity extends AppCompatActivity {
 
-    private AqcinRequestService async = new AqcinRequestService(MainActivity.this);
+    private AqcinRequestService async   = new AqcinRequestService(MainActivity.this);
+    private List<WaqiObject> cities     = new ArrayList<>();
+    private AqcinListAdapter adapter    = new AqcinListAdapter(cities, MainActivity.this);
     private int radioIndex;
+
+    public List<WaqiObject> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<WaqiObject> cities) {
+        this.cities = cities;
+    }
+
+    public AqcinListAdapter getAdapter() {
+        return adapter;
+    }
+
+    public void setAdapter(AqcinListAdapter adapter) {
+        this.adapter = adapter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -402,13 +420,10 @@ public class MainActivity extends AppCompatActivity {
 
         builder.setPositiveButton(R.string.add_action, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                //TODO: Share adapter with fragment & activity
-                /*
                 WaqiObject cityObject = new WaqiObject(locationArray.get(radioIndex).getUid(), async, adapter);
                 cityObject.save();
                 cityObject.fetchData();
-                //cities.add(cityObject);
-                */
+                cities.add(cityObject);
             }
         });
 
