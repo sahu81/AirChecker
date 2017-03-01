@@ -3,6 +3,7 @@ package com.example.dessusdi.myfirstapp.tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;

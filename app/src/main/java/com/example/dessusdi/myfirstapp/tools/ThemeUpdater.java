@@ -46,10 +46,9 @@ public class ThemeUpdater {
 
     public void restartActivities() {
         Activity activity = (Activity) context;
-        TaskStackBuilder.create(activity)
-                .addNextIntent(new Intent(activity, MainActivity.class))
-                .addNextIntent(activity.getIntent())
-                .startActivities();
+        Intent mIntent = activity.getIntent();
+        activity.finish();
+        activity.startActivity(mIntent);
     }
 
     public void loadSavedTheme() {
