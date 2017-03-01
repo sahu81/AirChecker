@@ -41,9 +41,9 @@ public class MainFragment extends Fragment {
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView recyclerView;
     private TextView emptyRecyclerTextView;
-    private AqcinRequestService async = new AqcinRequestService(getActivity());
-    private List<WaqiObject> cities = new ArrayList<>();
-    private AqcinListAdapter adapter = new AqcinListAdapter(cities, getActivity());
+    private AqcinRequestService async;
+    private List<WaqiObject> cities;
+    private AqcinListAdapter adapter;
     private LanguageUpdater langUpdater;
     private ThemeUpdater themeUpdater;
     private int radioIndex;
@@ -66,6 +66,10 @@ public class MainFragment extends Fragment {
         this.recyclerView           = (RecyclerView) view.findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) view.findViewById(R.id.emptyRecycler);
         this.swipeRefresh           = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+
+        this.async      = new AqcinRequestService(getActivity());
+        this.cities     = new ArrayList<>();
+        this.adapter    = new AqcinListAdapter(cities, getActivity());
 
         //this.langUpdater = new LanguageUpdater(getContext(), PreferenceManager.getDefaultSharedPreferences(this));
         //this.langUpdater.loadSavedLanguage();
@@ -140,7 +144,7 @@ public class MainFragment extends Fragment {
         for (WaqiObject cityObject : this.cities) {
             cityObject.setAqcinListAdapter(this.adapter);
             cityObject.setRequestService(this.async);
-            //cityObject.fetchData();
+            cityObject.fetchData();
         }
 
         this.checkIfRecyclerEmpty();
