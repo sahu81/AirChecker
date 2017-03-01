@@ -3,8 +3,11 @@ package com.example.dessusdi.myfirstapp;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Menu;
@@ -42,13 +45,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         this.themeUpdater = new ThemeUpdater(this, PreferenceManager.getDefaultSharedPreferences(this));
         this.themeUpdater.loadSavedTheme();
 
         this.langUpdater = new LanguageUpdater(this, PreferenceManager.getDefaultSharedPreferences(this));
         this.langUpdater.loadSavedLanguage();
+
+        setContentView(R.layout.activity_main);
     }
 
     @Override
