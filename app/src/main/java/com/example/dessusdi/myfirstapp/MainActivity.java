@@ -3,17 +3,15 @@ package com.example.dessusdi.myfirstapp;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.example.dessusdi.myfirstapp.fragments.SettingsFragment;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;

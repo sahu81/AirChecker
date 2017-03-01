@@ -1,33 +1,25 @@
-package com.example.dessusdi.myfirstapp;
+package com.example.dessusdi.myfirstapp.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.dessusdi.myfirstapp.MainActivity;
+import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
-import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
-import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
-import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -142,124 +134,5 @@ public class MainFragment extends Fragment {
     public void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(this.adapter);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.menu_search) {
-            this.presentSearchDialog();
-            return true;
-        } else if (id == R.id.menu_settings) {
-            this.showUserSettings();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void showUserSettings() {
-        Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
-        startActivity(settingsIntent);
-    }
-
-    private void presentSearchDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.add_city);
-
-        // Set up the input
-        final EditText input = new EditText(getActivity());
-        // Specify the type of input expected
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
-        builder.setView(input);
-
-        // Set up the buttons
-        builder.setPositiveButton(R.string.validate_action, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String inputText = input.getText().toString();
-
-                async.fetchCityID(inputText,
-                        new AqcinRequestService.SearchQueryCallback() {
-                            @Override
-                            public void onSuccess(SearchGlobalObject searchGlobalObject) {
-                                if(searchGlobalObject.getData().size() > 0)
-                                    presentRadioList(searchGlobalObject.getData());
-                                else
-                                    presentCityNotFoundDialog();
-                            }
-                        });
-
-            }
-        });
-        builder.setNegativeButton(R.string.cancel_action, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
-
-    private void presentCityNotFoundDialog() {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(getActivity());
-        builder1.setMessage(R.string.city_not_found);
-        builder1.setCancelable(true);
-
-        builder1.setPositiveButton(
-                R.string.validate_action,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        AlertDialog alertCityNotFound = builder1.create();
-        alertCityNotFound.show();
-    }
-
-    private void presentRadioList(final ArrayList<SearchLocationObject> locationArray) {
-
-        List<String> citiesName = new ArrayList<String>();
-        for (SearchLocationObject location : locationArray) {
-            citiesName.add(location.getStation().getName());
-        }
-
-        if(citiesName.size() <= 0)
-            return;
-
-        final String[] items = new String[ citiesName.size() ];
-        citiesName.toArray( items );
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());//ERROR ShowDialog cannot be resolved to a type
-        builder.setTitle(R.string.choose_location);
-        AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        radioIndex = item;
-                    }
-                });
-
-        builder.setPositiveButton(R.string.add_action, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                WaqiObject cityObject = new WaqiObject(locationArray.get(radioIndex).getUid(), async, adapter);
-                cityObject.save();
-                cityObject.fetchData();
-                cities.add(cityObject);
-                checkIfRecyclerEmpty();
-            }
-        });
-
-        builder.setNegativeButton(R.string.cancel_action, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.cancel();
-            }
-        });
-
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 }

@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp;
+package com.example.dessusdi.myfirstapp.fragments;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
 import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
