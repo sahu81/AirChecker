@@ -105,7 +105,7 @@ public class MainFragment extends Fragment {
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recyclerview
+        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to RecyclerView
     }
 
     private void checkIfRecyclerEmpty() {

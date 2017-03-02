@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         final String[] items = new String[ citiesName.size() ];
         citiesName.toArray( items );
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);//ERROR ShowDialog cannot be resolved to a type
+        AlertDialog.Builder builder = new AlertDialog.Builder(this); //ERROR ShowDialog cannot be resolved to a type
         builder.setTitle(R.string.choose_location);
         AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
