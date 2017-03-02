@@ -15,7 +15,14 @@ public abstract class RequestBuilder {
         String urlStr = Constants.Url.CITY_SEARCH_BASE_URL;
         urlStr = urlStr.replace("%%TOKEN%%", Constants.Url.TOKEN);
         urlStr += search;
-        Log.d("DATA", urlStr);
         return urlStr;
+    }
+
+    public static String buildCityInformationURL(String city) {
+        return Constants.Url.CITY_INFORMATION_BASE_URL.concat(city);
+    }
+
+    public static String buildCityImageURL(String city) {
+        return Constants.Url.CITY_IMAGE_BASE_URL.concat(city);
     }
 }
