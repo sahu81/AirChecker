@@ -1,13 +1,17 @@
 package com.example.dessusdi.myfirstapp.recycler_view;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
+import com.example.dessusdi.myfirstapp.fragments.DetailsFragment;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 
 import java.util.List;
@@ -37,6 +41,16 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
             public void onClick(View v) {
                 final int position = aqcinView.getAdapterPosition();
                 Toast.makeText(context, "Recycle Click" + position, Toast.LENGTH_SHORT).show();
+
+                DetailsFragment fragment = new DetailsFragment();
+                Bundle args = new Bundle();
+                args.putString("data", "This data has sent to FragmentTwo");
+                fragment.setArguments(args);
+                FragmentTransaction transaction = ((MainActivity) context).getFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_container, fragment);
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

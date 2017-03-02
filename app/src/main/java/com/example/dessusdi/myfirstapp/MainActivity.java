@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         if (getFragmentManager().getBackStackEntryCount() <= 0) {
             SettingsFragment newFragment = new SettingsFragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, newFragment, TAG_FRAGMENT);
+            transaction.replace(R.id.main_container, newFragment, TAG_FRAGMENT);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.addToBackStack(null);
             transaction.commit();
         }
