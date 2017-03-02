@@ -39,4 +39,6 @@
     <string name="theme_sunset">Sunset theme</string>
     <string name="theme_sunset_alias" translatable="false">theme_sunset</string>
     <string name="set_auto_night_theme">Automatic night mode</string>
+    <string name="city_details" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod nibh diam, sit amet sodales elit hendrerit nec. Maecenas blandit sapien nisl, mollis dapibus nunc dictum sed. Morbi ac purus vitae magna tristique iaculis porttitor in libero. Vivamus libero massa, gravida nec malesuada sit amet, molestie at felis. In facilisis arcu vitae tortor euismod, vel semper nisi tempor. Nam sit amet dui ut ipsum laoreet pulvinar. In dapibus magna eu leo finibus consectetur. Cras varius mauris sit amet pretium scelerisque.</string>
+    <string name="graph_button">Evolution</string>
 </resources>

@@ -17,7 +17,6 @@ import com.example.dessusdi.myfirstapp.R;
 public class DetailsFragment extends Fragment {
 
     private final static String TAG_FRAGMENT    = "FRAG_DETAILS";
-    TextView title;
 
     @Nullable
     @Override
@@ -28,12 +27,10 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        title = (TextView) view.findViewById(R.id.title);
 
-        title.setText("Je suis un fragment");
     }
 
     public void setTextLol(String test) {
-        this.title.setText(test);
+        //this.title.setText(test);
     }
 }
