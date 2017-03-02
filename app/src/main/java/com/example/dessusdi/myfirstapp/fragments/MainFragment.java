@@ -34,7 +34,6 @@ public class MainFragment extends Fragment {
     private AqcinRequestService async;
     private List<WaqiObject> cities;
     private AqcinListAdapter adapter;
-    private int radioIndex;
 
     @Nullable
     @Override

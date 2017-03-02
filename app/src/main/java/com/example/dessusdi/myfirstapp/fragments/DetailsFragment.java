@@ -1,14 +1,19 @@
 package com.example.dessusdi.myfirstapp.fragments;
 
 import android.app.Fragment;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.R;
+import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 
 /**
  * Created by Dimitri on 02/03/2017.
@@ -16,7 +21,10 @@ import com.example.dessusdi.myfirstapp.R;
 
 public class DetailsFragment extends Fragment {
 
-    private final static String TAG_FRAGMENT    = "FRAG_DETAILS";
+    private WaqiObject city;
+    private ImageView cityPicture;
+    private TextView cityDescription;
+    private Button cityEvolution;
 
     @Nullable
     @Override
@@ -28,9 +36,13 @@ public class DetailsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.cityPicture        = (ImageView) view.findViewById(R.id.cityPicture);
+        this.cityDescription    = (TextView) view.findViewById(R.id.cityDescription);
+        this.cityEvolution      = (Button) view.findViewById(R.id.cityEvolution);
     }
 
-    public void setTextLol(String test) {
-        //this.title.setText(test);
+    public void setCity(WaqiObject city) {
+        this.city = city;
+        Log.d("DATAZER", "---------> " + city.getName());
     }
 }

@@ -10,27 +10,27 @@
     <ImageView
         android:layout_width="match_parent"
         android:src="@drawable/no_image"
-        android:id="@+id/imageView"
+        android:id="@+id/cityPicture"
         android:contentDescription=""
-        tools:ignore="ContentDescription"
         android:layout_weight="0.58"
         android:layout_height="0dp"
         android:scaleType="fitCenter"
         android:adjustViewBounds="false"
-        android:cropToPadding="false" />
+        android:cropToPadding="false"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:text="@string/city_details"
+        android:id="@+id/cityDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:layout_marginBottom="0dp"
-        android:id="@+id/textView2"
         android:textSize="18sp" />
 
     <Button
+        android:id="@+id/cityEvolution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button"
         android:text="@string/graph_button" />
 </LinearLayout>

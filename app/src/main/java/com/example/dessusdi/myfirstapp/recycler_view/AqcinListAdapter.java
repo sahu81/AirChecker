@@ -44,8 +44,7 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
             @Override
             public void onClick(View v) {
                 final int position = aqcinView.getAdapterPosition();
-
-                Toast.makeText(context, "Recycle Click --> " + position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Recycle Click --> " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
 
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
@@ -66,7 +65,7 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
                     // Support multiple screen so use current details fragment
                     FragmentManager fragmentManager = ((MainActivity) context).getFragmentManager();
                     DetailsFragment detailsFragment = (DetailsFragment) fragmentManager.findFragmentById(R.id.detail_fragment);
-                    detailsFragment.setTextLol("DATA SEND");
+                    detailsFragment.setCity(list.get(position));
                 }
             }
         });
