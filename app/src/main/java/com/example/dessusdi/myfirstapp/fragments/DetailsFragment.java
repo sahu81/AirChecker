@@ -43,6 +43,10 @@ public class DetailsFragment extends Fragment {
 
     public void setCity(WaqiObject city) {
         this.city = city;
-        Log.d("DATAZER", "---------> " + city.getName());
+        this.fetchEvolution();
+    }
+
+    private void fetchEvolution() {
+        Log.d("DATA", "----> " + this.city.getName());
     }
 }

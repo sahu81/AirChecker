@@ -53,9 +53,7 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
                 if(dpWidth < 800.0) {
                     // Doesn't support so replace with a new fragment
                     DetailsFragment fragment = new DetailsFragment();
-                    Bundle args = new Bundle();
-                    args.putString("data", "This data has sent to FragmentTwo");
-                    fragment.setArguments(args);
+                    fragment.setCity(list.get(position));
                     FragmentTransaction transaction = ((MainActivity) context).getFragmentManager().beginTransaction();
                     transaction.replace(R.id.main_container, fragment);
                     transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
