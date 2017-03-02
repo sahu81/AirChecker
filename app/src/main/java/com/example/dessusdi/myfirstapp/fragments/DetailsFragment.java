@@ -15,12 +15,14 @@ import com.example.dessusdi.myfirstapp.R;
  */
 
 public class DetailsFragment extends Fragment {
+
+    private final static String TAG_FRAGMENT    = "FRAG_DETAILS";
     TextView title;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_details,container,false);
+        return inflater.inflate(R.layout.fragment_details, container, false);
     }
 
     @Override
@@ -29,5 +31,9 @@ public class DetailsFragment extends Fragment {
         title = (TextView) view.findViewById(R.id.title);
 
         title.setText("Je suis un fragment");
+    }
+
+    public void setTextLol(String test) {
+        this.title.setText(test);
     }
 }

@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.example.dessusdi.myfirstapp.fragments.DetailsFragment;
 import com.example.dessusdi.myfirstapp.fragments.SettingsFragment;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
