@@ -1,17 +1,13 @@
 package com.example.dessusdi.myfirstapp.recycler_view;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
@@ -44,7 +40,6 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
             @Override
             public void onClick(View v) {
                 final int position = aqcinView.getAdapterPosition();
-                Toast.makeText(context, "Recycle Click --> " + list.get(position).getName(), Toast.LENGTH_SHORT).show();
 
                 DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
                 float dpWidth = displayMetrics.widthPixels / displayMetrics.density;

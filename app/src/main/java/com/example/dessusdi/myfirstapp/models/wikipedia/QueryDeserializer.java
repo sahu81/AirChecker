@@ -25,10 +25,11 @@ public class QueryDeserializer {
             JSONObject pages        = query.getJSONObject("pages");
             Iterator<String> keys   = pages.keys();
             if( keys.hasNext() ) {
-                String key      = keys.next();
-                String jsonPage = pages.getString(key);
-                Gson gson       = new Gson();
-                pageObject      = gson.fromJson(jsonPage, PageObject.class);
+                String key = keys.next();
+                if(!key.equals("-1")) {
+                    Gson gson = new Gson();
+                    pageObject = gson.fromJson(pages.getString(key), PageObject.class);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

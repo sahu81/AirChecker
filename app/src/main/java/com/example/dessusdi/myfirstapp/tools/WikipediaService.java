@@ -15,11 +15,6 @@ import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.QueryDeserializer;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.Iterator;
-
 /**
  * Created by Dimitri on 02/03/2017.
  */
