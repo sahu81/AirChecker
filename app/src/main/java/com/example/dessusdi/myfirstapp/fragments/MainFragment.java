@@ -34,7 +34,6 @@ public class MainFragment extends Fragment {
     private AqcinRequestService async;
     private List<WaqiObject> cities;
     private AqcinListAdapter adapter;
-    private int radioIndex;
 
     @Nullable
     @Override
@@ -105,7 +104,7 @@ public class MainFragment extends Fragment {
             }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
-        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to recyclerview
+        itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to RecyclerView
     }
 
     private void checkIfRecyclerEmpty() {

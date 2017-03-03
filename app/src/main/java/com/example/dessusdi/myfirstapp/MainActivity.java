@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         if (getFragmentManager().getBackStackEntryCount() <= 0) {
             SettingsFragment newFragment = new SettingsFragment();
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, newFragment, TAG_FRAGMENT);
+            transaction.replace(R.id.main_container, newFragment, TAG_FRAGMENT);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             transaction.addToBackStack(null);
             transaction.commit();
         }
@@ -109,18 +110,19 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.validate_action, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String inputText = input.getText().toString();
+                final String inputText = input.getText().toString();
 
                 async.fetchCityID(inputText,
                         new AqcinRequestService.SearchQueryCallback() {
                             @Override
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
                                 if(searchGlobalObject.getData().size() > 0)
-                                    presentRadioList(searchGlobalObject.getData());
+                                    presentRadioList(searchGlobalObject.getData(), inputText);
                                 else
                                     presentCityNotFoundDialog();
                             }
-                        });
+                        }
+                );
 
             }
         });
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         alertCityNotFound.show();
     }
 
-    private void presentRadioList(final ArrayList<SearchLocationObject> locationArray) {
+    private void presentRadioList(final ArrayList<SearchLocationObject> locationArray, final String searchQuery) {
 
         List<String> citiesName = new ArrayList<String>();
         for (SearchLocationObject location : locationArray) {
@@ -164,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         final String[] items = new String[ citiesName.size() ];
         citiesName.toArray( items );
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);//ERROR ShowDialog cannot be resolved to a type
+        AlertDialog.Builder builder = new AlertDialog.Builder(this); //ERROR ShowDialog cannot be resolved to a type
         builder.setTitle(R.string.choose_location);
         AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
@@ -176,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton(R.string.add_action, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 WaqiObject cityObject = new WaqiObject(locationArray.get(radioIndex).getUid(), async, adapter);
+                cityObject.setSearchQuery(searchQuery);
                 cityObject.save();
                 cityObject.fetchData();
                 cities.add(cityObject);

@@ -26,6 +26,7 @@ public class WaqiObject extends SugarRecord {
     @Ignore
     private String url = "";
 
+    private String searchQuery = "";
     int identifier = 0;
 
     public WaqiObject() {
@@ -45,7 +46,7 @@ public class WaqiObject extends SugarRecord {
             @Override
             public void onSuccess(GlobalObject global) {
                 setGlobalObject(global);
-                Log.d("DATABASE", "Data fetched !");
+                Log.d("SERVICE", "Data fetched !");
             }
         });
     }
@@ -61,6 +62,14 @@ public class WaqiObject extends SugarRecord {
 
     public void setAqcinListAdapter(AqcinListAdapter adpaterList) {
         this.adpaterList = adpaterList;
+    }
+
+    public void setSearchQuery(String searchQuery) {
+        this.searchQuery = searchQuery;
+    }
+
+    public String getSearchQuery() {
+        return searchQuery;
     }
 
     public String getName() {

@@ -29,10 +29,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         addPreferencesFromResource(R.xml.settings_global);
 
         // Adding listeners to ListPreference
-        this.languagePreference     = (ListPreference)findPreference("language_preference");
-        this.themePreferences       = (ListPreference)findPreference("theme_preference");
-        this.langUpdater            = new LanguageUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
-        this.themeUpdater           = new ThemeUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
+        this.languagePreference = (ListPreference)findPreference("language_preference");
+        this.themePreferences   = (ListPreference)findPreference("theme_preference");
+        this.langUpdater        = new LanguageUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
+        this.themeUpdater       = new ThemeUpdater(this.getActivity(), this.getPreferenceManager().getSharedPreferences());
 
         // Loading from shared prefs current locale
         this.languagePreference.setSummary(this.langUpdater.getSavedLocale());
