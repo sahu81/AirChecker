@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.wikipedia.ImageObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
 import com.example.dessusdi.myfirstapp.tools.WikipediaService;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Dimitri on 02/03/2017.
@@ -67,13 +70,25 @@ public class DetailsFragment extends Fragment {
 
         this.async = new WikipediaService(this.mActivity);
 
-        async.fetchCityInformation("Lyon",
+        async.fetchCityInformation("Grenoble",
                 new WikipediaService.cityInformationCallback() {
                     @Override
                     public void onSuccess(PageObject pageObject) {
                         cityTitle.setText(pageObject.getTitle());
                         cityDescription.setText(pageObject.getExtract());
-                        Log.d("DATA", "Result --> " + pageObject.getTitle());
+                    }
+                }
+        );
+
+        async.fetchCityImage("Grenoble",
+                new WikipediaService.cityImageCallback() {
+                    @Override
+                    public void onSuccess(ImageObject imageObject) {
+                        Picasso.with(mActivity)
+                                .load(imageObject.getOriginal().getSource())
+                                .fit()
+                                .centerCrop()
+                                .into(cityPicture);
                     }
                 }
         );

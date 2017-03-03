@@ -37,4 +37,26 @@ public class QueryDeserializer {
 
         return pageObject;
     }
+
+    public static ImageObject deserializeImage(String rawJSON, Context context) {
+        ImageObject imageObject = new ImageObject();
+
+        try {
+            JSONObject json         = new JSONObject(rawJSON);
+            JSONObject query        = json.getJSONObject("query");
+            JSONObject pages        = query.getJSONObject("pages");
+            Iterator<String> keys   = pages.keys();
+            if( keys.hasNext() ) {
+                String key = keys.next();
+                if(!key.equals("-1")) {
+                    Gson gson = new Gson();
+                    imageObject = gson.fromJson(pages.getString(key), ImageObject.class);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return imageObject;
+    }
 }
