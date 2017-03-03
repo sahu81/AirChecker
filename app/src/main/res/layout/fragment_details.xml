@@ -15,7 +15,7 @@
         android:weightSum="1">
 
         <TextView
-            android:text="@string/city_empty_title"
+            android:text="@string/loading"
             android:id="@+id/cityTitle"
             android:gravity="center"
             android:layout_width="match_parent"

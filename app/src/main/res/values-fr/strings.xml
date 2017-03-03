@@ -34,4 +34,5 @@
     <string name="graph_button">Évolution</string>
     <string name="city_empty_title">Ville non trouvée</string>
     <string name="city_empty_informations">Aucune données trouvées à propos de la ville</string>
+    <string name="loading">Chargement...</string>
 </resources>
