@@ -70,7 +70,7 @@ public class DetailsFragment extends Fragment {
 
         this.async = new WikipediaService(this.mActivity);
 
-        async.fetchCityInformation("Grenoble",
+        async.fetchCityInformation(this.city.getSearchQuery(),
                 new WikipediaService.cityInformationCallback() {
                     @Override
                     public void onSuccess(PageObject pageObject) {
@@ -80,7 +80,7 @@ public class DetailsFragment extends Fragment {
                 }
         );
 
-        async.fetchCityImage("Grenoble",
+        async.fetchCityImage(this.city.getSearchQuery(),
                 new WikipediaService.cityImageCallback() {
                     @Override
                     public void onSuccess(ImageObject imageObject) {
