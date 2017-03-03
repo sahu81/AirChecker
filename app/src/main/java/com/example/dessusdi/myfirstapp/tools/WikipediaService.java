@@ -11,9 +11,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
-import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
+import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
+import com.example.dessusdi.myfirstapp.models.wikipedia.QueryDeserializer;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
 
 /**
  * Created by Dimitri on 02/03/2017.
@@ -50,9 +55,8 @@ public class WikipediaService {
                     @Override
                     public void onResponse(String response) {
                         mDialog.dismiss();
-                        Gson gson = new Gson();
-                        //SearchGlobalObject globalSearchObject = gson.fromJson(response, SearchGlobalObject.class);
-                        callback.onSuccess(response);
+                        PageObject pageObject = QueryDeserializer.deserializePage(response, mApplicationContext);
+                        callback.onSuccess(pageObject);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -98,7 +102,7 @@ public class WikipediaService {
     }
 
     public interface cityInformationCallback {
-        void onSuccess(String information);
+        void onSuccess(PageObject pageObject);
     }
 
     public interface cityImageCallback {

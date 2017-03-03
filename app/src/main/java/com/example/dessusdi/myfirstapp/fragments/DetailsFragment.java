@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
 import com.example.dessusdi.myfirstapp.tools.WikipediaService;
 
 /**
@@ -23,6 +24,7 @@ import com.example.dessusdi.myfirstapp.tools.WikipediaService;
 public class DetailsFragment extends Fragment {
 
     private WaqiObject city;
+    private TextView cityTitle;
     private ImageView cityPicture;
     private TextView cityDescription;
     private Button cityEvolution;
@@ -39,6 +41,7 @@ public class DetailsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.cityTitle          = (TextView) view.findViewById(R.id.cityTitle);
         this.cityPicture        = (ImageView) view.findViewById(R.id.cityPicture);
         this.cityDescription    = (TextView) view.findViewById(R.id.cityDescription);
         this.cityEvolution      = (Button) view.findViewById(R.id.cityEvolution);
@@ -67,8 +70,10 @@ public class DetailsFragment extends Fragment {
         async.fetchCityInformation("Lyon",
                 new WikipediaService.cityInformationCallback() {
                     @Override
-                    public void onSuccess(String result) {
-                        Log.d("DATA", "Result --> " + result);
+                    public void onSuccess(PageObject pageObject) {
+                        cityTitle.setText(pageObject.getTitle());
+                        cityDescription.setText(pageObject.getExtract());
+                        Log.d("DATA", "Result --> " + pageObject.getTitle());
                     }
                 }
         );

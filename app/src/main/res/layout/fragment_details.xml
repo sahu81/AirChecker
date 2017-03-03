@@ -7,6 +7,15 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+    <TextView
+        android:text="@string/city_empty_title"
+        android:id="@+id/cityTitle"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="30sp" />
+
     <ImageView
         android:layout_width="match_parent"
         android:src="@drawable/no_image"

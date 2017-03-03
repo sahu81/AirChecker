@@ -32,4 +32,6 @@
     <string name="theme_sunset">Sunset theme</string>
     <string name="set_auto_night_theme">Automatic night mode</string>
     <string name="graph_button">Evolution</string>
+    <string name="city_empty_title">City not found</string>
+    <string name="city_empty_informations">No data found concerning city</string>
 </resources>
