@@ -34,6 +34,6 @@ public class PageObject {
     }
 
     public String getExtract() {
-        return extract;
+        return extract.replace("\n", "\n\n");
     }
 }
