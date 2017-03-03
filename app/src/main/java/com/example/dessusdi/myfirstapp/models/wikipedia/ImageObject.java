@@ -12,7 +12,11 @@ public class ImageObject {
     private Original_ImageObject original;
 
     public ImageObject() {
-
+        this.pageid = 0;
+        this.ns = 0;
+        this.title = "";
+        this.thumbnail = new Thumbnail_ImageObject();
+        this.original = new Original_ImageObject();
     }
 
     public int getPageid() {

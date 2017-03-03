@@ -66,7 +66,6 @@ public class DetailsFragment extends Fragment {
     }
 
     public void fetchCityInformation() {
-        Log.d("DATA", "----> " + this.city.getName());
 
         this.async = new WikipediaService(this.mActivity);
 
@@ -84,11 +83,17 @@ public class DetailsFragment extends Fragment {
                 new WikipediaService.cityImageCallback() {
                     @Override
                     public void onSuccess(ImageObject imageObject) {
-                        Picasso.with(mActivity)
-                                .load(imageObject.getOriginal().getSource())
-                                .fit()
-                                .centerCrop()
-                                .into(cityPicture);
+
+                        if(!imageObject.getOriginal().getSource().isEmpty()) {
+                            Picasso.with(mActivity)
+                                    .load(imageObject.getOriginal().getSource())
+                                    .fit()
+                                    .centerCrop()
+                                    .into(cityPicture);
+                        } else {
+                            cityPicture.setImageResource(R.drawable.no_image);
+                        }
+
                     }
                 }
         );
