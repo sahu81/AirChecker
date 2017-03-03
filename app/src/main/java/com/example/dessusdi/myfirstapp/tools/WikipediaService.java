@@ -3,6 +3,7 @@ package com.example.dessusdi.myfirstapp.tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,6 +28,13 @@ public class WikipediaService {
     }
 
     public void fetchCityInformation(String search, final WikipediaService.cityInformationCallback callback) {
+
+        if(this.mApplicationContext != null) {
+            Log.d("DATA", "PAS NULL 2");
+        } else {
+            Log.d("DATA", "NULL 2");
+        }
+
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
 
@@ -44,7 +52,7 @@ public class WikipediaService {
                         mDialog.dismiss();
                         Gson gson = new Gson();
                         //SearchGlobalObject globalSearchObject = gson.fromJson(response, SearchGlobalObject.class);
-                        callback.onSuccess("");
+                        callback.onSuccess(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -55,6 +63,7 @@ public class WikipediaService {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
+
     }
 
     public void fetchCityImage(String search, final WikipediaService.cityImageCallback callback) {

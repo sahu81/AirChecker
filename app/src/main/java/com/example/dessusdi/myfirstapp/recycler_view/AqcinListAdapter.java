@@ -64,6 +64,7 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
                     FragmentManager fragmentManager = ((MainActivity) context).getFragmentManager();
                     DetailsFragment detailsFragment = (DetailsFragment) fragmentManager.findFragmentById(R.id.detail_fragment);
                     detailsFragment.setCity(list.get(position));
+                    detailsFragment.fetchCityInformation();
                 }
             }
         });

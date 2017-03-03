@@ -1,7 +1,7 @@
 package com.example.dessusdi.myfirstapp.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.tools.WikipediaService;
 
 /**
  * Created by Dimitri on 02/03/2017.
@@ -25,6 +26,8 @@ public class DetailsFragment extends Fragment {
     private ImageView cityPicture;
     private TextView cityDescription;
     private Button cityEvolution;
+    private WikipediaService async;
+    private Activity mActivity;
 
     @Nullable
     @Override
@@ -41,12 +44,34 @@ public class DetailsFragment extends Fragment {
         this.cityEvolution      = (Button) view.findViewById(R.id.cityEvolution);
     }
 
-    public void setCity(WaqiObject city) {
-        this.city = city;
-        this.fetchEvolution();
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        this.mActivity = this.getActivity();
+
+        if(this.city != null) {
+            this.fetchCityInformation();
+        }
     }
 
-    private void fetchEvolution() {
+    public void setCity(WaqiObject city) {
+        this.city = city;
+    }
+
+    public void fetchCityInformation() {
         Log.d("DATA", "----> " + this.city.getName());
+
+        this.async = new WikipediaService(this.mActivity);
+
+        async.fetchCityInformation("Lyon",
+                new WikipediaService.cityInformationCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        Log.d("DATA", "Result --> " + result);
+                    }
+                }
+        );
+
     }
 }
