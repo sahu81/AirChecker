@@ -5,8 +5,8 @@ package com.example.dessusdi.myfirstapp.models.air_quality_position;
  * DESSUS Dimitri
  */
 public class PositionStationObject {
-    private Float lat;
-    private Float lon;
+    private float lat;
+    private float lon;
     private int uid;
     private String aqi;
 

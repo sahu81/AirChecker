@@ -1,7 +1,12 @@
 package com.example.dessusdi.myfirstapp.fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +14,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +23,11 @@ import android.widget.TextView;
 import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGlobalObject;
+import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+import com.example.dessusdi.myfirstapp.tools.WikipediaService;
 
 import java.util.List;
 
@@ -34,6 +43,8 @@ public class MainFragment extends Fragment {
     private AqcinRequestService async;
     private List<WaqiObject> cities;
     private AqcinListAdapter adapter;
+    public static final int position_range = 100; // In km
+    public static final double latlonOffset = 111.111; // In km
 
     @Nullable
     @Override
@@ -126,9 +137,58 @@ public class MainFragment extends Fragment {
             cityObject.fetchData();
         }
 
+        this.retrieveUserPosition();
         this.checkIfRecyclerEmpty();
         this.swipeRefresh.setRefreshing(false);
     }
+
+    private void retrieveUserPosition() {
+        LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+
+        if (location != null) {
+            retrieveCitiesAroundMe(location.getLatitude(), location.getLongitude());
+        }
+    }
+
+    private void retrieveCitiesAroundMe(double userLatitude, double userLongitude) {
+
+        float offsetLongitude = (float) (userLongitude + (position_range / latlonOffset));
+        float offsetLatitude = (float) (userLatitude + (position_range / latlonOffset));
+
+        async.fetchCitiesAroundPosition(userLatitude + "," + userLatitude + "," + offsetLatitude + "," + offsetLongitude,
+                new AqcinRequestService.PositionQueryCallback() {
+                    @Override
+                    public void onSuccess(PositionGlobalObject positionGlobalObject) {
+                        Log.d("POSITION", positionGlobalObject.getStatus());
+                        Log.d("POSITION", "Size --> " + positionGlobalObject.getData().size());
+                    }
+                }
+        );
+    }
+
+    final LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            retrieveCitiesAroundMe(location.getLatitude(), location.getLongitude());
+        }
+
+        public void onProviderDisabled(String arg0) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public void onProviderEnabled(String arg0) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+            // TODO Auto-generated method stub
+
+        }
+    };
+
 
     public void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

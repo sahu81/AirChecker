@@ -18,8 +18,8 @@ public abstract class RequestBuilder {
         return urlStr;
     }
 
-    public static String buildSearchCitiesPositionURL(String latlngBox) {
-        String urlStr = Constants.Url.CITY_SEARCH_BASE_URL;
+    public static String buildCitiesAroundPositionURL(String latlngBox) {
+        String urlStr = Constants.Url.CITY_POSITION_BASE_URL;
         urlStr = urlStr.replace("%%TOKEN%%", Constants.Url.TOKEN);
         urlStr += latlngBox;
         return urlStr;
