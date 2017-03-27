@@ -2,6 +2,7 @@ package com.example.dessusdi.myfirstapp.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
@@ -33,6 +34,7 @@ public class DetailsFragment extends Fragment {
     private Button cityEvolution;
     private WikipediaService async;
     private Activity mActivity;
+    private final static String TAG_FRAGMENT = "FRAG_EVOLUTION";
 
     @Nullable
     @Override
@@ -48,6 +50,14 @@ public class DetailsFragment extends Fragment {
         this.cityPicture        = (ImageView) view.findViewById(R.id.cityPicture);
         this.cityDescription    = (TextView) view.findViewById(R.id.cityDescription);
         this.cityEvolution      = (Button) view.findViewById(R.id.cityEvolution);
+
+        this.cityEvolution.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                showEvolution();
+            }
+        });
     }
 
     @Override
@@ -98,5 +108,15 @@ public class DetailsFragment extends Fragment {
                 }
         );
 
+    }
+
+    private void showEvolution() {
+        EvolutionFragment newFragment = new EvolutionFragment();
+        newFragment.setCity(this.city);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_container, newFragment, TAG_FRAGMENT);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }
