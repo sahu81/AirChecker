@@ -63,7 +63,6 @@ public class MainFragment extends Fragment {
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
         this.refreshRecyclerList();
-        //this.setupBackgroundService();
     }
 
     private void setupRecyclerView() {
