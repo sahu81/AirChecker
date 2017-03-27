@@ -3,6 +3,7 @@ package com.example.dessusdi.myfirstapp;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
 import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
@@ -49,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         this.langUpdater = new LanguageUpdater(this, PreferenceManager.getDefaultSharedPreferences(this));
         this.langUpdater.loadSavedLanguage();
+
+        this.setupBackgroundService();
 
         setContentView(R.layout.activity_main);
     }
@@ -116,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                         new AqcinRequestService.SearchQueryCallback() {
                             @Override
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
-                                if(searchGlobalObject.getData().size() > 0)
+                                if (searchGlobalObject.getData().size() > 0)
                                     presentRadioList(searchGlobalObject.getData(), inputText);
                                 else
                                     presentCityNotFoundDialog();
@@ -193,6 +197,11 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void setupBackgroundService() {
+        Intent myIntent = new Intent(this, BackgroundRefresher.class);
+        startService(myIntent);
     }
 
 }

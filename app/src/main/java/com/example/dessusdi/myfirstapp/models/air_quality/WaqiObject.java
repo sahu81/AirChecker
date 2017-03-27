@@ -71,7 +71,9 @@ public class WaqiObject extends SugarRecord {
 
     public void setGlobalObject(GlobalObject globalObject) {
         this.globalObject = globalObject;
-        adpaterList.notifyDataSetChanged();
+
+        if(adpaterList != null)
+            adpaterList.notifyDataSetChanged();
     }
 
     public void setAqcinListAdapter(AqcinListAdapter adpaterList) {

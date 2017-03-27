@@ -35,4 +35,6 @@
     <string name="city_empty_title">City not found</string>
     <string name="city_empty_informations">No data found concerning city</string>
     <string name="loading">Loading...</string>
+    <string name="push_alert_title">Pollution alert</string>
+    <string name="push_alert_content">Be aware, %1$s exceeded the critical pollution threshold (%2$d)</string>
 </resources>

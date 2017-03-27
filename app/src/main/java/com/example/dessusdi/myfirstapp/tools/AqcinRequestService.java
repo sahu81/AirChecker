@@ -89,4 +89,8 @@ public class AqcinRequestService {
     public interface SearchQueryCallback {
         void onSuccess(SearchGlobalObject globalSearchObject);
     }
+
+    public void setmApplicationContext(Activity activity) {
+        this.mApplicationContext = activity;
+    }
 }
