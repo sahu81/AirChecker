@@ -35,4 +35,6 @@
     <string name="city_empty_title">Ville non trouvée</string>
     <string name="city_empty_informations">Aucune données trouvées à propos de la ville</string>
     <string name="loading">Chargement...</string>
+    <string name="push_alert_title">Alerte pollution</string>
+    <string name="push_alert_content">Attention, %1$s vient de dépasser le seuil maximal de pollution (%2$d)</string>
 </resources>

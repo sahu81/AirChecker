@@ -200,7 +200,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupBackgroundService() {
-        startService(new Intent(this, BackgroundRefresher.class));
+        Intent myIntent = new Intent(this, BackgroundRefresher.class);
+        startService(myIntent);
     }
 
 }

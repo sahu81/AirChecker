@@ -23,9 +23,6 @@ public class AqcinRequestService {
 
     private Activity mApplicationContext;
 
-    public AqcinRequestService() {
-    }
-
     public AqcinRequestService(Context context) {
         mApplicationContext = (Activity)context;
     }
