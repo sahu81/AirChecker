@@ -18,6 +18,13 @@ public abstract class RequestBuilder {
         return urlStr;
     }
 
+    public static String buildSearchCitiesPositionURL(String latlngBox) {
+        String urlStr = Constants.Url.CITY_SEARCH_BASE_URL;
+        urlStr = urlStr.replace("%%TOKEN%%", Constants.Url.TOKEN);
+        urlStr += latlngBox;
+        return urlStr;
+    }
+
     public static String buildCityInformationURL(String city) {
         return Constants.Url.CITY_INFORMATION_BASE_URL.concat(city);
     }

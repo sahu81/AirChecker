@@ -10,6 +10,7 @@ public final class Constants {
     public final class Url {
         public static final String TOKEN    = "c71fbbfd99ef2c934f9d7d737be9e1e70ff03a9c";
         public static final String CITY_SEARCH_BASE_URL = "http://api.waqi.info/search/?token=%%TOKEN%%&keyword=";
+        public static final String CITY_POSITION_BASE_URL = "https://api.waqi.info/map/bounds/?token=%%TOKEN%%&latlng=";
         public static final String AIR_QUALITY_BASE_URL = "https://api.waqi.info/api/feed/%%CITY_ID%%/obs.en.json";
         public static final String CITY_INFORMATION_BASE_URL = "https://fr.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=";
         public static final String CITY_IMAGE_BASE_URL = "https://fr.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=";
