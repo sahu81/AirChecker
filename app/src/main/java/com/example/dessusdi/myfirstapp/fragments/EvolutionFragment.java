@@ -1,13 +1,25 @@
 package com.example.dessusdi.myfirstapp.fragments;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dessusdi.myfirstapp.R;
+import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.AxisValue;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.view.Chart;
+import lecho.lib.hellocharts.view.LineChartView;
 
 /**
  * Created by dessusdi on 27/03/2017.
@@ -15,6 +27,10 @@ import com.example.dessusdi.myfirstapp.R;
  */
 
 public class EvolutionFragment extends Fragment {
+
+    private WaqiObject city;
+    private LineChartView aqcinChart;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,6 +41,9 @@ public class EvolutionFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.aqcinChart = (LineChartView) view.findViewById(R.id.aqcinChart);
+        this.aqcinChart.setInteractive(true);
+        this.aqcinChart.setLineChartData(this.city.getForecastChartData());
     }
 
     @Override
@@ -32,5 +51,9 @@ public class EvolutionFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
+    }
+
+    public void setCity(WaqiObject city) {
+        this.city = city;
     }
 }

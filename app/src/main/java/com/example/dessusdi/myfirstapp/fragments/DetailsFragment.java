@@ -112,6 +112,7 @@ public class DetailsFragment extends Fragment {
 
     private void showEvolution() {
         EvolutionFragment newFragment = new EvolutionFragment();
+        newFragment.setCity(this.city);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, newFragment, TAG_FRAGMENT);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
