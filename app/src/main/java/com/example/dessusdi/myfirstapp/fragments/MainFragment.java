@@ -114,6 +114,7 @@ public class MainFragment extends Fragment {
             emptyRecyclerTextView.setVisibility(View.VISIBLE);
         }
     }
+
     private void reloadCitiesFromDB() {
         // Load cities from db
         this.cities.clear();
