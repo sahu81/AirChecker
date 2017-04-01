@@ -32,6 +32,7 @@ import java.util.TimerTask;
 
 public class BackgroundRefresher extends Service {
 
+    static final String TAG                     = "Background";
     public static final int delay               = 1800000; // Delay between each search query in ms (15 min here)
     public static final int limit               = 100; // Trigger notification when limit reached
     private Handler mHandler                    = new Handler();
@@ -74,7 +75,7 @@ public class BackgroundRefresher extends Service {
                     cities.clear();
                     cities.addAll(WaqiObject.listAll(WaqiObject.class));
 
-                    Log.d("BACKGROUND", "Checking cities on background task...");
+                    Log.d(TAG, "Checking cities on background task...");
                     for (WaqiObject cityObject : cities) {
                         this.retrieveAirQuality(cityObject.getIdentifier());
                     }
@@ -95,7 +96,7 @@ public class BackgroundRefresher extends Service {
                                     if (threshold >= limit) {
                                         if (!notificationsFired.contains(identifier)) {
                                             sendAlertPushNotification(global.getRxs().getObs().get(0).getMsg().getCity().getName(), threshold);
-                                            Log.d("BACKGROUND", "Notification fired !");
+                                            Log.d(TAG, "Notification fired !");
                                             notificationsFired.add(identifier);
                                         }
                                     } else {
@@ -110,13 +111,14 @@ public class BackgroundRefresher extends Service {
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Log.d("BACKGROUND", "Rate limit exceeded, trying again in " + delay);
+                                    Log.d(TAG, "Rate limit exceeded, trying again in " + delay);
                                 }
                             });
 
                     try {
                         reQueue.add(request);
                     } catch (Exception e) {
+                        Log.e(TAG, e.toString());
                     }
                 }
 

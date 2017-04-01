@@ -47,6 +47,10 @@ public class WaqiObject extends SugarRecord {
         super();
     }
 
+    public WaqiObject(int cityID) {
+        this.identifier = cityID;
+    }
+
     public WaqiObject(int cityID, AqcinRequestService waqiService, AqcinListAdapter adpater) {
         this.url            = RequestBuilder.buildAirQualityURL(cityID);
         this.waqiService    = waqiService;
@@ -72,10 +76,15 @@ public class WaqiObject extends SugarRecord {
     public void setGlobalObject(GlobalObject globalObject) {
         this.globalObject = globalObject;
 
+        if(this.globalObject != null)
+            Log.d("SERVICE", "Status " + globalObject.getRxs().getObs().get(0).getStatus());
+
         if(adpaterList != null)
             adpaterList.notifyDataSetChanged();
     }
 
+    public void setAqcinListAdapter(AqcinListAdapter adapaterList) {
+        this.adpaterList = adapaterList;
     }
 
     public void setSearchQuery(String searchQuery) {
@@ -88,7 +97,10 @@ public class WaqiObject extends SugarRecord {
 
     public String getName() {
         String name = "";
+
         if (this.globalObject != null) {
+            int index = globalObject.getRxs().getObs().size() - 1;
+            name = this.globalObject.getRxs().getObs().get(index).getMsg().getCity().getName();
         }
         return name;
     }
@@ -96,10 +108,13 @@ public class WaqiObject extends SugarRecord {
     public int getAirQuality() {
         int airQuality = 0;
         if (this.globalObject != null) {
+            int index = globalObject.getRxs().getObs().size() - 1;
+            airQuality = this.globalObject.getRxs().getObs().get(index).getMsg().getAqi();
         }
         return airQuality;
     }
 
+    public static String getColorCode(int airQuality) {
         String color = "#e74c3c";
 
         if(airQuality < 40)
@@ -126,6 +141,8 @@ public class WaqiObject extends SugarRecord {
     public String getGPSCoordinate() {
         String airQuality = "Loading...";
         if (this.globalObject != null) {
+            int index = globalObject.getRxs().getObs().size() - 1;
+            airQuality = String.format("GPS : %.6f - %.6f", this.globalObject.getRxs().getObs().get(index).getMsg().getCity().getGeo().get(0), this.globalObject.getRxs().getObs().get(index).getMsg().getCity().getGeo().get(1));
         }
         return airQuality;
     }
@@ -133,6 +150,9 @@ public class WaqiObject extends SugarRecord {
     public String getMinTemp() {
         String minTemp = "";
         if (this.globalObject != null) {
+            int index = globalObject.getRxs().getObs().size() - 1;
+            if(this.globalObject.getRxs().getObs().get(index).getMsg().getForecast().getAqi().size() > 0) {
+                minTemp = String.format("Min : %d°C", this.globalObject.getRxs().getObs().get(index).getMsg().getForecast().getAqi().get(0).getV().get(0));
             }
         }
         return minTemp;
@@ -143,12 +163,15 @@ public class WaqiObject extends SugarRecord {
         if (this.globalObject != null) {
             int index = globalObject.getRxs().getObs().size() - 1;
             if(this.globalObject.getRxs().getObs().get(index).getMsg().getForecast().getAqi().size() > 0) {
+                maxTemp = String.format("Max : %d°C", this.globalObject.getRxs().getObs().get(index).getMsg().getForecast().getAqi().get(0).getV().get(1));
             }
         }
         return maxTemp;
     }
 
     public LineChartData getForecastChartData() {
+        int indexArray = globalObject.getRxs().getObs().size() - 1;
+        ArrayList<AqiObject> forecast = this.globalObject.getRxs().getObs().get(indexArray).getMsg().getForecast().getAqi();
 
         // Dates formatter
         SimpleDateFormat fullFormatter = new SimpleDateFormat("yyyy-MM-dd");
