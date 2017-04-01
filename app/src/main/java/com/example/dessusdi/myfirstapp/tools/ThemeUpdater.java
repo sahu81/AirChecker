@@ -4,10 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.TaskStackBuilder;
-import android.util.Log;
 
-import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 
 import java.util.Calendar;
@@ -19,8 +16,6 @@ import java.util.Calendar;
 public class ThemeUpdater {
     private SharedPreferences sharedPreferences;
     private Context context;
-
-    public ThemeUpdater() {}
 
     public ThemeUpdater(Context context, SharedPreferences sharedPreferences) {
         this.context = context;

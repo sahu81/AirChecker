@@ -14,7 +14,6 @@ import com.android.volley.toolbox.Volley;
 import com.example.dessusdi.myfirstapp.models.wikipedia.ImageObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.QueryDeserializer;
-import com.google.gson.Gson;
 
 /**
  * Created by Dimitri on 02/03/2017.
@@ -22,7 +21,7 @@ import com.google.gson.Gson;
 
 public class WikipediaService {
 
-    private Activity mApplicationContext;
+    private final Activity mApplicationContext;
 
     public WikipediaService(Context context) {
         mApplicationContext = (Activity)context;

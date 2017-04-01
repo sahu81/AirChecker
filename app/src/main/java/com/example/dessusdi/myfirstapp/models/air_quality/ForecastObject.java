@@ -12,8 +12,4 @@ public class ForecastObject {
     public ArrayList<AqiObject> getAqi() {
         return aqi;
     }
-
-    public void setAqi(ArrayList<AqiObject> aqi) {
-        this.aqi = aqi;
-    }
 }

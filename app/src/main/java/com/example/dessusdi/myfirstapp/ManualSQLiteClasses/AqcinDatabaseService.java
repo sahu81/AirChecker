@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class AqcinDatabaseService {
 
-    private AqcinDatabaseHelper mDbHelper;
+    private final AqcinDatabaseHelper mDbHelper;
     private SQLiteDatabase db;
 
     public AqcinDatabaseService(Context context) {

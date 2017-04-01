@@ -5,9 +5,9 @@ package com.example.dessusdi.myfirstapp.models.wikipedia;
  */
 
 public class Original_ImageObject {
-    private String source;
-    private int width;
-    private int height;
+    private final String source;
+    private final int width;
+    private final int height;
 
     public Original_ImageObject() {
         this.source = "";
@@ -17,13 +17,5 @@ public class Original_ImageObject {
 
     public String getSource() {
         return source;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 }

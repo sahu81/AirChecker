@@ -4,6 +4,7 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
@@ -15,10 +16,10 @@ import java.util.List;
  */
 
 public class AirCheckerProvider extends ContentProvider {
-    static final String TAG = "ContentProvider";
+    private static final String TAG = "ContentProvider";
 
     public static final Uri CONTENT_URI = Uri.parse("content://com.dimitridessus.android.content.provider.airchecker");
-    static final String CONTENT_PROVIDER_MIME = "vnd.android.cursor.item/vnd.dimitridessus.android.content.provider.single";
+    private static final String CONTENT_PROVIDER_MIME = "vnd.android.cursor.item/vnd.dimitridessus.android.content.provider.single";
 
     @Override
     public boolean onCreate() {
@@ -27,12 +28,12 @@ public class AirCheckerProvider extends ContentProvider {
     }
 
     @Override
-    public String getType(Uri uri) {
+    public String getType(@NonNull Uri uri) {
         return AirCheckerProvider.CONTENT_PROVIDER_MIME;
     }
 
     @Override
-    public Uri insert(Uri uri, ContentValues values) {
+    public Uri insert(@NonNull Uri uri, ContentValues values) {
         int cityID = Integer.valueOf((String)values.get("identifier"));
         Log.d(TAG, "Saving city : " + cityID);
 
@@ -43,14 +44,14 @@ public class AirCheckerProvider extends ContentProvider {
     }
 
     @Override
-    public int update(Uri uri, ContentValues values, String selection,
+    public int update(@NonNull Uri uri, ContentValues values, String selection,
                       String[] selectionArgs) {
         // Nothing to update here
         return 0;
     }
 
     @Override
-    public int delete(Uri uri, String selection, String[] selectionArgs) {
+    public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         Log.d(TAG, "Deleting city : " + selection);
 
         int state = 1;
@@ -65,7 +66,7 @@ public class AirCheckerProvider extends ContentProvider {
     }
 
     @Override
-    public Cursor query(Uri uri, String[] projection, String selection,
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         return null;
     }

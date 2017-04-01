@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -22,14 +21,14 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
 
     private WaqiObject waqi;
     private Context context;
-    private TextView city_nameTextView;
-    private TextView air_qualityTextView;
-    private TextView gpsTextView;
-    private TextView minTextView;
-    private TextView maxTextView;
-    private ImageButton shareImageButton;
-    private ImageButton refreshImageButton;
-    private ImageButton bellImageButton;
+    final private TextView city_nameTextView;
+    final private TextView air_qualityTextView;
+    final private TextView gpsTextView;
+    final private TextView minTextView;
+    final private TextView maxTextView;
+    final private ImageButton shareImageButton;
+    final private ImageButton refreshImageButton;
+    final private ImageButton bellImageButton;
 
     public AqcinCellView(View itemView) {
         super(itemView);
@@ -68,7 +67,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
         } else if (v == this.refreshImageButton) {
             this.waqi.setGlobalObject(null);
             this.waqi.fetchData();
-        } else {
+        } else if (v == this.bellImageButton) {
             // Play a sound according to the air quality level
             MediaPlayer mPlayer = MediaPlayer.create(context, this.waqi.getSoundResId());
             mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);

@@ -17,24 +17,8 @@ public class MessageObject {
         return forecast;
     }
 
-    public void setForecast(ForecastObject forecast) {
-        this.forecast = forecast;
-    }
-
     public int getAqi() {
         return aqi;
-    }
-
-    public void setAqi(int aqi) {
-        this.aqi = aqi;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
     }
 
     public CityObject getCity() {
@@ -47,9 +31,5 @@ public class MessageObject {
 
     public ArrayList<IaqiObject> getIaqi() {
         return iaqi;
-    }
-
-    public void setIaqi(ArrayList<IaqiObject> iaqi) {
-        this.iaqi = iaqi;
     }
 }

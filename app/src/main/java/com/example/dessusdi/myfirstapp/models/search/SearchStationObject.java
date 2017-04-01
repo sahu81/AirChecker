@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class SearchStationObject {
     private String name;
-    private String url;
     private ArrayList<Float> geo;
 
     public String getName() {
@@ -17,21 +16,5 @@ public class SearchStationObject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public ArrayList<Float> getGeo() {
-        return geo;
-    }
-
-    public void setGeo(ArrayList<Float> geo) {
-        this.geo = geo;
     }
 }

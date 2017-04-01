@@ -46,6 +46,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
+        assert view != null;
         view.setBackgroundColor(getResources().getColor(android.R.color.white));
 
         return view;
@@ -64,9 +65,5 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else {
             return false;
         }
-    }
-
-    public void onBackPressed() {
-        this.getFragmentManager().popBackStack();
     }
 }

@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,19 +28,14 @@ import com.google.gson.Gson;
 
 public class AirCheckerWidget extends AppWidgetProvider {
 
-    private RequestQueue reQueue;
-
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        final int count = appWidgetIds.length;
-        reQueue = Volley.newRequestQueue(context);
+        RequestQueue reQueue = Volley.newRequestQueue(context);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         int favId = prefs.getInt("fav_city", 99999);
 
         Log.d("WIDGET", "ID --> " + favId);
-        for (int i = 0; i < count; i++) {
-            final int widgetId = appWidgetIds[i];
-
+        for (final int widgetId : appWidgetIds) {
             final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
             final Intent intent = new Intent(context, AirCheckerWidget.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -50,8 +46,8 @@ public class AirCheckerWidget extends AppWidgetProvider {
             remoteViews.setOnClickPendingIntent(R.id.refreshWidgetButton, pendingIntent);
 
 
-            if(favId != 99999) {
-                StringRequest request = new StringRequest(com.android.volley.Request.Method.GET,
+            if (favId != 99999) {
+                StringRequest request = new StringRequest(Request.Method.GET,
                         RequestBuilder.buildAirQualityURL(favId),
                         new Response.Listener<String>() {
 

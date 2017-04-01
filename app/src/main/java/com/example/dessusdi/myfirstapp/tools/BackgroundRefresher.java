@@ -1,6 +1,5 @@
 package com.example.dessusdi.myfirstapp.tools;
 
-import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,18 +25,18 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class BackgroundRefresher extends Service {
 
-    public static final int delay               = 1800000; // Delay between each search query in ms (15 min here)
-    public static final int limit               = 100; // Trigger notification when limit reached
-    private Handler mHandler                    = new Handler();
+    private static final String TAG             = "Background";
+    private static final int delay              = 1800000; // Delay between each search query in ms (15 min here)
+    private static final int limit              = 100; // Trigger notification when limit reached
+    private final Handler mHandler                    = new Handler();
     private Timer mTimer                        = null;
-    private List<WaqiObject> cities             = new ArrayList<>();
-    private List<Integer> notificationsFired    = new ArrayList<>();
+    private final List<WaqiObject> cities             = new ArrayList<>();
+    private final List<Integer> notificationsFired    = new ArrayList<>();
     private RequestQueue reQueue;
 
     @Override
@@ -63,7 +62,7 @@ public class BackgroundRefresher extends Service {
         Toast.makeText(this, R.string.service_killed, Toast.LENGTH_SHORT).show();
     }
 
-    class TimeDisplay extends TimerTask {
+    private class TimeDisplay extends TimerTask {
         @Override
         public void run() {
             // Fetching data...
@@ -74,7 +73,7 @@ public class BackgroundRefresher extends Service {
                     cities.clear();
                     cities.addAll(WaqiObject.listAll(WaqiObject.class));
 
-                    Log.d("BACKGROUND", "Checking cities on background task...");
+                    Log.d(TAG, "Checking cities on background task...");
                     for (WaqiObject cityObject : cities) {
                         this.retrieveAirQuality(cityObject.getIdentifier());
                     }
@@ -95,7 +94,7 @@ public class BackgroundRefresher extends Service {
                                     if (threshold >= limit) {
                                         if (!notificationsFired.contains(identifier)) {
                                             sendAlertPushNotification(global.getRxs().getObs().get(0).getMsg().getCity().getName(), threshold);
-                                            Log.d("BACKGROUND", "Notification fired !");
+                                            Log.d(TAG, "Notification fired !");
                                             notificationsFired.add(identifier);
                                         }
                                     } else {
@@ -110,13 +109,14 @@ public class BackgroundRefresher extends Service {
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-                                    Log.d("BACKGROUND", "Rate limit exceeded, trying again in " + delay);
+                                    Log.d(TAG, "Rate limit exceeded, trying again in " + delay);
                                 }
                             });
 
                     try {
                         reQueue.add(request);
                     } catch (Exception e) {
+                        Log.e(TAG, e.toString());
                     }
                 }
 

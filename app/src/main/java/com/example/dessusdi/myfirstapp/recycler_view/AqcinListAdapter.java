@@ -22,8 +22,8 @@ import java.util.List;
  */
 public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
-    List<WaqiObject> list;
-    Context context;
+    private final List<WaqiObject> list;
+    private final Context context;
 
     public AqcinListAdapter(List<WaqiObject> list, Context context) {
         this.list = list;

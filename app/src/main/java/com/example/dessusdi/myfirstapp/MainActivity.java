@@ -30,9 +30,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG_FRAGMENT    = "FRAG_SETTINGS";
-    private AqcinRequestService async           = new AqcinRequestService(MainActivity.this);
-    private List<WaqiObject> cities             = new ArrayList<>();
-    private AqcinListAdapter adapter            = new AqcinListAdapter(cities, MainActivity.this);
+    private final AqcinRequestService async           = new AqcinRequestService(MainActivity.this);
+    private final List<WaqiObject> cities             = new ArrayList<>();
+    private final AqcinListAdapter adapter            = new AqcinListAdapter(cities, MainActivity.this);
     private LanguageUpdater langUpdater;
     private ThemeUpdater themeUpdater;
     private int radioIndex;
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
         // Set up the input
         final EditText input = new EditText(this);
         // Specify the type of input expected
-        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
         builder.setView(input);
 
         // Set up the buttons
@@ -144,11 +144,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void presentCityNotFoundDialog() {
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-        builder1.setMessage(R.string.city_not_found);
-        builder1.setCancelable(true);
+        AlertDialog.Builder noCityDialog = new AlertDialog.Builder(MainActivity.this);
+        noCityDialog.setMessage(R.string.city_not_found);
+        noCityDialog.setCancelable(true);
 
-        builder1.setPositiveButton(
+        noCityDialog.setPositiveButton(
                 R.string.validate_action,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -156,13 +156,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        AlertDialog alertCityNotFound = builder1.create();
+        AlertDialog alertCityNotFound = noCityDialog.create();
         alertCityNotFound.show();
     }
 
     private void presentRadioList(final ArrayList<SearchLocationObject> locationArray, final String searchQuery) {
 
-        List<String> citiesName = new ArrayList<String>();
+        List<String> citiesName = new ArrayList<>();
         for (SearchLocationObject location : locationArray) {
             citiesName.add(location.getStation().getName());
         }
@@ -175,7 +175,8 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this); //ERROR ShowDialog cannot be resolved to a type
         builder.setTitle(R.string.choose_location);
-        AlertDialog.Builder builder1 = builder.setSingleChoiceItems(items, -1,
+        //noinspection UnusedAssignment
+        AlertDialog.Builder radioBuilder = builder.setSingleChoiceItems(items, -1,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
                         radioIndex = item;

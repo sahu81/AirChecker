@@ -28,20 +28,21 @@
     <string name="language_french">Français</string>
     <string name="pref_cat_customize_summary">Modifiez l\'interface de l\'application</string>
     <string name="service_killed">Service arrêté</string>
-    <string name="service_checking">Récupération qualité de l\'air...</string>
+    <string name="service_checking">Récupération qualité de l\'air…</string>
     <string name="theme_sunset">Theme rouge</string>
     <string name="set_auto_night_theme">Theme nuit automatique</string>
     <string name="graph_button">Évolution</string>
     <string name="city_empty_title">Ville non trouvée</string>
     <string name="city_empty_informations">Aucune données trouvées à propos de la ville</string>
-    <string name="loading">Chargement...</string>
+    <string name="loading">Chargement…</string>
     <string name="push_alert_title">Alerte pollution</string>
     <string name="push_alert_content">Attention, %1$s vient de dépasser le seuil maximal de pollution (%2$d)</string>
     <string name="details_title">Aucune ville</string>
-    <string name="city_details" translatable="false">Aucune ville chargée</string>
+    <string name="city_details">Aucune ville chargée</string>
     <string name="refresh">Recharger</string>
     <string name="favorite">Favorite</string>
-    <string name="unfavorite">Supprimer des favoris</string>
     <string name="favorite_added">Ville ajoutée en tant que favorite !</string>
     <string name="no_fav">Aucune ville favorite trouvée</string>
+    <string name="share">Partager</string>
+    <string name="ring">Sonnerie</string>
 </resources>

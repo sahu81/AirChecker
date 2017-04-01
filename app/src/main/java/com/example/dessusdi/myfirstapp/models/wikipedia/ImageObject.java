@@ -5,11 +5,11 @@ package com.example.dessusdi.myfirstapp.models.wikipedia;
  */
 
 public class ImageObject {
-    private int pageid;
-    private int ns;
-    private String title;
-    private Thumbnail_ImageObject thumbnail;
-    private Original_ImageObject original;
+    private final int pageid;
+    private final int ns;
+    private final String title;
+    private final Thumbnail_ImageObject thumbnail;
+    private final Original_ImageObject original;
 
     public ImageObject() {
         this.pageid = 0;
@@ -17,22 +17,6 @@ public class ImageObject {
         this.title = "";
         this.thumbnail = new Thumbnail_ImageObject();
         this.original = new Original_ImageObject();
-    }
-
-    public int getPageid() {
-        return pageid;
-    }
-
-    public int getNs() {
-        return ns;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Thumbnail_ImageObject getThumbnail() {
-        return thumbnail;
     }
 
     public Original_ImageObject getOriginal() {

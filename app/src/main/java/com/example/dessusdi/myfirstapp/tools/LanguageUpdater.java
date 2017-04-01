@@ -18,8 +18,6 @@ public class LanguageUpdater {
     private SharedPreferences sharedPreferences;
     private Context context;
 
-    public LanguageUpdater() {}
-
     public LanguageUpdater(Context context, SharedPreferences sharedPreferences) {
         this.context = context;
         this.sharedPreferences = sharedPreferences;

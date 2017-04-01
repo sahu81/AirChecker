@@ -1,7 +1,6 @@
 package com.example.dessusdi.myfirstapp.models.wikipedia;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
