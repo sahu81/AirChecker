@@ -19,7 +19,7 @@ import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.ImageObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
-import com.example.dessusdi.myfirstapp.tools.WikipediaService;
+import com.example.dessusdi.myfirstapp.services.WikipediaService;
 import com.squareup.picasso.Picasso;
 
 /**

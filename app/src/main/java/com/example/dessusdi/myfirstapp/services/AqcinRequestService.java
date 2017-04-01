@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp.tools;
+package com.example.dessusdi.myfirstapp.services;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
 import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
+import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 import com.google.gson.Gson;
 
 /**

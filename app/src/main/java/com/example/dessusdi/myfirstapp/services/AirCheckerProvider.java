@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp;
+package com.example.dessusdi.myfirstapp.services;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;

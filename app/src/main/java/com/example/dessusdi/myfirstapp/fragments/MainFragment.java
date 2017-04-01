@@ -24,7 +24,7 @@ import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGlobalObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
-import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+import com.example.dessusdi.myfirstapp.services.AqcinRequestService;
 
 import java.util.List;
 

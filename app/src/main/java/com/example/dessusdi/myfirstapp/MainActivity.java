@@ -19,8 +19,9 @@ import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchLocationObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
-import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
+import com.example.dessusdi.myfirstapp.services.AqcinRequestService;
+import com.example.dessusdi.myfirstapp.services.BackgroundRefresher;
+import com.example.dessusdi.myfirstapp.services.AirCheckerProvider;
 import com.example.dessusdi.myfirstapp.tools.LanguageUpdater;
 import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 

@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp.tools;
+package com.example.dessusdi.myfirstapp.services;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -14,6 +14,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.dessusdi.myfirstapp.models.wikipedia.ImageObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
 import com.example.dessusdi.myfirstapp.models.wikipedia.QueryDeserializer;
+import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 
 /**
  * Created by Dimitri on 02/03/2017.

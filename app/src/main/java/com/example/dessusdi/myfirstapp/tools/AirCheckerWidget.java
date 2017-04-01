@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp;
+package com.example.dessusdi.myfirstapp.tools;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -17,9 +17,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
-import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 import com.google.gson.Gson;
 
 /**
