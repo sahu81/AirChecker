@@ -3,16 +3,17 @@ package com.example.dessusdi.myfirstapp.fragments;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
@@ -32,6 +33,8 @@ public class DetailsFragment extends Fragment {
     private ImageView cityPicture;
     private TextView cityDescription;
     private Button cityEvolution;
+    private Button favoriteButton;
+
     private WikipediaService async;
     private Activity mActivity;
     private final static String TAG_FRAGMENT = "FRAG_EVOLUTION";
@@ -50,6 +53,7 @@ public class DetailsFragment extends Fragment {
         this.cityPicture        = (ImageView) view.findViewById(R.id.cityPicture);
         this.cityDescription    = (TextView) view.findViewById(R.id.cityDescription);
         this.cityEvolution      = (Button) view.findViewById(R.id.cityEvolution);
+        this.favoriteButton     = (Button) view.findViewById(R.id.cityFavorite);
 
         this.cityEvolution.setVisibility(View.GONE);
         this.cityEvolution.setOnClickListener( new View.OnClickListener() {
@@ -57,6 +61,26 @@ public class DetailsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showEvolution();
+            }
+        });
+
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if(settings.getInt("fav_city", 1000) == this.city.getIdentifier()) {
+            this.favoriteButton.setVisibility(View.GONE);
+        } else {
+            this.favoriteButton.setVisibility(View.VISIBLE);
+        }
+
+        this.favoriteButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("fav_city", city.getIdentifier());
+                editor.commit();
+                favoriteButton.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), R.string.favorite_added, Toast.LENGTH_LONG).show();
             }
         });
     }
