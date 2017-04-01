@@ -18,11 +18,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
-import com.example.dessusdi.myfirstapp.tools.BackgroundRefresher;
 import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 import com.google.gson.Gson;
-
-import java.util.Random;
 
 /**
  * Created by Dimitri on 01/04/2017.
@@ -46,6 +43,10 @@ public class AirCheckerWidget extends AppWidgetProvider {
             final Intent intent = new Intent(context, AirCheckerWidget.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+            
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
+                    0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            remoteViews.setOnClickPendingIntent(R.id.refreshWidgetButton, pendingIntent);
 
             StringRequest request = new StringRequest(com.android.volley.Request.Method.GET,
                     RequestBuilder.buildAirQualityURL(favId),
@@ -60,9 +61,6 @@ public class AirCheckerWidget extends AppWidgetProvider {
                             remoteViews.setTextViewText(R.id.air_qualityWidgetTextView, String.valueOf(aqi));
                             remoteViews.setTextViewText(R.id.city_nameWidgetTextView, global.getRxs().getObs().get(0).getMsg().getCity().getName());
                             remoteViews.setInt(R.id.air_qualityWidgetTextView, "setBackgroundColor", Color.parseColor(WaqiObject.getColorCode(aqi)));
-                            PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
-                                    0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                            remoteViews.setOnClickPendingIntent(R.id.refreshWidgetButton, pendingIntent);
 
                             appWidgetManager.updateAppWidget(widgetId, remoteViews);
                         }
