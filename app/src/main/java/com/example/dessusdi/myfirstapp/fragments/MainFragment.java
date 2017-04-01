@@ -1,6 +1,5 @@
 package com.example.dessusdi.myfirstapp.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,10 +23,8 @@ import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGlobalObject;
-import com.example.dessusdi.myfirstapp.models.wikipedia.PageObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-import com.example.dessusdi.myfirstapp.tools.WikipediaService;
 
 import java.util.List;
 
@@ -43,7 +40,7 @@ public class MainFragment extends Fragment {
     private AqcinRequestService async;
     private List<WaqiObject> cities;
     private AqcinListAdapter adapter;
-    public static final int position_range = 100; // In km
+    public static final int position_range = 10; // In km
     public static final double latlonOffset = 111.111; // In km
 
     @Nullable
@@ -154,15 +151,12 @@ public class MainFragment extends Fragment {
 
     private void retrieveCitiesAroundMe(double userLatitude, double userLongitude) {
 
-        float offsetLongitude = (float) (userLongitude + (position_range / latlonOffset));
-        float offsetLatitude = (float) (userLatitude + (position_range / latlonOffset));
-
-        async.fetchCitiesAroundPosition(userLatitude + "," + userLatitude + "," + offsetLatitude + "," + offsetLongitude,
+        async.fetchCitiesAroundPosition(userLatitude, userLongitude,
                 new AqcinRequestService.PositionQueryCallback() {
                     @Override
                     public void onSuccess(PositionGlobalObject positionGlobalObject) {
                         Log.d("POSITION", positionGlobalObject.getStatus());
-                        Log.d("POSITION", "Size --> " + positionGlobalObject.getData().size());
+                        Log.d("POSITION", "Size --> " + positionGlobalObject.getData().getCity().getName());
                     }
                 }
         );

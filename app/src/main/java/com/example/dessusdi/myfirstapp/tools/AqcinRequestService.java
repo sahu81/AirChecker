@@ -83,12 +83,12 @@ public class AqcinRequestService {
         queue.add(stringRequest);
     }
 
-    public void fetchCitiesAroundPosition(String latlngBox, final PositionQueryCallback callback) {
+    public void fetchCitiesAroundPosition(double latitude, double longitude, final PositionQueryCallback callback) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
-
+        
         // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildCitiesAroundPositionURL(latlngBox),
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildCitiesAroundPositionURL(latitude, longitude),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

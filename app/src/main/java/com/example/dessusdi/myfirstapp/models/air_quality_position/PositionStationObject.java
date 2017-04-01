@@ -5,40 +5,40 @@ package com.example.dessusdi.myfirstapp.models.air_quality_position;
  * DESSUS Dimitri
  */
 public class PositionStationObject {
-    private float lat;
-    private float lon;
-    private int uid;
-    private String aqi;
+    private int aqi;
+    private int idx;
+    private String dominentpol;
+    private PositionCityObject city;
 
-    public Float getLat() {
-        return lat;
-    }
-
-    public void setLat(Float lat) {
-        this.lat = lat;
-    }
-
-    public Float getLon() {
-        return lon;
-    }
-
-    public void setLon(Float lon) {
-        this.lon = lon;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
-    }
-
-    public String getAqi() {
+    public int getAqi() {
         return aqi;
     }
 
-    public void setAqi(String aqi) {
+    public void setAqi(int aqi) {
         this.aqi = aqi;
+    }
+
+    public int getIdx() {
+        return idx;
+    }
+
+    public void setIdx(int idx) {
+        this.idx = idx;
+    }
+
+    public String getDominentpol() {
+        return dominentpol;
+    }
+
+    public void setDominentpol(String dominentpol) {
+        this.dominentpol = dominentpol;
+    }
+
+    public PositionCityObject getCity() {
+        return city;
+    }
+
+    public void setCity(PositionCityObject city) {
+        this.city = city;
     }
 }

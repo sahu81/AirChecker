@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class PositionGlobalObject {
     private String status;
-    private ArrayList<PositionStationObject> data;
+    private PositionStationObject data;
 
     public String getStatus() {
         return status;
@@ -18,11 +18,11 @@ public class PositionGlobalObject {
         this.status = status;
     }
 
-    public ArrayList<PositionStationObject> getData() {
+    public PositionStationObject getData() {
         return data;
     }
 
-    public void setData(ArrayList<PositionStationObject> data) {
+    public void setData(PositionStationObject data) {
         this.data = data;
     }
 }
