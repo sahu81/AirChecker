@@ -18,7 +18,7 @@ public class PositionGlobalObject {
         this.status = status;
     }
 
-    public PositionStationObject getData() {
+    private PositionStationObject getData() {
         return data;
     }
 

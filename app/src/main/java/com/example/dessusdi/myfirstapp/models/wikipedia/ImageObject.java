@@ -5,11 +5,11 @@ package com.example.dessusdi.myfirstapp.models.wikipedia;
  */
 
 public class ImageObject {
-    private int pageid;
-    private int ns;
-    private String title;
-    private Thumbnail_ImageObject thumbnail;
-    private Original_ImageObject original;
+    private final int pageid;
+    private final int ns;
+    private final String title;
+    private final Thumbnail_ImageObject thumbnail;
+    private final Original_ImageObject original;
 
     public ImageObject() {
         this.pageid = 0;

@@ -16,10 +16,10 @@ import java.util.List;
  */
 
 public class AirCheckerProvider extends ContentProvider {
-    static final String TAG = "ContentProvider";
+    private static final String TAG = "ContentProvider";
 
     public static final Uri CONTENT_URI = Uri.parse("content://com.dimitridessus.android.content.provider.airchecker");
-    static final String CONTENT_PROVIDER_MIME = "vnd.android.cursor.item/vnd.dimitridessus.android.content.provider.single";
+    private static final String CONTENT_PROVIDER_MIME = "vnd.android.cursor.item/vnd.dimitridessus.android.content.provider.single";
 
     @Override
     public boolean onCreate() {

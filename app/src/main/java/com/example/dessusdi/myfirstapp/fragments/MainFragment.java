@@ -170,7 +170,7 @@ public class MainFragment extends Fragment {
         );
     }
 
-    final LocationListener locationListener = new LocationListener() {
+    private final LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
             retrieveCitiesAroundMe(location.getLatitude(), location.getLongitude());
         }
@@ -192,7 +192,7 @@ public class MainFragment extends Fragment {
     };
 
 
-    public void refreshRecyclerList() {
+    private void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(this.adapter);
     }

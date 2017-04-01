@@ -21,7 +21,7 @@ import com.google.gson.Gson;
  */
 public class AqcinRequestService {
 
-    private Activity mApplicationContext;
+    private final Activity mApplicationContext;
 
     public AqcinRequestService(Context context) {
         mApplicationContext = (Activity)context;

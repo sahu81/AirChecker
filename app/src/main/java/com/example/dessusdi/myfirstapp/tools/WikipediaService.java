@@ -21,7 +21,7 @@ import com.example.dessusdi.myfirstapp.models.wikipedia.QueryDeserializer;
 
 public class WikipediaService {
 
-    private Activity mApplicationContext;
+    private final Activity mApplicationContext;
 
     public WikipediaService(Context context) {
         mApplicationContext = (Activity)context;

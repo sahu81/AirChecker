@@ -30,13 +30,13 @@ import java.util.TimerTask;
 
 public class BackgroundRefresher extends Service {
 
-    static final String TAG                     = "Background";
-    public static final int delay               = 1800000; // Delay between each search query in ms (15 min here)
-    public static final int limit               = 100; // Trigger notification when limit reached
-    private Handler mHandler                    = new Handler();
+    private static final String TAG             = "Background";
+    private static final int delay              = 1800000; // Delay between each search query in ms (15 min here)
+    private static final int limit              = 100; // Trigger notification when limit reached
+    private final Handler mHandler                    = new Handler();
     private Timer mTimer                        = null;
-    private List<WaqiObject> cities             = new ArrayList<>();
-    private List<Integer> notificationsFired    = new ArrayList<>();
+    private final List<WaqiObject> cities             = new ArrayList<>();
+    private final List<Integer> notificationsFired    = new ArrayList<>();
     private RequestQueue reQueue;
 
     @Override
@@ -62,7 +62,7 @@ public class BackgroundRefresher extends Service {
         Toast.makeText(this, R.string.service_killed, Toast.LENGTH_SHORT).show();
     }
 
-    class TimeDisplay extends TimerTask {
+    private class TimeDisplay extends TimerTask {
         @Override
         public void run() {
             // Fetching data...

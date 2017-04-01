@@ -9,10 +9,10 @@ import com.example.dessusdi.myfirstapp.R;
  */
 
 public class PageObject {
-    private int pageid;
-    private int ns;
-    private String title;
-    private String extract;
+    private final int pageid;
+    private final int ns;
+    private final String title;
+    private final String extract;
 
     public PageObject(Context context) {
         this.pageid     = 0;

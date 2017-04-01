@@ -30,9 +30,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG_FRAGMENT    = "FRAG_SETTINGS";
-    private AqcinRequestService async           = new AqcinRequestService(MainActivity.this);
-    private List<WaqiObject> cities             = new ArrayList<>();
-    private AqcinListAdapter adapter            = new AqcinListAdapter(cities, MainActivity.this);
+    private final AqcinRequestService async           = new AqcinRequestService(MainActivity.this);
+    private final List<WaqiObject> cities             = new ArrayList<>();
+    private final AqcinListAdapter adapter            = new AqcinListAdapter(cities, MainActivity.this);
     private LanguageUpdater langUpdater;
     private ThemeUpdater themeUpdater;
     private int radioIndex;

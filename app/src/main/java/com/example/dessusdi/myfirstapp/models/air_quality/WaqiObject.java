@@ -39,7 +39,7 @@ public class WaqiObject extends SugarRecord {
     private String url = "";
 
     private String searchQuery = "";
-    int identifier = 0;
+    private int identifier = 0;
 
     public WaqiObject() {
         super();

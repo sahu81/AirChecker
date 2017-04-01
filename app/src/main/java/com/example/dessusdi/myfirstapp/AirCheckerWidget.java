@@ -32,7 +32,6 @@ public class AirCheckerWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        final int count = appWidgetIds.length;
         reQueue = Volley.newRequestQueue(context);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         int favId = prefs.getInt("fav_city", 99999);
