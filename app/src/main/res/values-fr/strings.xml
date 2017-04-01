@@ -39,4 +39,8 @@
     <string name="push_alert_content">Attention, %1$s vient de dépasser le seuil maximal de pollution (%2$d)</string>
     <string name="details_title">Aucune ville</string>
     <string name="city_details" translatable="false">Aucune ville chargée</string>
+    <string name="refresh">Recharger</string>
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Supprimer des favoris</string>
+    <string name="favorite_added">Ville ajoutée en tant que favorite !</string>
 </resources>

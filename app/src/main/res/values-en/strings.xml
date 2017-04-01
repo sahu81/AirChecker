@@ -39,4 +39,8 @@
     <string name="push_alert_content">Be aware, %1$s exceeded the critical pollution threshold (%2$d)</string>
     <string name="details_title">No city</string>
     <string name="city_details" translatable="false">No city loaded</string>
+    <string name="refresh">Refresh</string>
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Delete from favorite</string>
+    <string name="favorite_added">City added as favorite !</string>
 </resources>
