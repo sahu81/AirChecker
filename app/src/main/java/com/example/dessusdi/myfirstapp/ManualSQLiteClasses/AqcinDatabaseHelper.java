@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.dessusdi.myfirstapp.tools.Constants;
+import com.example.dessusdi.myfirstapp.Constants;
 
 /**
  * Created by dessusdi on 10/02/2017.

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
-import com.example.dessusdi.myfirstapp.tools.Constants;
+import com.example.dessusdi.myfirstapp.Constants;
 
 import java.util.List;
 

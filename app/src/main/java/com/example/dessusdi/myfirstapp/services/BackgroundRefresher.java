@@ -1,4 +1,4 @@
-package com.example.dessusdi.myfirstapp.tools;
+package com.example.dessusdi.myfirstapp.services;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -21,6 +21,7 @@ import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
