@@ -37,4 +37,6 @@
     <string name="loading">Chargement...</string>
     <string name="push_alert_title">Alerte pollution</string>
     <string name="push_alert_content">Attention, %1$s vient de dépasser le seuil maximal de pollution (%2$d)</string>
+    <string name="details_title">Aucune ville</string>
+    <string name="city_details" translatable="false">Aucune ville chargée</string>
 </resources>

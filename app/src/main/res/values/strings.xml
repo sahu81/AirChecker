@@ -39,7 +39,7 @@
     <string name="theme_sunset">Sunset theme</string>
     <string name="theme_sunset_alias" translatable="false">theme_sunset</string>
     <string name="set_auto_night_theme">Automatic night mode</string>
-    <string name="city_details" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod nibh diam, sit amet sodales elit hendrerit nec. Maecenas blandit sapien nisl, mollis dapibus nunc dictum sed. Morbi ac purus vitae magna tristique iaculis porttitor in libero. Vivamus libero massa, gravida nec malesuada sit amet, molestie at felis. In facilisis arcu vitae tortor euismod, vel semper nisi tempor. Nam sit amet dui ut ipsum laoreet pulvinar. In dapibus magna eu leo finibus consectetur. Cras varius mauris sit amet pretium scelerisque.</string>
+    <string name="city_details">No city loaded</string>
     <string name="graph_button">Evolution</string>
     <string name="city_empty_title">City not found</string>
     <string name="city_empty_informations">No data found concerning city</string>
@@ -47,4 +47,5 @@
     <string name="loading">Loading...</string>
     <string name="push_alert_title">Pollution alert</string>
     <string name="push_alert_content">Be aware, %1$s exceeded the critical pollution threshold (%2$d)</string>
+    <string name="details_title">No city</string>
 </resources>

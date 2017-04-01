@@ -37,4 +37,6 @@
     <string name="loading">Loading...</string>
     <string name="push_alert_title">Pollution alert</string>
     <string name="push_alert_content">Be aware, %1$s exceeded the critical pollution threshold (%2$d)</string>
+    <string name="details_title">No city</string>
+    <string name="city_details" translatable="false">No city loaded</string>
 </resources>
