@@ -50,7 +50,6 @@
     <string name="details_title">No city</string>
     <string name="refresh">Refresh</string>
     <string name="favorite">Favorite</string>
-    <string name="unfavorite">Delete from favorite</string>
     <string name="favorite_added">Favorite added !</string>
     <string name="no_fav">No favorite city added</string>
     <string name="share">Share</string>

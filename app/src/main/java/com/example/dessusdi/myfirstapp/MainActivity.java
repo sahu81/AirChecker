@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void presentRadioList(final ArrayList<SearchLocationObject> locationArray, final String searchQuery) {
 
-        List<String> citiesName = new ArrayList<String>();
+        List<String> citiesName = new ArrayList<>();
         for (SearchLocationObject location : locationArray) {
             citiesName.add(location.getStation().getName());
         }

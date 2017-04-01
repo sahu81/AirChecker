@@ -41,7 +41,6 @@
     <string name="city_details" translatable="false">Aucune ville chargée</string>
     <string name="refresh">Recharger</string>
     <string name="favorite">Favorite</string>
-    <string name="unfavorite">Supprimer des favoris</string>
     <string name="favorite_added">Ville ajoutée en tant que favorite !</string>
     <string name="no_fav">Aucune ville favorite trouvée</string>
     <string name="share">Partager</string>

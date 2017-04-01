@@ -41,7 +41,6 @@
     <string name="city_details" translatable="false">No city loaded</string>
     <string name="refresh">Refresh</string>
     <string name="favorite">Favorite</string>
-    <string name="unfavorite">Delete from favorite</string>
     <string name="favorite_added">City added as favorite !</string>
     <string name="no_fav">No favorite city added</string>
     <string name="share">Share</string>

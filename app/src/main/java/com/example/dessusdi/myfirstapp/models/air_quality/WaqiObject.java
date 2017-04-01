@@ -33,7 +33,7 @@ public class WaqiObject extends SugarRecord {
     private GlobalObject globalObject;
 
     @Ignore
-    private AqcinListAdapter adpaterList;
+    private AqcinListAdapter adapterList;
 
     @Ignore
     private String url = "";
@@ -49,10 +49,10 @@ public class WaqiObject extends SugarRecord {
         this.identifier = cityID;
     }
 
-    public WaqiObject(int cityID, AqcinRequestService waqiService, AqcinListAdapter adpater) {
+    public WaqiObject(int cityID, AqcinRequestService waqiService, AqcinListAdapter adapter) {
         this.url            = RequestBuilder.buildAirQualityURL(cityID);
         this.waqiService    = waqiService;
-        this.adpaterList    = adpater;
+        this.adapterList    = adapter;
         this.identifier     = cityID;
     }
 
@@ -77,12 +77,12 @@ public class WaqiObject extends SugarRecord {
         if(this.globalObject != null)
             Log.d("SERVICE", "Status " + globalObject.getRxs().getObs().get(0).getStatus());
 
-        if(adpaterList != null)
-            adpaterList.notifyDataSetChanged();
+        if(adapterList != null)
+            adapterList.notifyDataSetChanged();
     }
 
-    public void setAqcinListAdapter(AqcinListAdapter adapaterList) {
-        this.adpaterList = adapaterList;
+    public void setAqcinListAdapter(AqcinListAdapter adapterList) {
+        this.adapterList = adapterList;
     }
 
     public void setSearchQuery(String searchQuery) {
@@ -176,9 +176,9 @@ public class WaqiObject extends SugarRecord {
         SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
         SimpleDateFormat monthFormatter = new SimpleDateFormat("MM");
 
-        List<PointValue> values = new ArrayList<PointValue>();
-        List<Float> xAxisValues1 = new ArrayList<Float>();
-        List<String> xAxisValues2 = new ArrayList<String>();
+        List<PointValue> values = new ArrayList<>();
+        List<Float> xAxisValues1 = new ArrayList<>();
+        List<String> xAxisValues2 = new ArrayList<>();
 
         int index = 0;
         float maxVal = 0;
@@ -209,7 +209,7 @@ public class WaqiObject extends SugarRecord {
         }
 
         Line line = new Line(values).setColor(Color.BLUE).setCubic(true);
-        List<Line> lines = new ArrayList<Line>();
+        List<Line> lines = new ArrayList<>();
         lines.add(line);
 
         Axis xAxis = Axis.generateAxisFromCollection(xAxisValues1, xAxisValues2);
