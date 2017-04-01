@@ -28,11 +28,9 @@ import com.google.gson.Gson;
 
 public class AirCheckerWidget extends AppWidgetProvider {
 
-    private RequestQueue reQueue;
-
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        reQueue = Volley.newRequestQueue(context);
+        RequestQueue reQueue = Volley.newRequestQueue(context);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         int favId = prefs.getInt("fav_city", 99999);
 

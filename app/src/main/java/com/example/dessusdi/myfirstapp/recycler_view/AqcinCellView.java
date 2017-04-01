@@ -67,7 +67,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
         } else if (v == this.refreshImageButton) {
             this.waqi.setGlobalObject(null);
             this.waqi.fetchData();
-        } else {
+        } else if (v == this.bellImageButton) {
             // Play a sound according to the air quality level
             MediaPlayer mPlayer = MediaPlayer.create(context, this.waqi.getSoundResId());
             mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
