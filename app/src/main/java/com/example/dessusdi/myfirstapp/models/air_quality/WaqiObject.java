@@ -76,8 +76,6 @@ public class WaqiObject extends SugarRecord {
             adpaterList.notifyDataSetChanged();
     }
 
-    public void setAqcinListAdapter(AqcinListAdapter adpaterList) {
-        this.adpaterList = adpaterList;
     }
 
     public void setSearchQuery(String searchQuery) {
@@ -91,7 +89,6 @@ public class WaqiObject extends SugarRecord {
     public String getName() {
         String name = "";
         if (this.globalObject != null) {
-            name = this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getName();
         }
         return name;
     }
@@ -99,13 +96,10 @@ public class WaqiObject extends SugarRecord {
     public int getAirQuality() {
         int airQuality = 0;
         if (this.globalObject != null) {
-            airQuality = this.globalObject.getRxs().getObs().get(0).getMsg().getAqi();
         }
         return airQuality;
     }
 
-    public String getColorCode() {
-        int airQuality = this.getAirQuality();
         String color = "#e74c3c";
 
         if(airQuality < 40)
@@ -132,7 +126,6 @@ public class WaqiObject extends SugarRecord {
     public String getGPSCoordinate() {
         String airQuality = "Loading...";
         if (this.globalObject != null) {
-            airQuality = String.format("GPS : %.6f - %.6f", this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(0), this.globalObject.getRxs().getObs().get(0).getMsg().getCity().getGeo().get(1));
         }
         return airQuality;
     }
@@ -140,8 +133,6 @@ public class WaqiObject extends SugarRecord {
     public String getMinTemp() {
         String minTemp = "";
         if (this.globalObject != null) {
-            if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
-                minTemp = String.format("Min : %d°C", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(0));
             }
         }
         return minTemp;
@@ -150,15 +141,14 @@ public class WaqiObject extends SugarRecord {
     public String getMaxTemp() {
         String maxTemp = "";
         if (this.globalObject != null) {
-            if(this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().size() > 0) {
-                maxTemp = String.format("Max : %d°C", this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi().get(0).getV().get(1));
+            int index = globalObject.getRxs().getObs().size() - 1;
+            if(this.globalObject.getRxs().getObs().get(index).getMsg().getForecast().getAqi().size() > 0) {
             }
         }
         return maxTemp;
     }
 
     public LineChartData getForecastChartData() {
-        ArrayList<AqiObject> forecast = this.globalObject.getRxs().getObs().get(0).getMsg().getForecast().getAqi();
 
         // Dates formatter
         SimpleDateFormat fullFormatter = new SimpleDateFormat("yyyy-MM-dd");

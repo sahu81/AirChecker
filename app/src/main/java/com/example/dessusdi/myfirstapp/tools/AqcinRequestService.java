@@ -3,6 +3,7 @@ package com.example.dessusdi.myfirstapp.tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -86,7 +87,7 @@ public class AqcinRequestService {
     public void fetchCitiesAroundPosition(double latitude, double longitude, final PositionQueryCallback callback) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
-        
+
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildCitiesAroundPositionURL(latitude, longitude),
                 new Response.Listener<String>() {

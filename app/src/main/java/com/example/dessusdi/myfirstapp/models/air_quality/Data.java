@@ -6,6 +6,7 @@ package com.example.dessusdi.myfirstapp.models.air_quality;
  */
 public class Data {
     private MessageObject msg;
+    private String status;
 
     public MessageObject getMsg() {
         return msg;
@@ -13,5 +14,13 @@ public class Data {
 
     public void setMsg(MessageObject msg) {
         this.msg = msg;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

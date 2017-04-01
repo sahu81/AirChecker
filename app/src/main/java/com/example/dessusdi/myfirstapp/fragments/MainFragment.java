@@ -3,6 +3,7 @@ package com.example.dessusdi.myfirstapp.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -26,6 +27,8 @@ import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGloba
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -34,14 +37,16 @@ import java.util.List;
 
 public class MainFragment extends Fragment {
 
+    private TextView cityNameTextView;
+    private TextView air_qualityPositionTextView;
+    private TextView gpsPositionTextView;
+
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView recyclerView;
     private TextView emptyRecyclerTextView;
     private AqcinRequestService async;
     private List<WaqiObject> cities;
     private AqcinListAdapter adapter;
-    public static final int position_range = 10; // In km
-    public static final double latlonOffset = 111.111; // In km
 
     @Nullable
     @Override
@@ -52,6 +57,10 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        this.cityNameTextView               = (TextView) view.findViewById(R.id.city_namePositionTextView);
+        this.air_qualityPositionTextView    = (TextView) view.findViewById(R.id.air_qualityPositionTextView);
+        this.gpsPositionTextView            = (TextView) view.findViewById(R.id.gpsPositionTextView);
 
         this.recyclerView           = (RecyclerView) view.findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) view.findViewById(R.id.emptyRecycler);
@@ -155,8 +164,10 @@ public class MainFragment extends Fragment {
                 new AqcinRequestService.PositionQueryCallback() {
                     @Override
                     public void onSuccess(PositionGlobalObject positionGlobalObject) {
-                        Log.d("POSITION", positionGlobalObject.getStatus());
-                        Log.d("POSITION", "Size --> " + positionGlobalObject.getData().getCity().getName());
+                        cityNameTextView.setText(positionGlobalObject.getName());
+                        gpsPositionTextView.setText(positionGlobalObject.getGPSCoordinate());
+                        air_qualityPositionTextView.setText(positionGlobalObject.getAqi());
+                        air_qualityPositionTextView.setBackgroundColor(Color.parseColor(positionGlobalObject.getColorCode()));
                     }
                 }
         );

@@ -10,10 +10,81 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/positionBasedCard"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:orientation="vertical"
+            android:background="#ecf0f1"
+            >
+
+            <TextView
+                android:id="@+id/air_qualityPositionTextView"
+                android:layout_width="60dp"
+                android:maxLines="1"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="117"
+                android:textColor="#ffffff"
+                android:textSize="30dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="false"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="40dp" />
+
+            <TextView
+                android:id="@+id/city_namePositionTextView"
+                android:layout_width="230dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackground"
+                tools:text="@string/cell_city_name"
+                android:gravity="center_vertical"
+                android:fontFamily="sans-serif"
+                android:textColor="#333"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_alignTop="@+id/air_qualityPositionTextView"
+                android:text="@string/cell_city_name"
+                android:layout_alignStart="@+id/gpsPositionTextView" />
+
+            <TextView
+                android:id="@+id/gpsPositionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="false"
+                android:text="@string/cell_city_location"
+                android:layout_centerVertical="true"
+                android:layout_alignStart="@+id/minTextView"
+                android:layout_alignBottom="@+id/air_qualityPositionTextView"
+                android:layout_toEndOf="@+id/air_qualityPositionTextView"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/positionBasedCard">
 
         <android.support.v7.widget.RecyclerView
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,6 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/emptyRecycler"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_below="@+id/positionBasedCard" />
 
 </RelativeLayout>
