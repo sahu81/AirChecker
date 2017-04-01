@@ -34,7 +34,7 @@ public class AirCheckerWidget extends AppWidgetProvider {
         final int count = appWidgetIds.length;
         reQueue = Volley.newRequestQueue(context);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        int favId = prefs.getInt("fav_city", 1000);
+        int favId = prefs.getInt("fav_city", 99999);
 
         for (int i = 0; i < count; i++) {
             final int widgetId = appWidgetIds[i];
@@ -43,40 +43,47 @@ public class AirCheckerWidget extends AppWidgetProvider {
             final Intent intent = new Intent(context, AirCheckerWidget.class);
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-            
+
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                     0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.refreshWidgetButton, pendingIntent);
 
-            StringRequest request = new StringRequest(com.android.volley.Request.Method.GET,
-                    RequestBuilder.buildAirQualityURL(favId),
-                    new Response.Listener<String>() {
 
-                        @Override
-                        public void onResponse(String response) {
-                            Gson gson = new Gson();
-                            GlobalObject global = gson.fromJson(response, GlobalObject.class);
-                            int aqi = global.getRxs().getObs().get(0).getMsg().getAqi();
+            if(favId != 99999) {
+                StringRequest request = new StringRequest(com.android.volley.Request.Method.GET,
+                        RequestBuilder.buildAirQualityURL(favId),
+                        new Response.Listener<String>() {
 
-                            remoteViews.setTextViewText(R.id.air_qualityWidgetTextView, String.valueOf(aqi));
-                            remoteViews.setTextViewText(R.id.city_nameWidgetTextView, global.getRxs().getObs().get(0).getMsg().getCity().getName());
-                            remoteViews.setInt(R.id.air_qualityWidgetTextView, "setBackgroundColor", Color.parseColor(WaqiObject.getColorCode(aqi)));
+                            @Override
+                            public void onResponse(String response) {
+                                Gson gson = new Gson();
+                                GlobalObject global = gson.fromJson(response, GlobalObject.class);
+                                int aqi = global.getRxs().getObs().get(0).getMsg().getAqi();
 
-                            appWidgetManager.updateAppWidget(widgetId, remoteViews);
-                        }
-                    },
+                                remoteViews.setTextViewText(R.id.air_qualityWidgetTextView, String.valueOf(aqi));
+                                remoteViews.setTextViewText(R.id.city_nameWidgetTextView, global.getRxs().getObs().get(0).getMsg().getCity().getName());
+                                remoteViews.setInt(R.id.air_qualityWidgetTextView, "setBackgroundColor", Color.parseColor(WaqiObject.getColorCode(aqi)));
 
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.d("WIDGET", "Error when fetching data");
-                            appWidgetManager.updateAppWidget(widgetId, remoteViews);
-                        }
-                    });
+                                appWidgetManager.updateAppWidget(widgetId, remoteViews);
+                            }
+                        },
 
-            try {
-                reQueue.add(request);
-            } catch (Exception e) {
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.d("WIDGET", "Error when fetching data");
+                                appWidgetManager.updateAppWidget(widgetId, remoteViews);
+                            }
+                        });
+
+                try {
+                    reQueue.add(request);
+                } catch (Exception e) {
+                    appWidgetManager.updateAppWidget(widgetId, remoteViews);
+                }
+            } else {
+                remoteViews.setTextViewText(R.id.city_nameWidgetTextView, context.getString(R.string.no_fav));
+
                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
             }
         }
