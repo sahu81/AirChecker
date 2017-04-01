@@ -44,4 +44,6 @@
     <string name="unfavorite">Delete from favorite</string>
     <string name="favorite_added">City added as favorite !</string>
     <string name="no_fav">No favorite city added</string>
+    <string name="share">Share</string>
+    <string name="ring">Ring</string>
 </resources>

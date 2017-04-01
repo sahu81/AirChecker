@@ -44,4 +44,6 @@
     <string name="unfavorite">Supprimer des favoris</string>
     <string name="favorite_added">Ville ajoutée en tant que favorite !</string>
     <string name="no_fav">Aucune ville favorite trouvée</string>
+    <string name="share">Partager</string>
+    <string name="ring">Sonnerie</string>
 </resources>
