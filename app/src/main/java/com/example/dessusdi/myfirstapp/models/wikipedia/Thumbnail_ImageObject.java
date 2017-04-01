@@ -10,8 +10,4 @@ public class Thumbnail_ImageObject {
     public Thumbnail_ImageObject() {
         this.original = "";
     }
-
-    public String getOriginal() {
-        return original;
-    }
 }

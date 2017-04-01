@@ -17,8 +17,6 @@ public class ThemeUpdater {
     private SharedPreferences sharedPreferences;
     private Context context;
 
-    public ThemeUpdater() {}
-
     public ThemeUpdater(Context context, SharedPreferences sharedPreferences) {
         this.context = context;
         this.sharedPreferences = sharedPreferences;

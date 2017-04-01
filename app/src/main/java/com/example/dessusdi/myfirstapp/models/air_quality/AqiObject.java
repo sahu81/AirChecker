@@ -14,16 +14,8 @@ public class AqiObject {
         return v;
     }
 
-    public void setV(ArrayList<Integer> v) {
-        this.v = v;
-    }
-
     public String getT() {
         return t;
-    }
-
-    public void setT(String t) {
-        this.t = t;
     }
 
 }

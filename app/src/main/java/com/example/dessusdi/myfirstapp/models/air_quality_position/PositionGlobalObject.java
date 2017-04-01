@@ -10,14 +10,6 @@ public class PositionGlobalObject {
     private String status;
     private PositionStationObject data;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     private PositionStationObject getData() {
         return data;
     }

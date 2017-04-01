@@ -66,8 +66,4 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
             return false;
         }
     }
-
-    public void onBackPressed() {
-        this.getFragmentManager().popBackStack();
-    }
 }

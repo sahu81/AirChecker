@@ -15,23 +15,11 @@ public class PositionCityObject {
         return geo;
     }
 
-    public void setGeo(ArrayList<Float> geo) {
-        this.geo = geo;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 }

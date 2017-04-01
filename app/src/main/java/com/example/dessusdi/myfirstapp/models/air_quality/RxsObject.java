@@ -12,8 +12,4 @@ public class RxsObject {
     public ArrayList<Data> getObs() {
         return obs;
     }
-
-    public void setObs(ArrayList<Data> obs) {
-        this.obs = obs;
-    }
 }

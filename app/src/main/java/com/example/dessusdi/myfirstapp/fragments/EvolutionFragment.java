@@ -37,13 +37,6 @@ public class EvolutionFragment extends Fragment {
         this.aqcinChart.setLineChartData(this.city.getForecastChartData());
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
     public void setCity(WaqiObject city) {
         this.city = city;
     }

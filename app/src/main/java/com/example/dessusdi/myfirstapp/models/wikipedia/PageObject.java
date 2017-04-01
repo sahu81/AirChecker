@@ -9,24 +9,12 @@ import com.example.dessusdi.myfirstapp.R;
  */
 
 public class PageObject {
-    private final int pageid;
-    private final int ns;
     private final String title;
     private final String extract;
 
     public PageObject(Context context) {
-        this.pageid     = 0;
-        this.ns         = 0;
         this.title      = context.getResources().getString(R.string.city_empty_title);
         this.extract    = context.getResources().getString(R.string.city_empty_informations);
-    }
-
-    public int getPageid() {
-        return pageid;
-    }
-
-    public int getNs() {
-        return ns;
     }
 
     public String getTitle() {

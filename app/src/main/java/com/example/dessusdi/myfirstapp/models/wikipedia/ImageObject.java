@@ -19,22 +19,6 @@ public class ImageObject {
         this.original = new Original_ImageObject();
     }
 
-    public int getPageid() {
-        return pageid;
-    }
-
-    public int getNs() {
-        return ns;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Thumbnail_ImageObject getThumbnail() {
-        return thumbnail;
-    }
-
     public Original_ImageObject getOriginal() {
         return original;
     }
