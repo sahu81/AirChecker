@@ -35,7 +35,7 @@
     <string name="language_french_alias" translatable="false">fr_FR</string>
     <string name="pref_cat_customize_summary">Edit global app interface</string>
     <string name="service_killed">Service destroyed</string>
-    <string name="service_checking">Checking air quality...</string>
+    <string name="service_checking">Checking air quality…</string>
     <string name="theme_sunset">Sunset theme</string>
     <string name="theme_sunset_alias" translatable="false">theme_sunset</string>
     <string name="set_auto_night_theme">Automatic night mode</string>
@@ -44,7 +44,7 @@
     <string name="city_empty_title">City not found</string>
     <string name="city_empty_informations">No data found concerning city</string>
     <string name="city_name_default" translatable="false">Grenoble</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="push_alert_title">Pollution alert</string>
     <string name="push_alert_content">Be aware, %1$s exceeded the critical pollution threshold (%2$d)</string>
     <string name="details_title">No city</string>
