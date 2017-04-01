@@ -14,7 +14,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,8 +25,6 @@ import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGlobalObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

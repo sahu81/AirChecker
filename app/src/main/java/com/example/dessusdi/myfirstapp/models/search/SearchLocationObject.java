@@ -1,7 +1,5 @@
 package com.example.dessusdi.myfirstapp.models.search;
 
-import java.util.ArrayList;
-
 /**
  * Created by dessusdi on 10/02/2017.
  * DESSUS Dimitri

@@ -2,8 +2,6 @@ package com.example.dessusdi.myfirstapp.models.air_quality_position;
 
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 
-import java.util.ArrayList;
-
 /**
  * Created by dessusdi on 27/03/2017.
  * DESSUS Dimitri

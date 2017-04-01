@@ -1,7 +1,5 @@
 package com.example.dessusdi.myfirstapp.tools;
 
-import android.util.Log;
-
 /**
  * Created by dessusdi on 10/02/2017.
  * DESSUS Dimitri

@@ -1,6 +1,5 @@
 package com.example.dessusdi.myfirstapp.tools;
 
-import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -26,7 +25,6 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
