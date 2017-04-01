@@ -36,6 +36,7 @@ public class AirCheckerWidget extends AppWidgetProvider {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         int favId = prefs.getInt("fav_city", 99999);
 
+        Log.d("WIDGET", "ID --> " + favId);
         for (int i = 0; i < count; i++) {
             final int widgetId = appWidgetIds[i];
 

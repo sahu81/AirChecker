@@ -40,6 +40,10 @@
                 android:resource="@xml/widget_info" />
         </receiver>
 
+        <provider
+            android:name=".AirCheckerProvider"
+            android:authorities="com.dimitridessus.android.content.provider.airchecker" />
+
     </application>
 
 </manifest>
