@@ -145,7 +145,7 @@ public class DetailsFragment extends Fragment {
     private void readFavoriteCity() {
         if(this.favoriteButton == null || this.city == null)
             return;
-        
+
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if(settings.getInt("fav_city", 99999) == this.city.getIdentifier()) {
             this.favoriteButton.setVisibility(View.GONE);

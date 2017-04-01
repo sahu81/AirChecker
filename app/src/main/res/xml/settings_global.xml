@@ -24,6 +24,7 @@
             android:title="@string/set_auto_night_theme"
             android:icon="@drawable/auto_night"
             android:switchTextOn="I"
-            android:switchTextOff="O"/>
+            android:switchTextOff="O"
+            android:defaultValue="true"/>
     </PreferenceCategory>
 </PreferenceScreen>
