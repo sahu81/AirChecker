@@ -2,9 +2,11 @@ package com.example.dessusdi.myfirstapp;
 
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         this.langUpdater.loadSavedLanguage();
 
         this.setupBackgroundService();
+        // this.testContentProvider();
 
         setContentView(R.layout.activity_main);
     }
@@ -200,8 +203,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupBackgroundService() {
-        Intent myIntent = new Intent(this, BackgroundRefresher.class);
-        startService(myIntent);
+        final Intent myIntent = new Intent(this, BackgroundRefresher.class);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startService(myIntent);
+            }
+        }, 10000);
+
+    }
+
+    private void testContentProvider() {
+        // Inserting new city (Amsterdam)
+        ContentValues aqi = new ContentValues();
+        aqi.put("identifier", "5771");
+        getContentResolver().insert(AirCheckerProvider.CONTENT_URI, aqi);
+
+        // Deleting city (Amsterdam)
+        getContentResolver().delete(AirCheckerProvider.CONTENT_URI, "5771", null);
+
     }
 
 }
