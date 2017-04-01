@@ -87,7 +87,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
         gpsTextView.setText(this.waqi.getGPSCoordinate());
         minTextView.setText(this.waqi.getMinTemp());
         maxTextView.setText(this.waqi.getMaxTemp());
-        air_qualityTextView.setBackgroundColor(Color.parseColor(this.waqi.getColorCode()));
+        air_qualityTextView.setBackgroundColor(Color.parseColor(WaqiObject.getColorCode(this.waqi.getAirQuality())));
     }
 
     public void setContext(Context context) {

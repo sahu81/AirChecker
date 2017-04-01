@@ -70,8 +70,6 @@ public class BackgroundRefresher extends Service {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    sendAlertPushNotification("Lyon", 415);
-                    sendAlertPushNotification("Paris", 40);
                     Toast.makeText(BackgroundRefresher.this, R.string.service_checking, Toast.LENGTH_SHORT).show();
                     cities.clear();
                     cities.addAll(WaqiObject.listAll(WaqiObject.class));

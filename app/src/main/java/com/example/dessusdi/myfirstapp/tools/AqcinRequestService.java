@@ -3,6 +3,7 @@ package com.example.dessusdi.myfirstapp.tools;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -12,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
+import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGlobalObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
 import com.google.gson.Gson;
 
@@ -82,6 +84,31 @@ public class AqcinRequestService {
         queue.add(stringRequest);
     }
 
+    public void fetchCitiesAroundPosition(double latitude, double longitude, final PositionQueryCallback callback) {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+
+        // Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildCitiesAroundPositionURL(latitude, longitude),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Gson gson = new Gson();
+                        PositionGlobalObject global = gson.fromJson(response, PositionGlobalObject.class);
+
+                        callback.onSuccess(global);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+    }
+
     public interface GlobalObjectCallback {
         void onSuccess(GlobalObject globalObject);
     }
@@ -90,7 +117,7 @@ public class AqcinRequestService {
         void onSuccess(SearchGlobalObject globalSearchObject);
     }
 
-    public void setmApplicationContext(Activity activity) {
-        this.mApplicationContext = activity;
+    public interface PositionQueryCallback {
+        void onSuccess(PositionGlobalObject positionGlobalObject);
     }
 }

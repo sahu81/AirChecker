@@ -1,7 +1,12 @@
 package com.example.dessusdi.myfirstapp.fragments;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +14,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +23,11 @@ import android.widget.TextView;
 import com.example.dessusdi.myfirstapp.MainActivity;
 import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
+import com.example.dessusdi.myfirstapp.models.air_quality_position.PositionGlobalObject;
 import com.example.dessusdi.myfirstapp.recycler_view.AqcinListAdapter;
 import com.example.dessusdi.myfirstapp.tools.AqcinRequestService;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -27,6 +36,10 @@ import java.util.List;
  */
 
 public class MainFragment extends Fragment {
+
+    private TextView cityNameTextView;
+    private TextView air_qualityPositionTextView;
+    private TextView gpsPositionTextView;
 
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView recyclerView;
@@ -44,6 +57,10 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        this.cityNameTextView               = (TextView) view.findViewById(R.id.city_namePositionTextView);
+        this.air_qualityPositionTextView    = (TextView) view.findViewById(R.id.air_qualityPositionTextView);
+        this.gpsPositionTextView            = (TextView) view.findViewById(R.id.gpsPositionTextView);
 
         this.recyclerView           = (RecyclerView) view.findViewById(R.id.recyclerView);
         this.emptyRecyclerTextView  = (TextView) view.findViewById(R.id.emptyRecycler);
@@ -126,9 +143,57 @@ public class MainFragment extends Fragment {
             cityObject.fetchData();
         }
 
+        this.retrieveUserPosition();
         this.checkIfRecyclerEmpty();
         this.swipeRefresh.setRefreshing(false);
     }
+
+    private void retrieveUserPosition() {
+        LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+
+        if (location != null) {
+            retrieveCitiesAroundMe(location.getLatitude(), location.getLongitude());
+        }
+    }
+
+    private void retrieveCitiesAroundMe(double userLatitude, double userLongitude) {
+
+        async.fetchCitiesAroundPosition(userLatitude, userLongitude,
+                new AqcinRequestService.PositionQueryCallback() {
+                    @Override
+                    public void onSuccess(PositionGlobalObject positionGlobalObject) {
+                        cityNameTextView.setText(positionGlobalObject.getName());
+                        gpsPositionTextView.setText(positionGlobalObject.getGPSCoordinate());
+                        air_qualityPositionTextView.setText(positionGlobalObject.getAqi());
+                        air_qualityPositionTextView.setBackgroundColor(Color.parseColor(positionGlobalObject.getColorCode()));
+                    }
+                }
+        );
+    }
+
+    final LocationListener locationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            retrieveCitiesAroundMe(location.getLatitude(), location.getLongitude());
+        }
+
+        public void onProviderDisabled(String arg0) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public void onProviderEnabled(String arg0) {
+            // TODO Auto-generated method stub
+
+        }
+
+        public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+            // TODO Auto-generated method stub
+
+        }
+    };
+
 
     public void refreshRecyclerList() {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

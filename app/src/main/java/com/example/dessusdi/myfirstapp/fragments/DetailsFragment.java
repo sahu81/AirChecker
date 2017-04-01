@@ -51,6 +51,7 @@ public class DetailsFragment extends Fragment {
         this.cityDescription    = (TextView) view.findViewById(R.id.cityDescription);
         this.cityEvolution      = (Button) view.findViewById(R.id.cityEvolution);
 
+        this.cityEvolution.setVisibility(View.GONE);
         this.cityEvolution.setOnClickListener( new View.OnClickListener() {
 
             @Override
@@ -85,6 +86,7 @@ public class DetailsFragment extends Fragment {
                     public void onSuccess(PageObject pageObject) {
                         cityTitle.setText(pageObject.getTitle());
                         cityDescription.setText(pageObject.getExtract());
+                        cityEvolution.setVisibility(View.VISIBLE);
                     }
                 }
         );

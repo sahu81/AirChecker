@@ -18,6 +18,14 @@ public abstract class RequestBuilder {
         return urlStr;
     }
 
+    public static String buildCitiesAroundPositionURL(double latitude, double longitude) {
+        String urlStr = Constants.Url.CITY_POSITION_BASE_URL;
+        urlStr = urlStr.replace("%%TOKEN%%", Constants.Url.TOKEN);
+        urlStr = urlStr.replace("%%LAT%%", String.valueOf(latitude));
+        urlStr = urlStr.replace("%%LNG%%", String.valueOf(longitude));
+        return urlStr;
+    }
+
     public static String buildCityInformationURL(String city) {
         return Constants.Url.CITY_INFORMATION_BASE_URL.concat(city);
     }
