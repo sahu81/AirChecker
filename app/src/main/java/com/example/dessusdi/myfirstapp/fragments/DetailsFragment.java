@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,12 +65,7 @@ public class DetailsFragment extends Fragment {
             }
         });
 
-        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        if(settings.getInt("fav_city", 1000) == this.city.getIdentifier()) {
-            this.favoriteButton.setVisibility(View.GONE);
-        } else {
-            this.favoriteButton.setVisibility(View.VISIBLE);
-        }
+        this.readFavoriteCity();
 
         this.favoriteButton.setOnClickListener( new View.OnClickListener() {
 
@@ -102,6 +98,7 @@ public class DetailsFragment extends Fragment {
 
     public void fetchCityInformation() {
 
+        this.readFavoriteCity();
         this.async = new WikipediaService(this.mActivity);
 
         async.fetchCityInformation(this.city.getSearchQuery(),
@@ -133,7 +130,6 @@ public class DetailsFragment extends Fragment {
                     }
                 }
         );
-
     }
 
     private void showEvolution() {
@@ -144,5 +140,17 @@ public class DetailsFragment extends Fragment {
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void readFavoriteCity() {
+        if(this.favoriteButton == null || this.city == null)
+            return;
+        
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        if(settings.getInt("fav_city", 99999) == this.city.getIdentifier()) {
+            this.favoriteButton.setVisibility(View.GONE);
+        } else {
+            this.favoriteButton.setVisibility(View.VISIBLE);
+        }
     }
 }
