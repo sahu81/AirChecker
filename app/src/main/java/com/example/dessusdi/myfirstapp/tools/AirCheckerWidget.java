@@ -70,14 +70,13 @@ public class AirCheckerWidget extends AppWidgetProvider {
                                     Log.d(TAG, "error when parsing GlobalObject");
                                 }
 
-                                if(global == null)
-                                    return;
+                                if(global != null) {
+                                    int aqi = global.getRxs().getObs().get(0).getMsg().getAqi();
 
-                                int aqi = global.getRxs().getObs().get(0).getMsg().getAqi();
-
-                                remoteViews.setTextViewText(R.id.air_qualityWidgetTextView, String.valueOf(aqi));
-                                remoteViews.setTextViewText(R.id.city_nameWidgetTextView, global.getRxs().getObs().get(0).getMsg().getCity().getName());
-                                remoteViews.setInt(R.id.air_qualityWidgetTextView, "setBackgroundColor", Color.parseColor(WaqiObject.getColorCode(aqi)));
+                                    remoteViews.setTextViewText(R.id.air_qualityWidgetTextView, String.valueOf(aqi));
+                                    remoteViews.setTextViewText(R.id.city_nameWidgetTextView, global.getRxs().getObs().get(0).getMsg().getCity().getName());
+                                    remoteViews.setInt(R.id.air_qualityWidgetTextView, "setBackgroundColor", Color.parseColor(WaqiObject.getColorCode(aqi)));
+                                }
 
                                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
                             }
