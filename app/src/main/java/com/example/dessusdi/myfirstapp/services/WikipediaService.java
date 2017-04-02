@@ -3,7 +3,6 @@ package com.example.dessusdi.myfirstapp.services;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,13 +27,12 @@ public class WikipediaService {
         mApplicationContext = (Activity)context;
     }
 
+    /**
+     * Fetch city information by using wikipedia API.
+     * @param search city name
+     * @param callback
+     */
     public void fetchCityInformation(String search, final WikipediaService.cityInformationCallback callback) {
-
-        if(this.mApplicationContext != null) {
-            Log.d("DATA", "PAS NULL 2");
-        } else {
-            Log.d("DATA", "NULL 2");
-        }
 
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
@@ -65,6 +63,11 @@ public class WikipediaService {
 
     }
 
+    /**
+     * Fetch city image by using wikipedia API
+     * @param search city name
+     * @param callback
+     */
     public void fetchCityImage(String search, final WikipediaService.cityImageCallback callback) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
@@ -94,10 +97,18 @@ public class WikipediaService {
         queue.add(stringRequest);
     }
 
+    /**
+     * Callback for PageObject
+     * @see PageObject
+     */
     public interface cityInformationCallback {
         void onSuccess(PageObject pageObject);
     }
 
+    /**
+     * Callback for ImageObject
+     * @see ImageObject
+     */
     public interface cityImageCallback {
         void onSuccess(ImageObject imageObject);
     }

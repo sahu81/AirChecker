@@ -28,6 +28,11 @@ import com.google.gson.Gson;
 
 public class AirCheckerWidget extends AppWidgetProvider {
 
+    /**
+     * @param context
+     * @param appWidgetManager
+     * @param appWidgetIds
+     */
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         RequestQueue reQueue = Volley.newRequestQueue(context);
@@ -45,7 +50,7 @@ public class AirCheckerWidget extends AppWidgetProvider {
                     0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.refreshWidgetButton, pendingIntent);
 
-
+            // If favorite id set, perform request.
             if (favId != 99999) {
                 StringRequest request = new StringRequest(Request.Method.GET,
                         RequestBuilder.buildAirQualityURL(favId),

@@ -56,6 +56,9 @@ public class WaqiObject extends SugarRecord {
         this.identifier     = cityID;
     }
 
+    /**
+     * Fetching global data (aqi, name etc.)
+     */
     public void fetchData() {
         this.waqiService.fetchAirQuality(this.identifier,
         new AqcinRequestService.GlobalObjectCallback() {
@@ -67,10 +70,18 @@ public class WaqiObject extends SugarRecord {
         });
     }
 
+    /**
+     * Aqcin setter
+     * @param waqiService
+     */
     public void setRequestService(AqcinRequestService waqiService) {
         this.waqiService = waqiService;
     }
 
+    /**
+     * Global object setter
+     * @param globalObject
+     */
     public void setGlobalObject(GlobalObject globalObject) {
         this.globalObject = globalObject;
 
@@ -81,18 +92,32 @@ public class WaqiObject extends SugarRecord {
             adapterList.notifyDataSetChanged();
     }
 
+    /**
+     * List adapter setter
+     * @param adapterList
+     */
     public void setAqcinListAdapter(AqcinListAdapter adapterList) {
         this.adapterList = adapterList;
     }
 
+    /**
+     * Search query setter
+     * @param searchQuery
+     */
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery;
     }
 
+    /**
+     * @return Search query string
+     */
     public String getSearchQuery() {
         return searchQuery;
     }
 
+    /**
+     * @return City name
+     */
     public String getName() {
         String name = "";
 
@@ -103,6 +128,9 @@ public class WaqiObject extends SugarRecord {
         return name;
     }
 
+    /**
+     * @return Air quality of the station
+     */
     public int getAirQuality() {
         int airQuality = 0;
         if (this.globalObject != null) {
@@ -112,6 +140,10 @@ public class WaqiObject extends SugarRecord {
         return airQuality;
     }
 
+    /**
+     * @param airQuality
+     * @return Properly color according to air quality level
+     */
     public static String getColorCode(int airQuality) {
         String color = "#e74c3c";
 
@@ -123,6 +155,9 @@ public class WaqiObject extends SugarRecord {
         return color;
     }
 
+    /**
+     * @return Properly sound according to air quality level
+     */
     public int getSoundResId() {
         int soundResID;
         int airQuality = this.getAirQuality();
@@ -136,6 +171,9 @@ public class WaqiObject extends SugarRecord {
         return soundResID;
     }
 
+    /**
+     * @return Formatted string of station location
+     */
     public String getGPSCoordinate() {
         String airQuality = "Loading...";
         if (this.globalObject != null) {
@@ -145,6 +183,9 @@ public class WaqiObject extends SugarRecord {
         return airQuality;
     }
 
+    /**
+     * @return Minimum temperature
+     */
     public String getMinTemp() {
         String minTemp = "";
         if (this.globalObject != null) {
@@ -156,6 +197,9 @@ public class WaqiObject extends SugarRecord {
         return minTemp;
     }
 
+    /**
+     * @return Maximum temperature
+     */
     public String getMaxTemp() {
         String maxTemp = "";
         if (this.globalObject != null) {
@@ -167,6 +211,10 @@ public class WaqiObject extends SugarRecord {
         return maxTemp;
     }
 
+    /**
+     * Build chart data of station's forecast
+     * @return Forecast line chart data
+     */
     public LineChartData getForecastChartData() {
         int indexArray = globalObject.getRxs().getObs().size() - 1;
         ArrayList<AqiObject> forecast = this.globalObject.getRxs().getObs().get(indexArray).getMsg().getForecast().getAqi();
@@ -229,6 +277,9 @@ public class WaqiObject extends SugarRecord {
         return data;
     }
 
+    /**
+     * @return Station's identifier
+     */
     public int getIdentifier() {
         return this.identifier;
     }

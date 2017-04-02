@@ -28,6 +28,11 @@ public class AqcinRequestService {
         mApplicationContext = (Activity)context;
     }
 
+    /**
+     * Fetch cities by name
+     * @param search city identifier
+     * @param callback
+     */
     public void fetchCityID(String search, final SearchQueryCallback callback) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
@@ -59,6 +64,11 @@ public class AqcinRequestService {
         queue.add(stringRequest);
     }
 
+    /**
+     * Fetch air quality by using unique city identifier
+     * @param identifier city identifier
+     * @param callback
+     */
     public void fetchAirQuality(int identifier, final GlobalObjectCallback callback) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
@@ -83,6 +93,12 @@ public class AqcinRequestService {
         queue.add(stringRequest);
     }
 
+    /**
+     * Retrieve cities around user's location
+     * @param latitude user's latitude
+     * @param longitude user's longitude
+     * @param callback
+     */
     public void fetchCitiesAroundPosition(double latitude, double longitude, final PositionQueryCallback callback) {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
@@ -108,14 +124,26 @@ public class AqcinRequestService {
         queue.add(stringRequest);
     }
 
+    /**
+     * Callback for GlobalObject
+     * @see GlobalObject
+     */
     public interface GlobalObjectCallback {
         void onSuccess(GlobalObject globalObject);
     }
 
+    /**
+     * Callback for SearchGlobalObject
+     * @see SearchGlobalObject
+     */
     public interface SearchQueryCallback {
         void onSuccess(SearchGlobalObject globalSearchObject);
     }
 
+    /**
+     * Callback for PositionQueryCallback
+     * @see PositionGlobalObject
+     */
     public interface PositionQueryCallback {
         void onSuccess(PositionGlobalObject positionGlobalObject);
     }

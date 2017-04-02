@@ -23,6 +23,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ListPreference languagePreference;
     private ListPreference themePreferences;
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         themePreferences.setOnPreferenceChangeListener(this);
     }
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
@@ -52,6 +61,12 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         return view;
     }
 
+    /**
+     * Listener on preference change
+     * @param preference
+     * @param newValue
+     * @return
+     */
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         if(preference == this.languagePreference) {

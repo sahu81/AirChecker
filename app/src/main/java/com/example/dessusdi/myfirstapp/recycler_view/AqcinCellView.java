@@ -30,6 +30,9 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
     final private ImageButton refreshImageButton;
     final private ImageButton bellImageButton;
 
+    /**
+     * @param itemView
+     */
     public AqcinCellView(View itemView) {
         super(itemView);
 
@@ -49,6 +52,10 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
         bellImageButton.setOnClickListener(this);
     }
 
+    /**
+     * Click global listener
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         // Ensure to call properly action according to button
@@ -75,11 +82,20 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
         }
     }
 
+    /**
+     * Waqi object setter
+     * @param myObject
+     * @see WaqiObject
+     */
     public void setWaqiObject(WaqiObject myObject){
         this.waqi = myObject;
         this.bindDataWithCell();
     }
 
+    /**
+     * Bind data with cell.
+     * This private method assign data to UI components.
+     */
     private void bindDataWithCell() {
         city_nameTextView.setText(this.waqi.getName());
         air_qualityTextView.setText(String.valueOf(this.waqi.getAirQuality()));
@@ -89,6 +105,10 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
         air_qualityTextView.setBackgroundColor(Color.parseColor(WaqiObject.getColorCode(this.waqi.getAirQuality())));
     }
 
+    /**
+     * Context setter
+     * @param context
+     */
     public void setContext(Context context) {
         this.context = context;
     }

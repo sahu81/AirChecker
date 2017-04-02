@@ -45,12 +45,22 @@ public class MainFragment extends Fragment {
     private List<WaqiObject> cities;
     private AqcinListAdapter adapter;
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_main,container,false);
     }
 
+    /**
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -76,21 +86,44 @@ public class MainFragment extends Fragment {
 
         this.setupRecyclerView();
         this.reloadCitiesFromDB();
-        this.refreshRecyclerList();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(this.adapter);
     }
 
+    /**
+     * Private method used to setting up recycler view object.
+     * Declaring some events like 'move' & 'swipe'.
+     */
     private void setupRecyclerView() {
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+
+            /**
+             * Disable cell moving
+             * @param recyclerView
+             * @param viewHolder
+             * @param target
+             * @return
+             */
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 return false;
             }
 
+            /**
+             * Swipe event allowing user to delete cells.
+             * @param viewHolder
+             * @param direction
+             */
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
+                // Getting cell position
                 final int position = viewHolder.getAdapterPosition();
 
+                // Enabling right & left swipe on cell
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+
+                    // Show dialog when event triggered
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage(R.string.delete_confirmation);
 
@@ -120,6 +153,10 @@ public class MainFragment extends Fragment {
         itemTouchHelper.attachToRecyclerView(recyclerView); //set swipe to RecyclerView
     }
 
+    /**
+     * Private method used to check if recycler is empty.
+     * Show/hide empty label on the center of the recycler view.
+     */
     private void checkIfRecyclerEmpty() {
         if (this.cities.size() > 0) {
             emptyRecyclerTextView.setVisibility(View.INVISIBLE);
@@ -128,12 +165,19 @@ public class MainFragment extends Fragment {
         }
     }
 
+    /**
+     * Private method used to reload cities from the local database.
+     * Cities object was loaded on a local array.
+     * All cities data was fetched after array populated.
+     */
     private void reloadCitiesFromDB() {
-        // Load cities from db
+        // Clear local array.
         this.cities.clear();
         this.adapter.notifyDataSetChanged();
+        // Populate local array.
         this.cities.addAll(WaqiObject.listAll(WaqiObject.class));
 
+        // Trigger fetch url on all city object.
         for (WaqiObject cityObject : this.cities) {
             cityObject.setAqcinListAdapter(this.adapter);
             cityObject.setRequestService(this.async);
@@ -145,17 +189,25 @@ public class MainFragment extends Fragment {
         this.swipeRefresh.setRefreshing(false);
     }
 
+    /**
+     * Retrieve user's position in order to retrieve cities around this position.
+     */
     private void retrieveUserPosition() {
         LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
 
         if (location != null) {
-            retrieveCitiesAroundMe(location.getLatitude(), location.getLongitude());
+            retrieveCityAroundMe(location.getLatitude(), location.getLongitude());
         }
     }
 
-    private void retrieveCitiesAroundMe(double userLatitude, double userLongitude) {
+    /**
+     * Retrieve city near user's location
+     * @param userLatitude latitude of the user
+     * @param userLongitude longitude of the user
+     */
+    private void retrieveCityAroundMe(double userLatitude, double userLongitude) {
 
         async.fetchCitiesAroundPosition(userLatitude, userLongitude,
                 new AqcinRequestService.PositionQueryCallback() {
@@ -170,30 +222,40 @@ public class MainFragment extends Fragment {
         );
     }
 
+    // Location listener (executed when user's location changed)
     private final LocationListener locationListener = new LocationListener() {
+        /**
+         * When the location change (latitude & longitude)
+         * @param location
+         */
         public void onLocationChanged(Location location) {
-            retrieveCitiesAroundMe(location.getLatitude(), location.getLongitude());
+            retrieveCityAroundMe(location.getLatitude(), location.getLongitude());
         }
 
+        /**
+         * @param arg0
+         */
         public void onProviderDisabled(String arg0) {
             // TODO Auto-generated method stub
 
         }
 
+        /**
+         * @param arg0
+         */
         public void onProviderEnabled(String arg0) {
             // TODO Auto-generated method stub
 
         }
 
+        /**
+         * @param arg0
+         * @param arg1
+         * @param arg2
+         */
         public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
             // TODO Auto-generated method stub
 
         }
     };
-
-
-    private void refreshRecyclerList() {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(this.adapter);
-    }
 }

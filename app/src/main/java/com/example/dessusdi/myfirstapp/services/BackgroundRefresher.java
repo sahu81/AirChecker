@@ -31,13 +31,13 @@ import java.util.TimerTask;
 
 public class BackgroundRefresher extends Service {
 
-    private static final String TAG             = "Background";
-    private static final int delay              = 1800000; // Delay between each search query in ms (15 min here)
-    private static final int limit              = 100; // Trigger notification when limit reached
-    private final Handler mHandler                    = new Handler();
-    private Timer mTimer                        = null;
-    private final List<WaqiObject> cities             = new ArrayList<>();
-    private final List<Integer> notificationsFired    = new ArrayList<>();
+    private static final String TAG     = "Background";
+    private static final int delay      = 1800000; // Delay between each search query in ms (15 min here)
+    private static final int limit      = 100; // Trigger notification when limit reached
+    private final Handler mHandler      = new Handler();
+    private Timer mTimer                = null;
+    private final List<WaqiObject> cities           = new ArrayList<>();
+    private final List<Integer> notificationsFired  = new ArrayList<>();
     private RequestQueue reQueue;
 
     @Override
@@ -52,10 +52,15 @@ public class BackgroundRefresher extends Service {
         else
             mTimer = new Timer();
 
+        // Clear notifications fired array
         this.notificationsFired.clear();
+        // Launch refresher task service timer
         mTimer.scheduleAtFixedRate(new TimeDisplay(), 1000, delay);
     }
 
+    /**
+     * Service destroyed
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -68,6 +73,10 @@ public class BackgroundRefresher extends Service {
         public void run() {
             // Fetching data...
             mHandler.post(new Runnable() {
+                /**
+                 * Checking cities data every x sec.
+                 * @see WaqiObject
+                 */
                 @Override
                 public void run() {
                     Toast.makeText(BackgroundRefresher.this, R.string.service_checking, Toast.LENGTH_SHORT).show();
@@ -80,26 +89,37 @@ public class BackgroundRefresher extends Service {
                     }
                 }
 
+                /**
+                 * Retrieve air quality for specific city identifier
+                 * @param identifier city identifier
+                 */
                 private void retrieveAirQuality(final int identifier) {
+                    // Assigning RequestQueue
                     reQueue = Volley.newRequestQueue(BackgroundRefresher.this);
+                    // Build and launch request
                     StringRequest request = new StringRequest(com.android.volley.Request.Method.GET,
                             RequestBuilder.buildAirQualityURL(identifier),
                             new Response.Listener<String>() {
 
                                 @Override
                                 public void onResponse(String response) {
+                                    // Parsing JSON string
                                     Gson gson = new Gson();
                                     GlobalObject global = gson.fromJson(response, GlobalObject.class);
                                     int threshold = global.getRxs().getObs().get(0).getMsg().getAqi();
 
+                                    // Checking if air level greater/equal than limit
                                     if (threshold >= limit) {
+                                        // Air quality is greater/equal
+                                        // Checking if notification already fired
                                         if (!notificationsFired.contains(identifier)) {
+                                            // Send alert push notification
                                             sendAlertPushNotification(global.getRxs().getObs().get(0).getMsg().getCity().getName(), threshold);
                                             Log.d(TAG, "Notification fired !");
                                             notificationsFired.add(identifier);
                                         }
                                     } else {
-                                        // Removing identifier
+                                        // Removing identifier from fired push array
                                         if (notificationsFired.contains(identifier))
                                             notificationsFired.remove(identifier);
                                     }
@@ -121,6 +141,11 @@ public class BackgroundRefresher extends Service {
                     }
                 }
 
+                /**
+                 * Fire a push notification.
+                 * @param city name of the city
+                 * @param threshold air quality of the city
+                 */
                 private void sendAlertPushNotification(String city, int threshold) {
                     NotificationCompat.Builder b = new NotificationCompat.Builder(BackgroundRefresher.this);
 

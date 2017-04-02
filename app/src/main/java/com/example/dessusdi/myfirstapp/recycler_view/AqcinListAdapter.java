@@ -25,17 +25,30 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
     private final List<WaqiObject> list;
     private final Context context;
 
+    /**
+     * @param list WaqiObject list
+     * @param context
+     * @see WaqiObject
+     */
     public AqcinListAdapter(List<WaqiObject> list, Context context) {
         this.list = list;
         this.context = context;
     }
 
+    /**
+     * Setting up Aqcin cell view.
+     * @param viewGroup
+     * @param position
+     * @return
+     * @see AqcinCellView
+     */
     @Override
     public AqcinCellView onCreateViewHolder(final ViewGroup viewGroup, final int position) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_view, viewGroup, false);
         final AqcinCellView aqcinView = new AqcinCellView(view);
         aqcinView.setContext(this.context);
 
+        // On click on the cell view
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,12 +80,22 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
         return aqcinView;
     }
 
+    /**
+     * Bind WaqiObject to cell view
+     * @param aqcinCellView
+     * @param index
+     * @see AqcinCellView
+     * @see WaqiObject
+     */
     @Override
     public void onBindViewHolder(AqcinCellView aqcinCellView, int index) {
         WaqiObject myObject = list.get(index);
         aqcinCellView.setWaqiObject(myObject);
     }
 
+    /**
+     * @return List size (number of stations)
+     */
     @Override
     public int getItemCount() {
         return list.size();

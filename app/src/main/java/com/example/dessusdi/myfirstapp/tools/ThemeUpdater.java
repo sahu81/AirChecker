@@ -17,11 +17,19 @@ public class ThemeUpdater {
     private SharedPreferences sharedPreferences;
     private Context context;
 
+    /**
+     * @param context
+     * @param sharedPreferences
+     */
     public ThemeUpdater(Context context, SharedPreferences sharedPreferences) {
         this.context = context;
         this.sharedPreferences = sharedPreferences;
     }
 
+    /**
+     * Setting dynamically precise theme
+     * @param newTheme name of the theme
+     */
     public void setTheme(String newTheme) {
         int theme;
         switch (newTheme) {
@@ -39,6 +47,9 @@ public class ThemeUpdater {
         this.context.setTheme(theme);
     }
 
+    /**
+     * Restart all activities
+     */
     public void restartActivities() {
         Activity activity = (Activity) context;
         Intent mIntent = activity.getIntent();
@@ -46,6 +57,9 @@ public class ThemeUpdater {
         activity.startActivity(mIntent);
     }
 
+    /**
+     * Load saved theme from preferences
+     */
     public void loadSavedTheme() {
         // Check if auto night theme is enabled
         if(this.sharedPreferences.getBoolean("theme_auto_preference", true)) {
@@ -60,6 +74,9 @@ public class ThemeUpdater {
         this.setTheme(getSavedTheme());
     }
 
+    /**
+     * @return theme name
+     */
     public String getSavedTheme() {
         return this.sharedPreferences.getString("theme_preference", context.getResources().getString(R.string.theme_light_alias));
     }

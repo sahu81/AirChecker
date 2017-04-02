@@ -22,12 +22,22 @@ public class EvolutionFragment extends Fragment {
     private WaqiObject city;
     private LineChartView aqcinChart;
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_evolution, container, false);
     }
 
+    /**
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -37,6 +47,10 @@ public class EvolutionFragment extends Fragment {
         this.aqcinChart.setLineChartData(this.city.getForecastChartData());
     }
 
+    /**
+     * City setter
+     * @param city
+     */
     public void setCity(WaqiObject city) {
         this.city = city;
     }
