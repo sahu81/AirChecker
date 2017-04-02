@@ -213,6 +213,9 @@ public class MainFragment extends Fragment {
                 new AqcinRequestService.PositionQueryCallback() {
                     @Override
                     public void onSuccess(PositionGlobalObject positionGlobalObject) {
+                        if(positionGlobalObject == null)
+                            return;
+
                         cityNameTextView.setText(positionGlobalObject.getName());
                         gpsPositionTextView.setText(positionGlobalObject.getGPSCoordinate());
                         air_qualityPositionTextView.setText(positionGlobalObject.getAqi());

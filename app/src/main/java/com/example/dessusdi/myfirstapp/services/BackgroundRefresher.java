@@ -23,6 +23,7 @@ import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,8 +105,18 @@ public class BackgroundRefresher extends Service {
                                 @Override
                                 public void onResponse(String response) {
                                     // Parsing JSON string
+
+                                    GlobalObject global = null;
                                     Gson gson = new Gson();
-                                    GlobalObject global = gson.fromJson(response, GlobalObject.class);
+                                    try {
+                                        global = gson.fromJson(response, GlobalObject.class);
+                                    } catch (IllegalStateException | JsonSyntaxException exception){
+                                        Log.d(TAG, "error when parsing GlobalObject");
+                                    }
+
+                                    if(global == null)
+                                        return;
+
                                     int threshold = global.getRxs().getObs().get(0).getMsg().getAqi();
 
                                     // Checking if air level greater/equal than limit

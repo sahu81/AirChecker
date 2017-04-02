@@ -129,6 +129,9 @@ public class DetailsFragment extends Fragment {
                 new WikipediaService.cityInformationCallback() {
                     @Override
                     public void onSuccess(PageObject pageObject) {
+                        if(pageObject == null)
+                            return;
+
                         cityTitle.setText(pageObject.getTitle());
                         cityDescription.setText(pageObject.getExtract());
                         cityEvolution.setVisibility(View.VISIBLE);
@@ -141,6 +144,8 @@ public class DetailsFragment extends Fragment {
                 new WikipediaService.cityImageCallback() {
                     @Override
                     public void onSuccess(ImageObject imageObject) {
+                        if(imageObject == null)
+                            return;
 
                         // If image URL not empty, perform a new request with Picasso
                         // in order to retrieve the image

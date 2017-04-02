@@ -145,10 +145,14 @@ public class MainActivity extends AppCompatActivity {
                         new AqcinRequestService.SearchQueryCallback() {
                             @Override
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
-                                if (searchGlobalObject.getData().size() > 0)
-                                    presentRadioList(searchGlobalObject.getData(), inputText);
-                                else
+                                if(searchGlobalObject == null) {
+                                    if (searchGlobalObject.getData().size() > 0)
+                                        presentRadioList(searchGlobalObject.getData(), inputText);
+                                    else
+                                        presentCityNotFoundDialog();
+                                } else {
                                     presentCityNotFoundDialog();
+                                }
                             }
                         }
                 );

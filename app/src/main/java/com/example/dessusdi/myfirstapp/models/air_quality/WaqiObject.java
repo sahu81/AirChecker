@@ -64,7 +64,8 @@ public class WaqiObject extends SugarRecord {
         new AqcinRequestService.GlobalObjectCallback() {
             @Override
             public void onSuccess(GlobalObject global) {
-                setGlobalObject(global);
+                if(global != null)
+                    setGlobalObject(global);
                 Log.d("SERVICE", "Data fetched !");
             }
         });
