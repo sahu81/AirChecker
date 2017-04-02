@@ -225,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 cityObject.save();
                 cityObject.fetchData();
                 cities.add(cityObject);
+
             }
         });
 

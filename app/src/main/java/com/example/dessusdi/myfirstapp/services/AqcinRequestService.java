@@ -46,6 +46,9 @@ public class AqcinRequestService {
         mDialog.setCancelable(false);
         mDialog.show();
 
+        // Encode space character
+        search = search.replace(" ", "%20");
+
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildCityIdURL(search),
                 new Response.Listener<String>() {
@@ -66,6 +69,8 @@ public class AqcinRequestService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                mDialog.dismiss();
+                
                 System.out.println(error);
             }
         });
