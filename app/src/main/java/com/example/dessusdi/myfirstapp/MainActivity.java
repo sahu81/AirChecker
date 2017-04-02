@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         new AqcinRequestService.SearchQueryCallback() {
                             @Override
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
-                                if(searchGlobalObject == null) {
+                                if(searchGlobalObject != null) {
                                     if (searchGlobalObject.getData().size() > 0)
                                         presentRadioList(searchGlobalObject.getData(), inputText);
                                     else
@@ -225,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 cityObject.save();
                 cityObject.fetchData();
                 cities.add(cityObject);
+
             }
         });
 
