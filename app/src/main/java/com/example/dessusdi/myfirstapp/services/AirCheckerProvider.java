@@ -21,17 +21,30 @@ public class AirCheckerProvider extends ContentProvider {
     public static final Uri CONTENT_URI = Uri.parse("content://com.dimitridessus.android.content.provider.airchecker");
     private static final String CONTENT_PROVIDER_MIME = "vnd.android.cursor.item/vnd.dimitridessus.android.content.provider.single";
 
+    /**
+     * @return
+     */
     @Override
     public boolean onCreate() {
         Log.d(TAG, "Creating");
         return true;
     }
 
+    /**
+     * @param uri
+     * @return
+     */
     @Override
     public String getType(@NonNull Uri uri) {
         return AirCheckerProvider.CONTENT_PROVIDER_MIME;
     }
 
+    /**
+     * Inserting a new city in database using Sugar ORM
+     * @param uri
+     * @param values containing city identifier
+     * @return
+     */
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
         int cityID = Integer.valueOf((String)values.get("identifier"));
@@ -50,6 +63,13 @@ public class AirCheckerProvider extends ContentProvider {
         return 0;
     }
 
+    /**
+     * Delete a city from database
+     * @param uri
+     * @param selection city identifier
+     * @param selectionArgs
+     * @return
+     */
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
         Log.d(TAG, "Deleting city : " + selection);

@@ -21,6 +21,7 @@ import com.example.dessusdi.myfirstapp.R;
 import com.example.dessusdi.myfirstapp.models.air_quality.GlobalObject;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 /**
  * Created by Dimitri on 01/04/2017.
@@ -28,13 +29,20 @@ import com.google.gson.Gson;
 
 public class AirCheckerWidget extends AppWidgetProvider {
 
+    private static final String TAG = "Widget";
+
+    /**
+     * @param context
+     * @param appWidgetManager
+     * @param appWidgetIds
+     */
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         RequestQueue reQueue = Volley.newRequestQueue(context);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         int favId = prefs.getInt("fav_city", 99999);
 
-        Log.d("WIDGET", "ID --> " + favId);
+        Log.d(TAG, "identifier --> " + favId);
         for (final int widgetId : appWidgetIds) {
             final RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
             final Intent intent = new Intent(context, AirCheckerWidget.class);
@@ -45,7 +53,7 @@ public class AirCheckerWidget extends AppWidgetProvider {
                     0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.refreshWidgetButton, pendingIntent);
 
-
+            // If favorite id set, perform request.
             if (favId != 99999) {
                 StringRequest request = new StringRequest(Request.Method.GET,
                         RequestBuilder.buildAirQualityURL(favId),
@@ -53,8 +61,18 @@ public class AirCheckerWidget extends AppWidgetProvider {
 
                             @Override
                             public void onResponse(String response) {
+
+                                GlobalObject global = null;
                                 Gson gson = new Gson();
-                                GlobalObject global = gson.fromJson(response, GlobalObject.class);
+                                try {
+                                    global = gson.fromJson(response, GlobalObject.class);
+                                } catch (IllegalStateException | JsonSyntaxException exception){
+                                    Log.d(TAG, "error when parsing GlobalObject");
+                                }
+
+                                if(global == null)
+                                    return;
+
                                 int aqi = global.getRxs().getObs().get(0).getMsg().getAqi();
 
                                 remoteViews.setTextViewText(R.id.air_qualityWidgetTextView, String.valueOf(aqi));
@@ -68,7 +86,7 @@ public class AirCheckerWidget extends AppWidgetProvider {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.d("WIDGET", "Error when fetching data");
+                                Log.d(TAG, "Error when fetching data");
                                 appWidgetManager.updateAppWidget(widgetId, remoteViews);
                             }
                         });

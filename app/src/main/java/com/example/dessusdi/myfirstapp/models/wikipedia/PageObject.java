@@ -17,10 +17,16 @@ public class PageObject {
         this.extract    = context.getResources().getString(R.string.city_empty_informations);
     }
 
+    /**
+     * @return City name
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return City description
+     */
     public String getExtract() {
         return extract.replace("\n", "\n\n");
     }

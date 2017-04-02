@@ -31,9 +31,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private final static String TAG_FRAGMENT    = "FRAG_SETTINGS";
-    private final AqcinRequestService async           = new AqcinRequestService(MainActivity.this);
-    private final List<WaqiObject> cities             = new ArrayList<>();
-    private final AqcinListAdapter adapter            = new AqcinListAdapter(cities, MainActivity.this);
+    private final AqcinRequestService async     = new AqcinRequestService(MainActivity.this);
+    private final List<WaqiObject> cities       = new ArrayList<>();
+    private final AqcinListAdapter adapter      = new AqcinListAdapter(cities, MainActivity.this);
     private LanguageUpdater langUpdater;
     private ThemeUpdater themeUpdater;
     private int radioIndex;
@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         return adapter;
     }
 
+    /**
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    /**
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -68,6 +75,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -84,6 +95,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Replace current fragment by settings.
+     */
     private void showUserSettings() {
         if (getFragmentManager().getBackStackEntryCount() <= 0) {
             SettingsFragment newFragment = new SettingsFragment();
@@ -95,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Override back button pressed.
+     * Return to previous fragment.
+     */
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
@@ -104,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Present search dialog to find city
+     */
     private void presentSearchDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.add_city);
@@ -124,10 +145,14 @@ public class MainActivity extends AppCompatActivity {
                         new AqcinRequestService.SearchQueryCallback() {
                             @Override
                             public void onSuccess(SearchGlobalObject searchGlobalObject) {
-                                if (searchGlobalObject.getData().size() > 0)
-                                    presentRadioList(searchGlobalObject.getData(), inputText);
-                                else
+                                if(searchGlobalObject == null) {
+                                    if (searchGlobalObject.getData().size() > 0)
+                                        presentRadioList(searchGlobalObject.getData(), inputText);
+                                    else
+                                        presentCityNotFoundDialog();
+                                } else {
                                     presentCityNotFoundDialog();
+                                }
                             }
                         }
                 );
@@ -144,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * Present city not found dialog.
+     */
     private void presentCityNotFoundDialog() {
         AlertDialog.Builder noCityDialog = new AlertDialog.Builder(MainActivity.this);
         noCityDialog.setMessage(R.string.city_not_found);
@@ -161,8 +189,14 @@ public class MainActivity extends AppCompatActivity {
         alertCityNotFound.show();
     }
 
+    /**
+     * Present cities searched into dialog.
+     * @param locationArray cities found array
+     * @param searchQuery search query
+     */
     private void presentRadioList(final ArrayList<SearchLocationObject> locationArray, final String searchQuery) {
 
+        // Cities string name array
         List<String> citiesName = new ArrayList<>();
         for (SearchLocationObject location : locationArray) {
             citiesName.add(location.getStation().getName());
@@ -204,6 +238,10 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
+    /**
+     * Setup background service task.
+     * Delayed to 10000 ms (10 sec) to avoid multiple requests.
+     */
     private void setupBackgroundService() {
         final Intent myIntent = new Intent(this, BackgroundRefresher.class);
         final Handler handler = new Handler();
@@ -216,6 +254,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Testing content provider.
+     * 1. Adding 'Amsterdam' to database.
+     * 2. Removing 'Amsterdam' to database.
+     */
     private void testContentProvider() {
         // Inserting new city (Amsterdam)
         ContentValues aqi = new ContentValues();

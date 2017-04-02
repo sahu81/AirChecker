@@ -40,12 +40,22 @@ public class DetailsFragment extends Fragment {
     private Activity mActivity;
     private final static String TAG_FRAGMENT = "FRAG_EVOLUTION";
 
+    /**
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_details, container, false);
     }
 
+    /**
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -65,6 +75,8 @@ public class DetailsFragment extends Fragment {
             }
         });
 
+        // Read if city is marked as favorite
+        // In order to show/hide button
         this.readFavoriteCity();
 
         this.favoriteButton.setOnClickListener( new View.OnClickListener() {
@@ -92,19 +104,34 @@ public class DetailsFragment extends Fragment {
         }
     }
 
+    /**
+     * @param city
+     */
     public void setCity(WaqiObject city) {
         this.city = city;
     }
 
+    /**
+     * This method is used to fetch city information from Wikipedia
+     * Two async request was sent :
+     * 1. Get Title & Description text (from Wikipedia)
+     * 2. Fetch main image.
+     */
     public void fetchCityInformation() {
 
+        // Read if city is marked as favorite
+        // In order to show/hide button
         this.readFavoriteCity();
         this.async = new WikipediaService(this.mActivity);
 
+        // Fetch Title & Description text
         async.fetchCityInformation(this.city.getSearchQuery(),
                 new WikipediaService.cityInformationCallback() {
                     @Override
                     public void onSuccess(PageObject pageObject) {
+                        if(pageObject == null)
+                            return;
+
                         cityTitle.setText(pageObject.getTitle());
                         cityDescription.setText(pageObject.getExtract());
                         cityEvolution.setVisibility(View.VISIBLE);
@@ -112,11 +139,16 @@ public class DetailsFragment extends Fragment {
                 }
         );
 
+        // Fetch main URL image
         async.fetchCityImage(this.city.getSearchQuery(),
                 new WikipediaService.cityImageCallback() {
                     @Override
                     public void onSuccess(ImageObject imageObject) {
+                        if(imageObject == null)
+                            return;
 
+                        // If image URL not empty, perform a new request with Picasso
+                        // in order to retrieve the image
                         if(!imageObject.getOriginal().getSource().isEmpty()) {
                             Picasso.with(mActivity)
                                     .load(imageObject.getOriginal().getSource())
@@ -124,6 +156,7 @@ public class DetailsFragment extends Fragment {
                                     .centerCrop()
                                     .into(cityPicture);
                         } else {
+                            // Setting default image if image URL not exist
                             cityPicture.setImageResource(R.drawable.no_image);
                         }
 
@@ -132,9 +165,13 @@ public class DetailsFragment extends Fragment {
         );
     }
 
+    /**
+     * Private method allowing to launch evolution fragment.
+     * This method is triggered when user click on the 'Evolution' button.
+     */
     private void showEvolution() {
         EvolutionFragment newFragment = new EvolutionFragment();
-        newFragment.setCity(this.city);
+        newFragment.setCity(this.city); // Setting city object to 'EvolutionFragment' class
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, newFragment, TAG_FRAGMENT);
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -142,14 +179,22 @@ public class DetailsFragment extends Fragment {
         transaction.commit();
     }
 
+    /**
+     * Private method used to compare loaded city identifier with the saved one.
+     * If city identifier is the same, hide favorite button else show it.
+     */
     private void readFavoriteCity() {
+        // Detecting if favorite button & city object not null
         if(this.favoriteButton == null || this.city == null)
             return;
 
+        // Getting city identifier from preferences
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
         if(settings.getInt("fav_city", 99999) == this.city.getIdentifier()) {
+            // Set button invisible
             this.favoriteButton.setVisibility(View.GONE);
         } else {
+            // Set button visible
             this.favoriteButton.setVisibility(View.VISIBLE);
         }
     }

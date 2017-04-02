@@ -2,18 +2,22 @@ package com.example.dessusdi.myfirstapp.ManualSQLiteClasses;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.Constants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by dessusdi on 10/02/2017.
  * DESSUS Dimitri
  */
+
+// Deprecated class, now using Sugar ORM
 public class AqcinDatabaseService {
 
     private final AqcinDatabaseHelper mDbHelper;
@@ -23,10 +27,18 @@ public class AqcinDatabaseService {
         this.mDbHelper = new AqcinDatabaseHelper(context);
     }
 
+    /**
+     * Opening database
+     */
     public void open() {
         mDbHelper.getWritableDatabase();
     }
 
+    /**
+     * Addin a new city on database
+     * @param identifier the city id
+     * @return
+     */
     public long addCity(String identifier) {
         Log.d("DATABASE", "Adding city to db...");
         // Gets the data repository in write mode
@@ -41,6 +53,10 @@ public class AqcinDatabaseService {
         return db.insert(Constants.Database.TABLE_NAME, null, values);
     }
 
+    /**
+     * Removing a city from database
+     * @param identifier the city id
+     */
     public void removeCity(String identifier) {
         Log.d("DATABASE", "Removing city from db...");
 
@@ -55,12 +71,16 @@ public class AqcinDatabaseService {
         this.close();
     }
 
+    /**
+     * Fetch all saved cities
+     * @return
+     */
     public List fetchSavedCities() {
         Log.d("DATABASE", "Fetching cities from db...");
 
         return WaqiObject.listAll(WaqiObject.class);
 
-        /* BEFORE ADDING ORM
+        /*
         db = mDbHelper.getReadableDatabase();
 
 
@@ -97,6 +117,9 @@ public class AqcinDatabaseService {
         */
     }
 
+    /**
+     * Closing database
+     */
     public void close() {
         this.mDbHelper.close();
     }

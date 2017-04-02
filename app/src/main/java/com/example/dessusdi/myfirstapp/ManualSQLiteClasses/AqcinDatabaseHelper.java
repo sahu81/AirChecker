@@ -10,6 +10,8 @@ import com.example.dessusdi.myfirstapp.Constants;
  * Created by dessusdi on 10/02/2017.
  * DESSUS Dimitri
  */
+
+// Deprecated class, now using Sugar ORM
 public class AqcinDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_ENTRIES =
@@ -23,15 +25,31 @@ public class AqcinDatabaseHelper extends SQLiteOpenHelper {
     public AqcinDatabaseHelper(Context context) {
         super(context, Constants.Database.DATABASE_NAME, null, Constants.Database.DATABASE_VERSION);
     }
+
+    /**
+     * @param db
+     */
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
     }
+
+    /**
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }
+
+    /**
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
