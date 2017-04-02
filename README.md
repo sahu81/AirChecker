@@ -1,5 +1,8 @@
-# AirChecker
-An Android application to fetch air quality
+<p align="center">
+  <img src="./logo.png" width="430" />
+</p>
+
+An Android application to fetch air quality.
 
 ## Screenshots
 <img src="./screenshots/home.png" width="270" height="480"/> <img src="./screenshots/details.png" width="270" height="480"/> <img src="./screenshots/chooser.png" width="270" height="480"/>
