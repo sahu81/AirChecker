@@ -25,6 +25,7 @@ import com.google.gson.JsonSyntaxException;
 public class AqcinRequestService {
 
     private final Activity mApplicationContext;
+    private RequestQueue queue;
     private static final String TAG = "Service";
 
     public AqcinRequestService(Context context) {
@@ -38,7 +39,8 @@ public class AqcinRequestService {
      */
     public void fetchCityID(String search, final SearchQueryCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(this.queue == null)
+            this.queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Create progress dialog
         final ProgressDialog mDialog = new ProgressDialog(this.mApplicationContext);
@@ -85,7 +87,8 @@ public class AqcinRequestService {
      */
     public void fetchAirQuality(int identifier, final GlobalObjectCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(this.queue == null)
+            this.queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildAirQualityURL(identifier),
@@ -120,7 +123,8 @@ public class AqcinRequestService {
      */
     public void fetchCitiesAroundPosition(double latitude, double longitude, final PositionQueryCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(this.queue == null)
+            this.queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildCitiesAroundPositionURL(latitude, longitude),

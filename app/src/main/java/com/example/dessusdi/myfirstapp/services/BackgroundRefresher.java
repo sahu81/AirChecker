@@ -99,7 +99,8 @@ public class BackgroundRefresher extends Service {
                  */
                 private void retrieveAirQuality(final int identifier) {
                     // Assigning RequestQueue
-                    reQueue = Volley.newRequestQueue(BackgroundRefresher.this);
+                    if(reQueue == null)
+                        reQueue = Volley.newRequestQueue(BackgroundRefresher.this);
                     // Build and launch request
                     StringRequest request = new StringRequest(com.android.volley.Request.Method.GET,
                             RequestBuilder.buildAirQualityURL(identifier),

@@ -23,6 +23,7 @@ import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 public class WikipediaService {
 
     private final Activity mApplicationContext;
+    private  RequestQueue queue;
 
     public WikipediaService(Context context) {
         mApplicationContext = (Activity)context;
@@ -36,7 +37,8 @@ public class WikipediaService {
     public void fetchCityInformation(String search, final WikipediaService.cityInformationCallback callback) {
 
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(queue == null)
+            queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Create progress dialog
         final ProgressDialog mDialog = new ProgressDialog(this.mApplicationContext);
@@ -71,7 +73,8 @@ public class WikipediaService {
      */
     public void fetchCityImage(String search, final WikipediaService.cityImageCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(queue == null)
+            queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Create progress dialog
         final ProgressDialog mDialog = new ProgressDialog(this.mApplicationContext);
