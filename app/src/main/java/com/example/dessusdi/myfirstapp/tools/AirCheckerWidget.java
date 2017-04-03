@@ -71,10 +71,11 @@ public class AirCheckerWidget extends AppWidgetProvider {
                                 }
 
                                 if(global != null) {
-                                    int aqi = global.getRxs().getObs().get(0).getMsg().getAqi();
+                                    int index = global.getRxs().getObs().size() - 1;
+                                    int aqi = global.getRxs().getObs().get(index).getMsg().getAqi();
 
                                     remoteViews.setTextViewText(R.id.air_qualityWidgetTextView, String.valueOf(aqi));
-                                    remoteViews.setTextViewText(R.id.city_nameWidgetTextView, global.getRxs().getObs().get(0).getMsg().getCity().getName());
+                                    remoteViews.setTextViewText(R.id.city_nameWidgetTextView, global.getRxs().getObs().get(index).getMsg().getCity().getName());
                                     remoteViews.setInt(R.id.air_qualityWidgetTextView, "setBackgroundColor", Color.parseColor(WaqiObject.getColorCode(aqi)));
                                 }
 

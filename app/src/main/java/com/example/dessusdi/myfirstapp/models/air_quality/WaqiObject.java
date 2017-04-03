@@ -86,8 +86,10 @@ public class WaqiObject extends SugarRecord {
     public void setGlobalObject(GlobalObject globalObject) {
         this.globalObject = globalObject;
 
-        if(this.globalObject != null)
-            Log.d("SERVICE", "Status " + globalObject.getRxs().getObs().get(0).getStatus());
+        if(this.globalObject != null) {
+            int index = globalObject.getRxs().getObs().size() - 1;
+            Log.d("SERVICE", "Status " + globalObject.getRxs().getObs().get(index).getStatus());
+        }
 
         if(adapterList != null)
             adapterList.notifyDataSetChanged();
