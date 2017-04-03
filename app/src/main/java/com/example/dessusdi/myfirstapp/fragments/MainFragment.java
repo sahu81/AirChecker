@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -195,7 +197,8 @@ public class MainFragment extends Fragment {
     private void retrieveUserPosition() {
         LocationManager lm = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, locationListener);
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
         if (location != null) {
             retrieveCityAroundMe(location.getLatitude(), location.getLongitude());
@@ -208,7 +211,7 @@ public class MainFragment extends Fragment {
      * @param userLongitude longitude of the user
      */
     private void retrieveCityAroundMe(double userLatitude, double userLongitude) {
-
+        Log.d("Service", "ICI");
         async.fetchCitiesAroundPosition(userLatitude, userLongitude,
                 new AqcinRequestService.PositionQueryCallback() {
                     @Override
@@ -258,7 +261,6 @@ public class MainFragment extends Fragment {
          */
         public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
             // TODO Auto-generated method stub
-
         }
     };
 }
