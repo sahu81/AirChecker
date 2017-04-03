@@ -117,7 +117,8 @@ public class BackgroundRefresher extends Service {
                                     if(global == null)
                                         return;
 
-                                    int threshold = global.getRxs().getObs().get(0).getMsg().getAqi();
+                                    int index = global.getRxs().getObs().size() - 1;
+                                    int threshold = global.getRxs().getObs().get(index).getMsg().getAqi();
 
                                     // Checking if air level greater/equal than limit
                                     if (threshold >= limit) {
@@ -125,7 +126,7 @@ public class BackgroundRefresher extends Service {
                                         // Checking if notification already fired
                                         if (!notificationsFired.contains(identifier)) {
                                             // Send alert push notification
-                                            sendAlertPushNotification(global.getRxs().getObs().get(0).getMsg().getCity().getName(), threshold);
+                                            sendAlertPushNotification(global.getRxs().getObs().get(index).getMsg().getCity().getName(), threshold);
                                             Log.d(TAG, "Notification fired !");
                                             notificationsFired.add(identifier);
                                         }
