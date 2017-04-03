@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,6 +103,16 @@ public class DetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         this.mActivity = this.getActivity();
+
+
+    }
+
+    /**
+     * Method executed when fragment appear
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
 
         if(this.city != null) {
             this.fetchCityInformation();
