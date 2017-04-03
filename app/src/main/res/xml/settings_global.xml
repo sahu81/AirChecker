@@ -14,10 +14,10 @@
             android:key="theme_preference"
             android:title="@string/change_theme_title"
             android:icon="@drawable/pref_theme"
-            android:summary="@string/theme_darken"
+            android:summary="@string/theme_light"
             android:entries="@array/themes"
             android:entryValues="@array/themes_values"
-            android:defaultValue="@string/theme_darken_alias" />
+            android:defaultValue="@string/theme_light_alias" />
 
         <SwitchPreference
             android:key="theme_auto_preference"

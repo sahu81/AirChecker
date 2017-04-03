@@ -211,7 +211,7 @@ public class MainFragment extends Fragment {
      * @param userLongitude longitude of the user
      */
     private void retrieveCityAroundMe(double userLatitude, double userLongitude) {
-        Log.d("Service", "ICI");
+
         async.fetchCitiesAroundPosition(userLatitude, userLongitude,
                 new AqcinRequestService.PositionQueryCallback() {
                     @Override
