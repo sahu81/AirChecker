@@ -35,9 +35,9 @@ public class AqcinDatabaseService {
     }
 
     /**
-     * Addin a new city on database
+     * Adding a new city on database
      * @param identifier the city id
-     * @return
+     * @return boolean value according to the success/error of the insert
      */
     public long addCity(String identifier) {
         Log.d("DATABASE", "Adding city to db...");
@@ -73,7 +73,7 @@ public class AqcinDatabaseService {
 
     /**
      * Fetch all saved cities
-     * @return
+     * @return saved cities array
      */
     public List fetchSavedCities() {
         Log.d("DATABASE", "Fetching cities from db...");

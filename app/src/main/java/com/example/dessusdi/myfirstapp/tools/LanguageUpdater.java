@@ -19,8 +19,8 @@ public class LanguageUpdater {
     private Context context;
 
     /**
-     * @param context
-     * @param sharedPreferences
+     * @param context context of the activity
+     * @param sharedPreferences preferences of the app
      */
     public LanguageUpdater(Context context, SharedPreferences sharedPreferences) {
         this.context = context;
@@ -56,8 +56,8 @@ public class LanguageUpdater {
 
     /**
      * Refresh current UI after setting language
-     * @param config
-     * @param recreateActivity
+     * @param config new configuration
+     * @param recreateActivity boolean value, true to recreate the activity, false to ignore
      */
     private void refreshUI(Configuration config, boolean recreateActivity) {
         Activity activity = (Activity)context;

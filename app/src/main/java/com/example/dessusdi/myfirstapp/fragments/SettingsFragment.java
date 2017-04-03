@@ -24,7 +24,7 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     private ListPreference themePreferences;
 
     /**
-     * @param savedInstanceState
+     * @param savedInstanceState reference to a Bundle object
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,10 +47,10 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
     }
 
     /**
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater instantiate layout XML
+     * @param container container view
+     * @param savedInstanceState reference to a Bundle object
+     * @return nothing
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,9 +63,9 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
 
     /**
      * Listener on preference change
-     * @param preference
-     * @param newValue
-     * @return
+     * @param preference preference object
+     * @param newValue new language to set
+     * @return boolean value according to success or error
      */
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {

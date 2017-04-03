@@ -23,10 +23,10 @@ public class EvolutionFragment extends Fragment {
     private LineChartView aqcinChart;
 
     /**
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater instantiate layout XML
+     * @param container container view
+     * @param savedInstanceState reference to a Bundle object
+     * @return nothing
      */
     @Nullable
     @Override
@@ -35,8 +35,8 @@ public class EvolutionFragment extends Fragment {
     }
 
     /**
-     * @param view
-     * @param savedInstanceState
+     * @param view evolution view
+     * @param savedInstanceState reference to a Bundle object
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class EvolutionFragment extends Fragment {
 
     /**
      * City setter
-     * @param city
+     * @param city city object containing (name, description etc.)
      */
     public void setCity(WaqiObject city) {
         this.city = city;

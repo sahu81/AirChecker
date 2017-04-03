@@ -18,8 +18,8 @@ public class ThemeUpdater {
     private Context context;
 
     /**
-     * @param context
-     * @param sharedPreferences
+     * @param context context of the activity
+     * @param sharedPreferences preferences of the appliction
      */
     public ThemeUpdater(Context context, SharedPreferences sharedPreferences) {
         this.context = context;

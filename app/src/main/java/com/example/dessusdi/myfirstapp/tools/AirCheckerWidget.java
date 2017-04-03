@@ -32,9 +32,9 @@ public class AirCheckerWidget extends AppWidgetProvider {
     private static final String TAG = "Widget";
 
     /**
-     * @param context
-     * @param appWidgetManager
-     * @param appWidgetIds
+     * @param context context of the activity
+     * @param appWidgetManager reference to installed widget of the app
+     * @param appWidgetIds widget's identifiers
      */
     @Override
     public void onUpdate(final Context context, final AppWidgetManager appWidgetManager, int[] appWidgetIds) {

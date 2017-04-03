@@ -46,10 +46,10 @@ public class MainFragment extends Fragment {
     private AqcinListAdapter adapter;
 
     /**
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater instantiate layout XML
+     * @param container container view
+     * @param savedInstanceState reference to a Bundle object
+     * @return nothing
      */
     @Nullable
     @Override
@@ -58,8 +58,8 @@ public class MainFragment extends Fragment {
     }
 
     /**
-     * @param view
-     * @param savedInstanceState
+     * @param view main list view
+     * @param savedInstanceState reference to a Bundle object
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -100,10 +100,10 @@ public class MainFragment extends Fragment {
 
             /**
              * Disable cell moving
-             * @param recyclerView
-             * @param viewHolder
-             * @param target
-             * @return
+             * @param recyclerView the recycler view (list containing all cities)
+             * @param viewHolder city's cell displaying name, aqi and more.
+             * @param target target reference
+             * @return boolean value (disabled here)
              */
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -112,8 +112,8 @@ public class MainFragment extends Fragment {
 
             /**
              * Swipe event allowing user to delete cells.
-             * @param viewHolder
-             * @param direction
+             * @param viewHolder city's cell displaying name, aqi and more.
+             * @param direction swipe direction
              */
             @Override
             public void onSwiped(final RecyclerView.ViewHolder viewHolder, int direction) {
@@ -230,33 +230,22 @@ public class MainFragment extends Fragment {
     private final LocationListener locationListener = new LocationListener() {
         /**
          * When the location change (latitude & longitude)
-         * @param location
+         * @param location location object
          */
         public void onLocationChanged(Location location) {
             retrieveCityAroundMe(location.getLatitude(), location.getLongitude());
         }
 
-        /**
-         * @param arg0
-         */
         public void onProviderDisabled(String arg0) {
             // TODO Auto-generated method stub
 
         }
 
-        /**
-         * @param arg0
-         */
         public void onProviderEnabled(String arg0) {
             // TODO Auto-generated method stub
 
         }
 
-        /**
-         * @param arg0
-         * @param arg1
-         * @param arg2
-         */
         public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
             // TODO Auto-generated method stub
         }

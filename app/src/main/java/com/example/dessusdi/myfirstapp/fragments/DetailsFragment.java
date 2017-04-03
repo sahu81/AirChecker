@@ -41,10 +41,10 @@ public class DetailsFragment extends Fragment {
     private final static String TAG_FRAGMENT = "FRAG_EVOLUTION";
 
     /**
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater instantiate layout XML
+     * @param container container view
+     * @param savedInstanceState reference to a Bundle object
+     * @return nothing
      */
     @Nullable
     @Override
@@ -53,8 +53,8 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * @param view
-     * @param savedInstanceState
+     * @param view details view
+     * @param savedInstanceState reference to a Bundle object
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -94,6 +94,9 @@ public class DetailsFragment extends Fragment {
         });
     }
 
+    /**
+     * @param savedInstanceState reference to a Bundle object
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +109,7 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * @param city
+     * @param city city object containing (name, description etc.)
      */
     public void setCity(WaqiObject city) {
         this.city = city;

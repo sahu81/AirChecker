@@ -31,7 +31,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
     final private ImageButton bellImageButton;
 
     /**
-     * @param itemView
+     * @param itemView cell view
      */
     public AqcinCellView(View itemView) {
         super(itemView);
@@ -54,7 +54,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
 
     /**
      * Click global listener
-     * @param v
+     * @param v button view
      */
     @Override
     public void onClick(View v) {
@@ -84,7 +84,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
 
     /**
      * Waqi object setter
-     * @param myObject
+     * @param myObject WaqiObject containing city informations
      * @see WaqiObject
      */
     public void setWaqiObject(WaqiObject myObject){
@@ -107,7 +107,7 @@ public class AqcinCellView extends RecyclerView.ViewHolder implements View.OnCli
 
     /**
      * Context setter
-     * @param context
+     * @param context context of the activity
      */
     public void setContext(Context context) {
         this.context = context;

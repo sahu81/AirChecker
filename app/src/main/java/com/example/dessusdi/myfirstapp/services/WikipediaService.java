@@ -30,7 +30,7 @@ public class WikipediaService {
     /**
      * Fetch city information by using wikipedia API.
      * @param search city name
-     * @param callback
+     * @param callback customized callback interface
      */
     public void fetchCityInformation(String search, final WikipediaService.cityInformationCallback callback) {
 
@@ -66,7 +66,7 @@ public class WikipediaService {
     /**
      * Fetch city image by using wikipedia API
      * @param search city name
-     * @param callback
+     * @param callback customized callback interface
      */
     public void fetchCityImage(String search, final WikipediaService.cityImageCallback callback) {
         // Instantiate the RequestQueue.
