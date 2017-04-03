@@ -15,15 +15,15 @@ An Android application to fetch air quality from [**Aqicn**](http://aqicn.org/).
 - French & English support. 
 - Share air quality level by email.
 - Playing sound according to air quality level.
-- Content provider allowing to add/remove a city from other app ([see **content provider**](#content-provider)).
+- Content provider allowing to add/remove a city from other app (see [**content provider**](#content-provider)).
 - Air quality chart (powered by [**Hello Chart Android**](https://github.com/lecho/hellocharts-android)).
 - 3 themes available (dark, light, sunset).
 - Automatic night mode (apply dark theme automatically).
 - Display nearest city from user's location.
-- Refresh in background all saved cities ([see **background service**](#background-service).
+- Refresh in background all saved cities (see [**background service**](#background-service)).
 - Send push notifications when air quality is higher than 100.
 - Display informations about city.
-- Widget of favorite city ([see **widget**](#widget).
+- Widget of favorite city (see [**widget**](#widget)).
 
 ## Compatibility
 
