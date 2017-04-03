@@ -57,6 +57,7 @@ public class WikipediaService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                mDialog.dismiss();
                 error.printStackTrace();
             }
         });
@@ -93,6 +94,7 @@ public class WikipediaService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                mDialog.dismiss();
                 error.printStackTrace();
             }
         });
