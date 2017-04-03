@@ -2,7 +2,7 @@
   <img src="./logo.png" width="430" />
 </p>
 
-An Android application to fetch air quality.
+An Android application to fetch air quality from [**Aqicn**](http://aqicn.org/).
 
 ## Screenshots
 <img src="./screenshots/home.png" width="270" height="480"/> <img src="./screenshots/details.png" width="270" height="480"/> <img src="./screenshots/chooser.png" width="270" height="480"/>
@@ -42,6 +42,10 @@ An Android application to fetch air quality.
 </tr>
 </table>
 
+Working on :
+- Smartphone
+- Tablet
+
 ## Installation
 
 - Clone this repository.
@@ -55,12 +59,14 @@ git clone git@github.com:istornz/AirChecker.git
 ## Usage
 
 #### Basic usage
-- Add a new city by touching the "glass" icon at top right.
+- Add a new city by touching the "magnifying glass" icon at top right.
+- Type your city on the search field and click on "OK".
+- Select on the list your city.
 - To delete a city, swipe right/left on it and choose "Yes".
 
 #### Widget
-- Add a new city.
-- Touch the city cell and touch "Favorite" at the bottom.
+- Add a new city (see [**basic usage**](https://github.com/istornz/AirChecker#basic-usage)).
+- Select the city cell in list and touch "Favorite" button at the bottom of details page.
 - Add the widget on your homescreen/launchscreen.
 - Enjoy :tada:
 
