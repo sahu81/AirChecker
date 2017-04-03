@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import com.example.dessusdi.myfirstapp.fragments.MainFragment;
 import com.example.dessusdi.myfirstapp.fragments.SettingsFragment;
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.models.search.SearchGlobalObject;
@@ -226,6 +227,9 @@ public class MainActivity extends AppCompatActivity {
                 cityObject.fetchData();
                 cities.add(cityObject);
 
+                // Perform checking on main cities list.
+                MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.list_fragment);
+                mainFragment.checkIfRecyclerEmpty();
             }
         });
 
