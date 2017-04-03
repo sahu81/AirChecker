@@ -17,6 +17,7 @@ import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 
 /**
  * Created by Dimitri on 02/03/2017.
+ * DESSUS Dimitri
  */
 
 public class WikipediaService {

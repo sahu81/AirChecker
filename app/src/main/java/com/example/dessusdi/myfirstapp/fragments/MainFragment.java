@@ -30,6 +30,7 @@ import java.util.List;
 
 /**
  * Created by Dimitri on 01/03/2017.
+ * DESSUS Dimitri
  */
 
 public class MainFragment extends Fragment {
@@ -135,7 +136,6 @@ public class MainFragment extends Fragment {
                             cities.get(position).delete();
                             cities.remove(position);
                             checkIfRecyclerEmpty();
-                            return;
                         }
                     }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
@@ -143,7 +143,6 @@ public class MainFragment extends Fragment {
                             // Replace cell at same position
                             adapter.notifyItemRangeChanged(position, adapter.getItemCount());
                             checkIfRecyclerEmpty();
-                            return;
                         }
                     }).show();
                 }

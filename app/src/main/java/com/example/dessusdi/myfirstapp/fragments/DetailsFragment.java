@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ import com.squareup.picasso.Picasso;
 
 /**
  * Created by Dimitri on 02/03/2017.
+ * DESSUS Dimitri
  */
 
 public class DetailsFragment extends Fragment {

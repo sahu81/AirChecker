@@ -14,6 +14,7 @@ import com.example.dessusdi.myfirstapp.tools.ThemeUpdater;
 
 /**
  * Created by Dimitri on 01/03/2017.
+ * DESSUS Dimitri
  */
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {

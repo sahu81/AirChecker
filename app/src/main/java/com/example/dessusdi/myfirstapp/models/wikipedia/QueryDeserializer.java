@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 /**
  * Created by Dimitri on 03/03/2017.
+ * DESSUS Dimitri
  */
 
 public class QueryDeserializer {

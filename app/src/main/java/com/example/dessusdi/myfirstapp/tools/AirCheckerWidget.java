@@ -25,6 +25,7 @@ import com.google.gson.JsonSyntaxException;
 
 /**
  * Created by Dimitri on 01/04/2017.
+ * DESSUS Dimitri
  */
 
 public class AirCheckerWidget extends AppWidgetProvider {

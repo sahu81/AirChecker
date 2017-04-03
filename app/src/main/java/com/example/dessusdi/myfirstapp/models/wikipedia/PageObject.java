@@ -6,6 +6,7 @@ import com.example.dessusdi.myfirstapp.R;
 
 /**
  * Created by Dimitri on 03/03/2017.
+ * DESSUS Dimitri
  */
 
 public class PageObject {
