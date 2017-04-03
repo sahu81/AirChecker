@@ -12,7 +12,8 @@ An Android application to fetch air quality from [**Aqicn**](http://aqicn.org/).
 
 - Show all saved cities with air quality level fetched from [**Aqicn**](http://aqicn.org/).
 - Add/delete any city.
-- French & English support. 
+- French & English support.
+- Special display on tablet/smartphone (fragmented layout).
 - Share air quality level by email.
 - Playing sound according to air quality level.
 - Content provider allowing to add/remove a city from other app (see [**content provider**](#content-provider)).
@@ -63,6 +64,7 @@ git clone git@github.com:istornz/AirChecker.git
 - Type your city on the search field and click on "OK".
 - Select on the list your city.
 - To delete a city, swipe right/left on it and choose "Yes".
+- On the top of list, this is the nearest city (gray background).
 
 #### Widget
 - Add a new city (see [**basic usage**](#basic-usage)).
@@ -93,6 +95,11 @@ private static final int delay = 1800000;
 private static final int limit = 100;
 ```
 
+## APIs used
+
+- [Aqicn](http://aqicn.org/)
+- [Wikipedia](https://www.mediawiki.org/wiki/API:Main_page/fr)
+
 ## Others
 
 To get your keys, please go on the [**Air Quality Open Data Platform register page**](http://aqicn.org/data-platform/token/#/).
@@ -104,3 +111,5 @@ To get your keys, please go on the [**Air Quality Open Data Platform register pa
 - [Sugar ORM](https://github.com/satyan/sugar)
 - [Picasso](https://github.com/square/picasso)
 - [HelloCharts](https://github.com/lecho/hellocharts-android)
+
+© Dessus Dimitri - 3/04/2017
