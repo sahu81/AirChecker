@@ -259,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
                 startService(myIntent);
             }
         }, 10000);
-
     }
 
     /**

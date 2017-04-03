@@ -70,8 +70,7 @@ public class AqcinRequestService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 mDialog.dismiss();
-                
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 
@@ -105,7 +104,7 @@ public class AqcinRequestService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 
@@ -140,7 +139,7 @@ public class AqcinRequestService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 

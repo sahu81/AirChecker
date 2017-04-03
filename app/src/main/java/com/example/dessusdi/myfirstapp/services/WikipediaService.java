@@ -55,7 +55,7 @@ public class WikipediaService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 
@@ -85,12 +85,12 @@ public class WikipediaService {
                     @Override
                     public void onResponse(String response) {
                         mDialog.dismiss();
-                        callback.onSuccess(QueryDeserializer.deserializeImage(response, mApplicationContext));
+                        callback.onSuccess(QueryDeserializer.deserializeImage(response));
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 

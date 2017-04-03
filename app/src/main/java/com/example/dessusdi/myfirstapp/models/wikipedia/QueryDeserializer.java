@@ -38,7 +38,7 @@ public class QueryDeserializer {
         return pageObject;
     }
 
-    public static ImageObject deserializeImage(String rawJSON, Context context) {
+    public static ImageObject deserializeImage(String rawJSON) {
         ImageObject imageObject = new ImageObject();
 
         try {
