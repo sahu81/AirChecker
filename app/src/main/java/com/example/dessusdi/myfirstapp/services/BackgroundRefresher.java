@@ -27,8 +27,11 @@ import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.R.attr.max;
 
 public class BackgroundRefresher extends Service {
 
@@ -161,7 +164,8 @@ public class BackgroundRefresher extends Service {
                 private void sendAlertPushNotification(String city, int threshold) {
                     NotificationCompat.Builder b = new NotificationCompat.Builder(BackgroundRefresher.this);
 
-                    Integer pushIdentifier = (int) (long) System.currentTimeMillis() / 1000;
+                    Random ran = new Random();
+                    Integer pushIdentifier = (int) System.currentTimeMillis() + (5 + ran.nextInt(max - 5 + 1));
 
                     Intent notificationIntent = new Intent(BackgroundRefresher.this, MainActivity.class);
                     PendingIntent contentIntent = PendingIntent.getActivity(BackgroundRefresher.this, 0, notificationIntent, 0);

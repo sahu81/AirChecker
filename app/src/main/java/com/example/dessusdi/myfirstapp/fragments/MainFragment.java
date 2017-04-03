@@ -159,7 +159,7 @@ public class MainFragment extends Fragment {
      * Private method used to check if recycler is empty.
      * Show/hide empty label on the center of the recycler view.
      */
-    private void checkIfRecyclerEmpty() {
+    public void checkIfRecyclerEmpty() {
         if (this.cities.size() > 0) {
             emptyRecyclerTextView.setVisibility(View.INVISIBLE);
         } else {
@@ -211,7 +211,7 @@ public class MainFragment extends Fragment {
      * @param userLongitude longitude of the user
      */
     private void retrieveCityAroundMe(double userLatitude, double userLongitude) {
-        Log.d("Service", "ICI");
+
         async.fetchCitiesAroundPosition(userLatitude, userLongitude,
                 new AqcinRequestService.PositionQueryCallback() {
                     @Override
