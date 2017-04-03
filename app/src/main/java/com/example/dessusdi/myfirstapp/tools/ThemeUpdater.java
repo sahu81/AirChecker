@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 /**
  * Created by Dimitri on 27/02/2017.
+ * DESSUS Dimitri
  */
 
 public class ThemeUpdater {
@@ -18,8 +19,8 @@ public class ThemeUpdater {
     private Context context;
 
     /**
-     * @param context
-     * @param sharedPreferences
+     * @param context context of the activity
+     * @param sharedPreferences preferences of the application
      */
     public ThemeUpdater(Context context, SharedPreferences sharedPreferences) {
         this.context = context;

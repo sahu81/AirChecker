@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Created by Dimitri on 01/04/2017.
+ * DESSUS Dimitri
  */
 
 public class AirCheckerProvider extends ContentProvider {
@@ -22,7 +23,7 @@ public class AirCheckerProvider extends ContentProvider {
     private static final String CONTENT_PROVIDER_MIME = "vnd.android.cursor.item/vnd.dimitridessus.android.content.provider.single";
 
     /**
-     * @return
+     * @return boolean value create method
      */
     @Override
     public boolean onCreate() {
@@ -31,8 +32,8 @@ public class AirCheckerProvider extends ContentProvider {
     }
 
     /**
-     * @param uri
-     * @return
+     * @param uri schema of the content provider
+     * @return string value of the mime provider
      */
     @Override
     public String getType(@NonNull Uri uri) {
@@ -41,9 +42,9 @@ public class AirCheckerProvider extends ContentProvider {
 
     /**
      * Inserting a new city in database using Sugar ORM
-     * @param uri
+     * @param uri schema of the content provider
      * @param values containing city identifier
-     * @return
+     * @return URI value
      */
     @Override
     public Uri insert(@NonNull Uri uri, ContentValues values) {
@@ -65,10 +66,10 @@ public class AirCheckerProvider extends ContentProvider {
 
     /**
      * Delete a city from database
-     * @param uri
+     * @param uri schema of the content provider
      * @param selection city identifier
-     * @param selectionArgs
-     * @return
+     * @param selectionArgs array of strings
+     * @return int value about delete state
      */
     @Override
     public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {

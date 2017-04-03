@@ -25,6 +25,7 @@ import com.google.gson.JsonSyntaxException;
 public class AqcinRequestService {
 
     private final Activity mApplicationContext;
+    private RequestQueue queue;
     private static final String TAG = "Service";
 
     public AqcinRequestService(Context context) {
@@ -34,11 +35,12 @@ public class AqcinRequestService {
     /**
      * Fetch cities by name
      * @param search city identifier
-     * @param callback
+     * @param callback customized callback interface
      */
     public void fetchCityID(String search, final SearchQueryCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(this.queue == null)
+            this.queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Create progress dialog
         final ProgressDialog mDialog = new ProgressDialog(this.mApplicationContext);
@@ -70,8 +72,7 @@ public class AqcinRequestService {
             @Override
             public void onErrorResponse(VolleyError error) {
                 mDialog.dismiss();
-                
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 
@@ -82,11 +83,12 @@ public class AqcinRequestService {
     /**
      * Fetch air quality by using unique city identifier
      * @param identifier city identifier
-     * @param callback
+     * @param callback customized callback interface
      */
     public void fetchAirQuality(int identifier, final GlobalObjectCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(this.queue == null)
+            this.queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildAirQualityURL(identifier),
@@ -105,7 +107,7 @@ public class AqcinRequestService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 
@@ -117,11 +119,12 @@ public class AqcinRequestService {
      * Retrieve cities around user's location
      * @param latitude user's latitude
      * @param longitude user's longitude
-     * @param callback
+     * @param callback customized callback interface
      */
     public void fetchCitiesAroundPosition(double latitude, double longitude, final PositionQueryCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(this.queue == null)
+            this.queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.GET, RequestBuilder.buildCitiesAroundPositionURL(latitude, longitude),
@@ -140,7 +143,7 @@ public class AqcinRequestService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 

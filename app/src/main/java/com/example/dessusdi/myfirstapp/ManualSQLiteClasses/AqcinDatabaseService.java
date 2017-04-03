@@ -2,14 +2,12 @@ package com.example.dessusdi.myfirstapp.ManualSQLiteClasses;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 import com.example.dessusdi.myfirstapp.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,9 +33,9 @@ public class AqcinDatabaseService {
     }
 
     /**
-     * Addin a new city on database
+     * Adding a new city on database
      * @param identifier the city id
-     * @return
+     * @return boolean value according to the success/error of the insert
      */
     public long addCity(String identifier) {
         Log.d("DATABASE", "Adding city to db...");
@@ -73,7 +71,7 @@ public class AqcinDatabaseService {
 
     /**
      * Fetch all saved cities
-     * @return
+     * @return saved cities array
      */
     public List fetchSavedCities() {
         Log.d("DATABASE", "Fetching cities from db...");

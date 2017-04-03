@@ -1,5 +1,6 @@
 package com.example.dessusdi.myfirstapp.models.air_quality;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.util.Log;
 
@@ -73,7 +74,7 @@ public class WaqiObject extends SugarRecord {
 
     /**
      * Aqcin setter
-     * @param waqiService
+     * @param waqiService service of aqi API
      */
     public void setRequestService(AqcinRequestService waqiService) {
         this.waqiService = waqiService;
@@ -81,7 +82,7 @@ public class WaqiObject extends SugarRecord {
 
     /**
      * Global object setter
-     * @param globalObject
+     * @param globalObject global object containing city informations
      */
     public void setGlobalObject(GlobalObject globalObject) {
         this.globalObject = globalObject;
@@ -97,7 +98,7 @@ public class WaqiObject extends SugarRecord {
 
     /**
      * List adapter setter
-     * @param adapterList
+     * @param adapterList adapter list to link cell in recycler view
      */
     public void setAqcinListAdapter(AqcinListAdapter adapterList) {
         this.adapterList = adapterList;
@@ -105,7 +106,7 @@ public class WaqiObject extends SugarRecord {
 
     /**
      * Search query setter
-     * @param searchQuery
+     * @param searchQuery string city search pattern (ex. 'grenoble', 'lyon' etc.)
      */
     public void setSearchQuery(String searchQuery) {
         this.searchQuery = searchQuery;
@@ -144,7 +145,7 @@ public class WaqiObject extends SugarRecord {
     }
 
     /**
-     * @param airQuality
+     * @param airQuality air quality level
      * @return Properly color according to air quality level
      */
     public static String getColorCode(int airQuality) {
@@ -177,6 +178,7 @@ public class WaqiObject extends SugarRecord {
     /**
      * @return Formatted string of station location
      */
+    @SuppressLint("DefaultLocale")
     public String getGPSCoordinate() {
         String airQuality = "Loading...";
         if (this.globalObject != null) {
@@ -189,6 +191,7 @@ public class WaqiObject extends SugarRecord {
     /**
      * @return Minimum temperature
      */
+    @SuppressLint("DefaultLocale")
     public String getMinTemp() {
         String minTemp = "";
         if (this.globalObject != null) {
@@ -203,6 +206,7 @@ public class WaqiObject extends SugarRecord {
     /**
      * @return Maximum temperature
      */
+    @SuppressLint("DefaultLocale")
     public String getMaxTemp() {
         String maxTemp = "";
         if (this.globalObject != null) {
@@ -223,9 +227,9 @@ public class WaqiObject extends SugarRecord {
         ArrayList<AqiObject> forecast = this.globalObject.getRxs().getObs().get(indexArray).getMsg().getForecast().getAqi();
 
         // Dates formatter
-        SimpleDateFormat fullFormatter = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
-        SimpleDateFormat monthFormatter = new SimpleDateFormat("MM");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat fullFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat dayFormatter = new SimpleDateFormat("dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat monthFormatter = new SimpleDateFormat("MM");
 
         List<PointValue> values = new ArrayList<>();
         List<Float> xAxisValues1 = new ArrayList<>();

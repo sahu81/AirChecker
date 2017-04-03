@@ -27,7 +27,7 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
     /**
      * @param list WaqiObject list
-     * @param context
+     * @param context context of the activity
      * @see WaqiObject
      */
     public AqcinListAdapter(List<WaqiObject> list, Context context) {
@@ -37,9 +37,9 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
     /**
      * Setting up Aqcin cell view.
-     * @param viewGroup
-     * @param position
-     * @return
+     * @param viewGroup aqcin cell view
+     * @param position position of the cell in the recycler view
+     * @return cell view
      * @see AqcinCellView
      */
     @Override
@@ -82,8 +82,8 @@ public class AqcinListAdapter extends RecyclerView.Adapter<AqcinCellView> {
 
     /**
      * Bind WaqiObject to cell view
-     * @param aqcinCellView
-     * @param index
+     * @param aqcinCellView aqcin cell view
+     * @param index position of the cell in the recycler view
      * @see AqcinCellView
      * @see WaqiObject
      */

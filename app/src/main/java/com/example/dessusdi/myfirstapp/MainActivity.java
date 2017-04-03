@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * @param savedInstanceState
+     * @param savedInstanceState reference to a Bundle object
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +60,17 @@ public class MainActivity extends AppCompatActivity {
         this.langUpdater.loadSavedLanguage();
 
         this.setupBackgroundService();
+
+        // Uncomment this part to test content provider.
+
         // this.testContentProvider();
 
         setContentView(R.layout.activity_main);
     }
 
     /**
-     * @param menu
-     * @return
+     * @param menu menu in the toolbar
+     * @return boolean value for inflating menu or not
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * @param item
-     * @return
+     * @param item menu item
+     * @return boolean value item super constructor
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -256,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
                 startService(myIntent);
             }
         }, 10000);
-
     }
 
     /**

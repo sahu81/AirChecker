@@ -13,13 +13,11 @@
     <string name="city_not_found">City not found, please check again and try again.</string>
     <string name="delete_confirmation">Are you sure to delete ?</string>
     <string name="emptyRecycler">No city added !</string>
-    <string name="hello_world">Hello Android !</string>
     <string name="language_english">English</string>
     <string name="language_french">French</string>
     <string name="menu_search">Search</string>
     <string name="menu_settings">Settings</string>
     <string name="no">No</string>
-    <string name="pref_cat_customize_summary">Edit global app interface</string>
     <string name="pref_cat_customize">Customization</string>
     <string name="share_air_quality_mail_subject">Result of air quality</string>
     <string name="theme_darken">Darken theme</string>
@@ -34,7 +32,6 @@
     <string name="graph_button">Evolution</string>
     <string name="city_empty_title">City not found</string>
     <string name="city_empty_informations">No data found concerning city</string>
-    <string name="loading">Loading…</string>
     <string name="push_alert_title">Pollution alert</string>
     <string name="push_alert_content">Be aware, %1$s exceeded the critical pollution threshold (%2$d)</string>
     <string name="details_title">No city</string>

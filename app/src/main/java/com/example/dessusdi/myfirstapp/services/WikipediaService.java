@@ -17,11 +17,13 @@ import com.example.dessusdi.myfirstapp.tools.RequestBuilder;
 
 /**
  * Created by Dimitri on 02/03/2017.
+ * DESSUS Dimitri
  */
 
 public class WikipediaService {
 
     private final Activity mApplicationContext;
+    private  RequestQueue queue;
 
     public WikipediaService(Context context) {
         mApplicationContext = (Activity)context;
@@ -30,12 +32,13 @@ public class WikipediaService {
     /**
      * Fetch city information by using wikipedia API.
      * @param search city name
-     * @param callback
+     * @param callback customized callback interface
      */
     public void fetchCityInformation(String search, final WikipediaService.cityInformationCallback callback) {
 
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(queue == null)
+            queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Create progress dialog
         final ProgressDialog mDialog = new ProgressDialog(this.mApplicationContext);
@@ -54,7 +57,7 @@ public class WikipediaService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 
@@ -66,11 +69,12 @@ public class WikipediaService {
     /**
      * Fetch city image by using wikipedia API
      * @param search city name
-     * @param callback
+     * @param callback customized callback interface
      */
     public void fetchCityImage(String search, final WikipediaService.cityImageCallback callback) {
         // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.mApplicationContext);
+        if(queue == null)
+            queue = Volley.newRequestQueue(this.mApplicationContext);
 
         // Create progress dialog
         final ProgressDialog mDialog = new ProgressDialog(this.mApplicationContext);
@@ -84,12 +88,12 @@ public class WikipediaService {
                     @Override
                     public void onResponse(String response) {
                         mDialog.dismiss();
-                        callback.onSuccess(QueryDeserializer.deserializeImage(response, mApplicationContext));
+                        callback.onSuccess(QueryDeserializer.deserializeImage(response));
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                error.printStackTrace();
             }
         });
 

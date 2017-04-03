@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 /**
  * Created by Dimitri on 02/03/2017.
+ * DESSUS Dimitri
  */
 
 public class DetailsFragment extends Fragment {
@@ -41,10 +42,10 @@ public class DetailsFragment extends Fragment {
     private final static String TAG_FRAGMENT = "FRAG_EVOLUTION";
 
     /**
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater instantiate layout XML
+     * @param container container view
+     * @param savedInstanceState reference to a Bundle object
+     * @return nothing
      */
     @Nullable
     @Override
@@ -53,8 +54,8 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * @param view
-     * @param savedInstanceState
+     * @param view details view
+     * @param savedInstanceState reference to a Bundle object
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -87,18 +88,31 @@ public class DetailsFragment extends Fragment {
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("fav_city", city.getIdentifier());
-                editor.commit();
+                editor.apply();
                 favoriteButton.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), R.string.favorite_added, Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    /**
+     * @param savedInstanceState reference to a Bundle object
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         this.mActivity = this.getActivity();
+
+
+    }
+
+    /**
+     * Method executed when fragment appear
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
 
         if(this.city != null) {
             this.fetchCityInformation();
@@ -106,7 +120,7 @@ public class DetailsFragment extends Fragment {
     }
 
     /**
-     * @param city
+     * @param city city object containing (name, description etc.)
      */
     public void setCity(WaqiObject city) {
         this.city = city;

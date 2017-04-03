@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Dimitri on 01/04/2017.
+ * DESSUS Dimitri
  */
 
 public class PositionCityObject {
