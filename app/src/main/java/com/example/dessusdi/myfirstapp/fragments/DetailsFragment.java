@@ -87,7 +87,7 @@ public class DetailsFragment extends Fragment {
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 SharedPreferences.Editor editor = settings.edit();
                 editor.putInt("fav_city", city.getIdentifier());
-                editor.commit();
+                editor.apply();
                 favoriteButton.setVisibility(View.GONE);
                 Toast.makeText(getActivity(), R.string.favorite_added, Toast.LENGTH_LONG).show();
             }

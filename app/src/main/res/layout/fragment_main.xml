@@ -71,7 +71,6 @@
                 android:textColor="#FFFFFF"
                 android:text="@string/cell_city_location"
                 android:layout_centerVertical="true"
-                android:layout_alignStart="@+id/minTextView"
                 android:layout_alignBottom="@+id/air_qualityPositionTextView"
                 android:layout_toEndOf="@+id/air_qualityPositionTextView"/>
 

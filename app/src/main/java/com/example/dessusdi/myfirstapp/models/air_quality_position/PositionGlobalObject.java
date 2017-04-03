@@ -1,5 +1,7 @@
 package com.example.dessusdi.myfirstapp.models.air_quality_position;
 
+import android.annotation.SuppressLint;
+
 import com.example.dessusdi.myfirstapp.models.air_quality.WaqiObject;
 
 /**
@@ -28,6 +30,7 @@ public class PositionGlobalObject {
     /**
      * @return Formatted location of the station
      */
+    @SuppressLint("DefaultLocale")
     public String getGPSCoordinate() {
         return String.format("GPS : %.6f - %.6f", this.getData().getCity().getGeo().get(0), this.getData().getCity().getGeo().get(1));
     }
