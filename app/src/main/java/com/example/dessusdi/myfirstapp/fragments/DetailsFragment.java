@@ -67,6 +67,7 @@ public class DetailsFragment extends Fragment {
         this.favoriteButton     = (Button) view.findViewById(R.id.cityFavorite);
 
         this.cityEvolution.setVisibility(View.GONE);
+        this.favoriteButton.setVisibility(View.GONE);
         this.cityEvolution.setOnClickListener( new View.OnClickListener() {
 
             @Override
