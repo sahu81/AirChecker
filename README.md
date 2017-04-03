@@ -11,28 +11,28 @@ An Android application to fetch air quality from [**Aqicn**](http://aqicn.org/).
 ## Functionnality
 
 - Show all saved cities with air quality level fetched from [**Aqicn**](http://aqicn.org/).
-- Add/delete city.
-- French & english support. 
-- Share air quality level by mail.
-- Play sound according to air quality level.
-- Content provider allowing to add/remove a city from other app.
+- Add/delete any city.
+- French & English support. 
+- Share air quality level by email.
+- Playing sound according to air quality level.
+- Content provider allowing to add/remove a city from other app ([see **content provider**](#content-provider)).
 - Air quality chart (powered by [**Hello Chart Android**](https://github.com/lecho/hellocharts-android)).
 - 3 themes available (dark, light, sunset).
 - Automatic night mode (apply dark theme automatically).
 - Display nearest city from user's location.
-- Refresh in background all saved cities.
+- Refresh in background all saved cities ([see **background service**](#background-service).
 - Send push notifications when air quality is higher than 100.
 - Display informations about city.
-- Widget of favorite city.
+- Widget of favorite city ([see **widget**](#widget).
 
 ## Compatibility
 
 <table>
 <tr>
-  <th>Min. version</th>
-  <th>Targeted version</th>
-  <th>Compiled version</th>
-  <th>Android Studio version used</th>
+  <th><b>Min. version</b></th>
+  <th><b>Targeted version</b></th>
+  <th><b>Compiled version</b></th>
+  <th><b>Android Studio v. used</b></th>
 </tr>
 <tr>
   <th>Android 4.4</th>
@@ -65,7 +65,7 @@ git clone git@github.com:istornz/AirChecker.git
 - To delete a city, swipe right/left on it and choose "Yes".
 
 #### Widget
-- Add a new city (see [**basic usage**](https://github.com/istornz/AirChecker#basic-usage)).
+- Add a new city (see [**basic usage**](#basic-usage)).
 - Select the city cell in list and touch "Favorite" button at the bottom of details page.
 - Add the widget on your homescreen/launchscreen.
 - Enjoy :tada:
